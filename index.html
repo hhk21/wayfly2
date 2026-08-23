@@ -363,9 +363,9 @@
                     <button type="submit" class="w-full bg-brand-500 hover:bg-brand-600 text-white font-bold py-4 rounded-xl transition-colors shadow-md text-lg">
                         Wyślij wiadomość
                     </button>
-                    <!-- Komunikat po wysłaniu -->
-                    <div id="form-success-msg" class="hidden text-center text-green-600 font-medium p-3 bg-green-50 rounded-lg border border-green-200 mt-4">
-                        Dziękujemy! Wiadomość została wysłana. Odpowiemy najszybciej jak to możliwe.
+                    <!-- Komunikat po pomyślnym wysłaniu -->
+                    <div id="form-success-msg" class="hidden text-center text-green-700 font-medium p-4 bg-green-50 rounded-xl border border-green-200 mt-4 leading-relaxed">
+                        <!-- Treść generowana dynamicznie w JS -->
                     </div>
                 </form>
             </div>
@@ -559,13 +559,16 @@
             }
         });
 
-        // Niezawodna wysyłka formularza przez FormSubmit
+        // Niezawodna wysyłka formularza z dynamicznym potwierdzeniem e-mail
         async function handleFormSubmit(e) {
             e.preventDefault();
             const form = e.target;
             const btn = form.querySelector('button[type="submit"]');
             const originalText = btn.innerHTML;
             
+            // Pobranie e-maila wprowadzonego przez użytkownika
+            const userEmail = document.getElementById('email').value;
+
             btn.innerHTML = '<i class="fa-solid fa-circle-notch fa-spin"></i> Wysyłanie...';
             btn.classList.add('opacity-80', 'cursor-not-allowed');
             btn.disabled = true;
@@ -579,9 +582,22 @@
 
                 if (response.ok) {
                     const msg = document.getElementById('form-success-msg');
+                    
+                    // Podstawienie dynamicznej treści z e-mailem użytkownika
+                    msg.innerHTML = `
+                        <p class="text-base font-bold text-green-800 mb-1">
+                            <i class="fa-solid fa-circle-check text-green-500 mr-2"></i>Wiadomość została pomyślnie wysłana!
+                        </p>
+                        <p class="text-sm text-green-700">
+                            Dziękujemy za kontakt. Naszą odpowiedź przesłana zostanie bezpośrednio na Twój adres e-mail: <span class="font-bold underline">${userEmail}</span>.
+                        </p>
+                    `;
+                    
                     msg.classList.remove('hidden');
                     form.reset();
-                    setTimeout(() => { msg.classList.add('hidden'); }, 6000);
+                    
+                    // Ukrycie komunikatu po 10 sekundach
+                    setTimeout(() => { msg.classList.add('hidden'); }, 10000);
                 } else {
                     alert("Wystąpił problem. Jeśli wysyłasz wiadomość po raz pierwszy, upewnij się, że kliknąłeś link aktywacyjny wysłany na Twój e-mail.");
                 }
