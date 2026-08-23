@@ -170,9 +170,9 @@
                             </div>
                         </div>
                         <p class="text-gray-600 text-sm mb-6 flex-grow">Poczuj magię przedświątecznego Rzymu. Tanie loty WizzAir, wylot z samego rana. Idealne na szybki wypad na pizzę i zwiedzanie.</p>
-                        <a href="#" class="w-full block text-center bg-gray-50 hover:bg-brand-50 text-gray-700 hover:text-brand-600 font-semibold py-3 rounded-xl border border-gray-200 hover:border-brand-200 transition-colors">
-                            Sprawdź szczegóły
-                        </a>
+                        <button onclick="openOfferModal('rzym')" class="w-full block text-center bg-gray-50 hover:bg-brand-50 text-gray-700 hover:text-brand-600 font-semibold py-3 rounded-xl border border-gray-200 hover:border-brand-200 transition-colors">
+    Sprawdź szczegóły
+</button>
                     </div>
                 </div>
 
@@ -193,9 +193,9 @@
                             </div>
                         </div>
                         <p class="text-gray-600 text-sm mb-6 flex-grow">Ucieknij przed zimą do słonecznej Hiszpanii. Rewelacyjna cena jak na ten kierunek zimą. Loty bezpośrednie.</p>
-                        <a href="#" class="w-full block text-center bg-gray-50 hover:bg-brand-50 text-gray-700 hover:text-brand-600 font-semibold py-3 rounded-xl border border-gray-200 hover:border-brand-200 transition-colors">
-                            Sprawdź szczegóły
-                        </a>
+                        <button onclick="openOfferModal('barcelona')" class="w-full block text-center bg-gray-50 hover:bg-brand-50 text-gray-700 hover:text-brand-600 font-semibold py-3 rounded-xl border border-gray-200 hover:border-brand-200 transition-colors">
+    Sprawdź szczegóły
+</button>
                     </div>
                 </div>
 
@@ -439,7 +439,7 @@ const offersData = {
             'Bezpośredni lot bez przesiadek (~2h 30min)',
             'Polecany nocleg w centrum od 120 zł/noc'
         ],
-        bookingUrl: 'https://www.ryanair.com' // Bezpośredni link do zakupu biletów
+        bookingUrl: 'https://www.ryanair.com'
     },
     'rzym': {
         title: 'Kraków ⇄ Rzym',
@@ -451,7 +451,22 @@ const offersData = {
         details: [
             'Wylot z lotniska Kraków-Balice',
             'Bezpośredni lot WizzAir',
-            'W cenie podręczny plecak'
+            'W cenie podręczny plecak',
+            'Wypij pyszne espresso z widokiem na Koloseum'
+        ],
+        bookingUrl: 'https://wizzair.com'
+    },
+    'barcelona': {
+        title: 'Katowice ⇄ Barcelona',
+        date: '12 - 19 Stycznia',
+        price: '249 zł',
+        airline: 'WizzAir',
+        image: 'https://images.unsplash.com/photo-1539037116277-4db20202d699?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+        description: 'Ucieknij przed zimą do słonecznej Hiszpanii. Rewelacyjna cena jak na ten kierunek w środku sezonu zimowego.',
+        details: [
+            'Wylot z lotniska Katowice-Pyrzowice',
+            'Bezpośredni lot bez przesiadek',
+            'Spaceruj po plaży Barceloneta w łagodnym klimacie'
         ],
         bookingUrl: 'https://wizzair.com'
     }
