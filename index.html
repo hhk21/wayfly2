@@ -46,7 +46,7 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between items-center h-20">
                 
-                <!-- Logo (Samolocik usunięty) -->
+                <!-- Logo -->
                 <div class="flex-shrink-0 flex items-center cursor-pointer" onclick="window.scrollTo(0,0)">
                     <span class="font-bold text-2xl tracking-tight text-gray-900">Way<span class="text-brand-500">Fly</span></span>
                 </div>
@@ -117,6 +117,17 @@
                 <p class="text-gray-600 text-lg">Codziennie przeszukujemy tysiące połączeń, aby znaleźć dla Ciebie te najtańsze. Korzystaj z naszych znalezisk zupełnie za darmo!</p>
             </div>
 
+            <!-- ADNOTACJA FOMO -->
+            <div class="mb-12 bg-amber-50 border border-amber-200 rounded-2xl p-6 text-center max-w-4xl mx-auto shadow-sm">
+                <div class="flex items-center justify-center gap-2 text-amber-800 font-bold text-lg mb-2">
+                    <i class="fa-solid fa-bolt text-amber-500 text-xl"></i> Pamiętaj: Ceny zmieniają się dynamicznie!
+                </div>
+                <p class="text-amber-900/80 text-sm sm:text-base leading-relaxed">
+                    Najlepsze okazje biletowe w liniach lotniczych znikają średnio w <strong>2-3 godziny</strong> od publikacji (zależą od liczby wolnych miejsc). Chcesz zdążyć kupić bilet zanim inni go wykupią? 
+                    Obserwuj nasze sociale na bieżąco!
+                </p>
+            </div>
+
             <!-- Siatka ofert -->
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                 
@@ -129,7 +140,7 @@
                         </div>
                     </div>
                     <div class="p-6 flex-grow flex flex-col">
-                        <div class="flex justify-between items-start mb-4">
+                        <div class="flex justify-between items-start mb-2">
                             <div>
                                 <h4 class="text-xl font-bold text-gray-900 mb-1">Warszawa <i class="fa-solid fa-arrow-right-arrow-left text-sm text-gray-400 mx-1"></i> Londyn</h4>
                                 <p class="text-sm text-gray-500"><i class="fa-regular fa-calendar mr-2"></i>15 - 22 Listopada</p>
@@ -139,10 +150,24 @@
                                 <span class="text-xs text-gray-400 uppercase">w obie strony</span>
                             </div>
                         </div>
+                        
+                        <!-- ZNACZNIK CZASU -->
+                        <div class="mb-4">
+                            <span class="inline-flex items-center text-xs text-gray-400 font-medium bg-gray-100 px-2.5 py-1 rounded-md">
+                                <i class="fa-regular fa-clock mr-1 text-gray-500"></i> Dodano: Dzisiaj, 08:30
+                            </span>
+                        </div>
+
                         <p class="text-gray-600 text-sm mb-6 flex-grow">Świetna okazja na jesienny city break w stolicy Wielkiej Brytanii. Loty realizowane przez Ryanair, w cenie mały bagaż podręczny.</p>
-                        <button onclick="openOfferModal('londyn')" class="w-full block text-center bg-gray-50 hover:bg-brand-50 text-gray-700 hover:text-brand-600 font-semibold py-3 rounded-xl border border-gray-200 hover:border-brand-200 transition-colors">
-                            Sprawdź szczegóły
-                        </button>
+                        
+                        <div class="space-y-2">
+                            <button onclick="openOfferModal('londyn')" class="w-full block text-center bg-gray-50 hover:bg-brand-50 text-gray-700 hover:text-brand-600 font-semibold py-3 rounded-xl border border-gray-200 hover:border-brand-200 transition-colors">
+                                Sprawdź szczegóły
+                            </button>
+                            <button onclick="reportPriceChange('Warszawa - Londyn (129 zł)')" class="w-full text-center text-xs text-red-500 hover:text-red-700 py-1 flex items-center justify-center gap-1 transition-colors">
+                                <i class="fa-solid fa-triangle-exclamation"></i> Zgłoś zmianę ceny
+                            </button>
+                        </div>
                     </div>
                 </div>
 
@@ -152,7 +177,7 @@
                         <img src="https://images.unsplash.com/photo-1504198453319-5ce911bafcde?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Rzym" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
                     </div>
                     <div class="p-6 flex-grow flex flex-col">
-                        <div class="flex justify-between items-start mb-4">
+                        <div class="flex justify-between items-start mb-2">
                             <div>
                                 <h4 class="text-xl font-bold text-gray-900 mb-1">Kraków <i class="fa-solid fa-arrow-right-arrow-left text-sm text-gray-400 mx-1"></i> Rzym</h4>
                                 <p class="text-sm text-gray-500"><i class="fa-regular fa-calendar mr-2"></i>5 - 10 Grudnia</p>
@@ -162,10 +187,24 @@
                                 <span class="text-xs text-gray-400 uppercase">w obie strony</span>
                             </div>
                         </div>
+
+                        <!-- ZNACZNIK CZASU -->
+                        <div class="mb-4">
+                            <span class="inline-flex items-center text-xs text-gray-400 font-medium bg-gray-100 px-2.5 py-1 rounded-md">
+                                <i class="fa-regular fa-clock mr-1 text-gray-500"></i> Dodano: Dzisiaj, 10:15
+                            </span>
+                        </div>
+
                         <p class="text-gray-600 text-sm mb-6 flex-grow">Poczuj magię przedświątecznego Rzymu. Tanie loty WizzAir, wylot z samego rana. Idealne na szybki wypad na pizzę i zwiedzanie.</p>
-                        <button onclick="openOfferModal('rzym')" class="w-full block text-center bg-gray-50 hover:bg-brand-50 text-gray-700 hover:text-brand-600 font-semibold py-3 rounded-xl border border-gray-200 hover:border-brand-200 transition-colors">
-                            Sprawdź szczegóły
-                        </button>
+                        
+                        <div class="space-y-2">
+                            <button onclick="openOfferModal('rzym')" class="w-full block text-center bg-gray-50 hover:bg-brand-50 text-gray-700 hover:text-brand-600 font-semibold py-3 rounded-xl border border-gray-200 hover:border-brand-200 transition-colors">
+                                Sprawdź szczegóły
+                            </button>
+                            <button onclick="reportPriceChange('Kraków - Rzym (189 zł)')" class="w-full text-center text-xs text-red-500 hover:text-red-700 py-1 flex items-center justify-center gap-1 transition-colors">
+                                <i class="fa-solid fa-triangle-exclamation"></i> Zgłoś zmianę ceny
+                            </button>
+                        </div>
                     </div>
                 </div>
 
@@ -175,7 +214,7 @@
                         <img src="https://images.unsplash.com/photo-1539037116277-4db20202d699?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Barcelona" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
                     </div>
                     <div class="p-6 flex-grow flex flex-col">
-                        <div class="flex justify-between items-start mb-4">
+                        <div class="flex justify-between items-start mb-2">
                             <div>
                                 <h4 class="text-xl font-bold text-gray-900 mb-1">Katowice <i class="fa-solid fa-arrow-right-arrow-left text-sm text-gray-400 mx-1"></i> Barcelona</h4>
                                 <p class="text-sm text-gray-500"><i class="fa-regular fa-calendar mr-2"></i>12 - 19 Stycznia</p>
@@ -185,10 +224,24 @@
                                 <span class="text-xs text-gray-400 uppercase">w obie strony</span>
                             </div>
                         </div>
+
+                        <!-- ZNACZNIK CZASU -->
+                        <div class="mb-4">
+                            <span class="inline-flex items-center text-xs text-gray-400 font-medium bg-gray-100 px-2.5 py-1 rounded-md">
+                                <i class="fa-regular fa-clock mr-1 text-gray-500"></i> Dodano: Wczoraj, 17:45
+                            </span>
+                        </div>
+
                         <p class="text-gray-600 text-sm mb-6 flex-grow">Ucieknij przed zimą do słonecznej Hiszpanii. Rewelacyjna cena jak na ten kierunek zimą. Loty bezpośrednie.</p>
-                        <button onclick="openOfferModal('barcelona')" class="w-full block text-center bg-gray-50 hover:bg-brand-50 text-gray-700 hover:text-brand-600 font-semibold py-3 rounded-xl border border-gray-200 hover:border-brand-200 transition-colors">
-                            Sprawdź szczegóły
-                        </button>
+                        
+                        <div class="space-y-2">
+                            <button onclick="openOfferModal('barcelona')" class="w-full block text-center bg-gray-50 hover:bg-brand-50 text-gray-700 hover:text-brand-600 font-semibold py-3 rounded-xl border border-gray-200 hover:border-brand-200 transition-colors">
+                                Sprawdź szczegóły
+                            </button>
+                            <button onclick="reportPriceChange('Katowice - Barcelona (249 zł)')" class="w-full text-center text-xs text-red-500 hover:text-red-700 py-1 flex items-center justify-center gap-1 transition-colors">
+                                <i class="fa-solid fa-triangle-exclamation"></i> Zgłoś zmianę ceny
+                            </button>
+                        </div>
                     </div>
                 </div>
 
@@ -412,13 +465,14 @@
 
     <!-- SKRYPTY JAVASCRIPT -->
     <script>
-        // Baza danych ofert
+        // Baza danych ofert z dodanymi znacznikami czasu
         const offersData = {
             'londyn': {
                 title: 'Warszawa ⇄ Londyn',
                 date: '15 - 22 Listopada',
                 price: '129 zł',
                 airline: 'Ryanair',
+                addedTime: 'Dzisiaj, 08:30',
                 image: 'https://images.unsplash.com/photo-1513635269975-59663e0ac1ad?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
                 description: 'Świetna okazja na jesienny city break w stolicy Wielkiej Brytanii. Zobacz Big Bena, London Eye oraz darmowe muzea światowej klasy!',
                 details: [
@@ -434,6 +488,7 @@
                 date: '5 - 10 Grudnia',
                 price: '189 zł',
                 airline: 'WizzAir',
+                addedTime: 'Dzisiaj, 10:15',
                 image: 'https://images.unsplash.com/photo-1504198453319-5ce911bafcde?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
                 description: 'Poczuj magię przedświątecznego Rzymu. Włochy bez tłumów turystów i z doskonałą pogodą na zwiedzanie.',
                 details: [
@@ -449,6 +504,7 @@
                 date: '12 - 19 Stycznia',
                 price: '249 zł',
                 airline: 'WizzAir',
+                addedTime: 'Wczoraj, 17:45',
                 image: 'https://images.unsplash.com/photo-1539037116277-4db20202d699?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
                 description: 'Ucieknij przed zimą do słonecznej Hiszpanii. Rewelacyjna cena jak na ten kierunek w środku sezonu zimowego.',
                 details: [
@@ -481,7 +537,8 @@
                     <div class="flex justify-between items-center bg-gray-50 p-4 rounded-xl border border-gray-100">
                         <div>
                             <p class="text-xs text-gray-500 uppercase font-semibold">Termin</p>
-                            <p class="text-gray-900 font-medium"><i class="fa-regular fa-calendar mr-2 text-brand-500"></i>${offer.date}</p>
+                            <p class="text-gray-900 font-medium mb-1"><i class="fa-regular fa-calendar mr-2 text-brand-500"></i>${offer.date}</p>
+                            <p class="text-xs text-gray-400 font-medium"><i class="fa-regular fa-clock mr-1"></i>Dodano: ${offer.addedTime}</p>
                         </div>
                         <div class="text-right">
                             <p class="text-xs text-gray-500 uppercase font-semibold">Cena w obie strony</p>
@@ -509,10 +566,14 @@
                         <a href="${offer.bookingUrl}" target="_blank" rel="noopener noreferrer" class="flex-1 text-center bg-brand-500 hover:bg-brand-600 text-white font-bold py-3.5 rounded-xl transition-colors shadow-md">
                             Kup bilet na stronie linii <i class="fa-solid fa-arrow-up-right-from-square ml-2 text-xs"></i>
                         </a>
-                        <button onclick="closeOfferModal()" class="px-6 py-3.5 bg-gray-100 hover:bg-gray-200 text-gray-700 font-semibold rounded-xl transition-colors">
-                            Zamknij
+                        <button onclick="reportPriceChange('${offer.title} (${offer.price})')" class="px-5 py-3.5 bg-red-50 hover:bg-red-100 text-red-600 font-semibold rounded-xl border border-red-200 transition-colors text-sm flex items-center justify-center gap-2">
+                            <i class="fa-solid fa-triangle-exclamation"></i> Zgłoś zmianę ceny
                         </button>
                     </div>
+                    
+                    <p class="text-xs text-gray-400 italic text-center pt-2">
+                        ℹ️ Podana cena była aktualna w momencie publikacji (${offer.addedTime}). Ceny w tanich liniach zmieniają się dynamicznie.
+                    </p>
                 </div>
             `;
 
@@ -523,6 +584,32 @@
         function closeOfferModal() {
             document.getElementById('offer-modal').classList.add('hidden');
             document.body.style.overflow = 'auto';
+        }
+
+        // Wysyłka zgłoszenia o zmianie ceny na Twój e-mail wayfly2025@gmail.com
+        async function reportPriceChange(offerTitle) {
+            if (!confirm(`Czy chcesz zgłosić zmianę / nieaktualność ceny dla oferty: "${offerTitle}"?`)) return;
+
+            try {
+                const formData = new FormData();
+                formData.append("Zgłoszenie", "Nieaktualna cena oferty!");
+                formData.append("Oferta", offerTitle);
+                formData.append("Data zgłoszenia", new Date().toLocaleString("pl-PL"));
+
+                const response = await fetch("https://formsubmit.co/ajax/wayfly2025@gmail.com", {
+                    method: "POST",
+                    body: formData,
+                    headers: { 'Accept': 'application/json' }
+                });
+
+                if (response.ok) {
+                    alert("Dziękujemy! Zgłoszenie zostało wysłane. Weryfikujemy cenę tej oferty.");
+                } else {
+                    alert("Wystąpił błąd podczas wysyłania zgłoszenia. Spróbuj ponownie.");
+                }
+            } catch (err) {
+                alert("Wystąpił błąd połączenia z siecią.");
+            }
         }
 
         // Menu mobilne
@@ -561,7 +648,7 @@
             }
         });
 
-        // Niezawodna wysyłka formularza z dynamicznym potwierdzeniem e-mail
+        // Wysyłka formularza z dynamicznym potwierdzeniem e-mail
         async function handleFormSubmit(e) {
             e.preventDefault();
             const form = e.target;
