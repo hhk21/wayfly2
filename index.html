@@ -4,19 +4,26 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>WayFly - Tanie loty i spersonalizowane plany podróży</title>
-
+    
+    <!-- Miniaturka strony -->
     <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' fill='%230ea5e9' viewBox='0 0 24 24'><path d='M21 16v-2l-8-5V3.5c0-.83-.67-1.5-1.5-1.5S10 2.67 10 3.5V9l-8 5v2l8-2.5V19l-2 1.5V22l3.5-1 3.5 1v-1.5L13 19v-5.5l8 2.5z'/></svg>">
+    
+    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
+    
     <script>
         tailwind.config = {
             theme: {
                 extend: {
-                    colors: { brand: { 50: '#f0f9ff', 100: '#e0f2fe', 500: '#0ea5e9', 600: '#0284c7', 900: '#0c4a6e' } },
+                    colors: {
+                        brand: { 50: '#f0f9ff', 100: '#e0f2fe', 500: '#0ea5e9', 600: '#0284c7', 900: '#0c4a6e' }
+                    },
                     fontFamily: { sans: ['Inter', 'sans-serif'] }
                 }
             }
         }
     </script>
+    
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
@@ -33,89 +40,162 @@
                     <a href="#tanie-loty" class="text-gray-600 hover:text-brand-500 font-medium transition-colors">Tanie Loty</a>
                     <a href="#plany-podrozy" class="text-gray-600 hover:text-brand-500 font-medium transition-colors">Plany Podróży</a>
                     <a href="#o-nas" class="text-gray-600 hover:text-brand-500 font-medium transition-colors">O nas</a>
-                    <a href="#kontakt" class="bg-brand-500 hover:bg-brand-600 text-white px-5 py-2.5 rounded-full font-medium transition-all shadow-md transform hover:-translate-y-0.5">Napisz do nas</a>
+                    <a href="#kontakt" class="bg-brand-500 hover:bg-brand-600 text-white px-5 py-2.5 rounded-full font-medium transition-all shadow-md hover:shadow-lg transform hover:-translate-y-0.5">Napisz do nas</a>
                 </div>
                 <div class="md:hidden flex items-center">
-                    <button id="mobile-menu-btn" class="text-gray-600 hover:text-brand-500 p-2"><i class="fa-solid fa-bars text-2xl"></i></button>
+                    <button id="mobile-menu-btn" class="text-gray-600 hover:text-brand-500 focus:outline-none p-2">
+                        <i class="fa-solid fa-bars text-2xl"></i>
+                    </button>
                 </div>
             </div>
         </div>
-        <div id="mobile-menu" class="hidden md:hidden bg-white border-t border-gray-100 shadow-xl">
-            <div class="px-4 pt-2 pb-6 space-y-2">
-                <a href="#tanie-loty" class="block px-3 py-3 text-base font-medium text-gray-700 hover:text-brand-500 rounded-md">Tanie Loty</a>
-                <a href="#plany-podrozy" class="block px-3 py-3 text-base font-medium text-gray-700 hover:text-brand-500 rounded-md">Plany Podróży</a>
-                <a href="#o-nas" class="block px-3 py-3 text-base font-medium text-gray-700 hover:text-brand-500 rounded-md">O nas</a>
-                <a href="#kontakt" class="block px-3 py-3 text-base font-medium text-brand-600 rounded-md">Kontakt</a>
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-t border-gray-100">
+            <div class="px-4 pt-2 pb-6 space-y-2 shadow-xl">
+                <a href="#tanie-loty" class="block px-3 py-3 text-base font-medium text-gray-700 hover:text-brand-500 hover:bg-brand-50 rounded-md">Tanie Loty</a>
+                <a href="#plany-podrozy" class="block px-3 py-3 text-base font-medium text-gray-700 hover:text-brand-500 hover:bg-brand-50 rounded-md">Plany Podróży</a>
+                <a href="#o-nas" class="block px-3 py-3 text-base font-medium text-gray-700 hover:text-brand-500 hover:bg-brand-50 rounded-md">O nas</a>
+                <a href="#kontakt" class="block px-3 py-3 text-base font-medium text-brand-600 hover:bg-brand-50 rounded-md">Kontakt</a>
             </div>
         </div>
     </nav>
 
-    <!-- HERO -->
+    <!-- SEKCJA HERO -->
     <header class="relative pt-32 pb-20 lg:pt-48 lg:pb-32 overflow-hidden">
         <div class="absolute inset-0 z-0">
-            <img src="https://images.unsplash.com/photo-1436491865332-7a61a109cc05?ixlib=rb-4.0.3&auto=format&fit=crop&w=2000&q=80" alt="Samolot" class="w-full h-full object-cover" />
+            <img src="https://images.unsplash.com/photo-1436491865332-7a61a109cc05?ixlib=rb-4.0.3&auto=format&fit=crop&w=2000&q=80" alt="Samolot w chmurach" class="w-full h-full object-cover" />
             <div class="absolute inset-0 bg-gradient-to-r from-gray-900/80 to-gray-900/40"></div>
         </div>
-        <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center lg:text-left lg:w-2/3">
-            <span class="inline-block py-1 px-3 rounded-full bg-brand-500/20 text-brand-100 border border-brand-400/30 text-sm font-semibold tracking-wider mb-6">ZACZNIJ PODRÓŻ ŻYCIA</span>
-            <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-white leading-tight mb-6">Świat jest ogromny. <br/><span class="text-brand-400">My pomożemy Ci go zwiedzić.</span></h1>
-            <p class="text-lg text-gray-200 max-w-2xl mb-10 font-light">Odkrywaj darmowe perełki wśród biletów lotniczych lub zamów spersonalizowany plan podróży.</p>
-            <div class="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
-                <a href="#tanie-loty" class="bg-brand-500 text-white px-8 py-4 rounded-full font-bold text-lg hover:-translate-y-1 transition-all">Odkryj Tanie Loty</a>
-                <a href="#plany-podrozy" class="bg-white/10 text-white border border-white/30 px-8 py-4 rounded-full font-bold text-lg hover:-translate-y-1 transition-all">Zamów Plan Podróży</a>
+        <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center lg:text-left flex flex-col lg:flex-row items-center">
+            <div class="lg:w-2/3">
+                <span class="inline-block py-1 px-3 rounded-full bg-brand-500/20 text-brand-100 backdrop-blur-sm border border-brand-400/30 text-sm font-semibold tracking-wider mb-6">ZACZNIJ PODRÓŻ ŻYCIA</span>
+                <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-white leading-tight mb-6">
+                    Świat jest ogromny. <br/>
+                    <span class="text-brand-400">My pomożemy Ci go zwiedzić.</span>
+                </h1>
+                <p class="mt-4 text-lg sm:text-xl text-gray-200 max-w-2xl mx-auto lg:mx-0 mb-10 font-light">
+                    Odkrywaj darmowe perełki wśród biletów lotniczych lub zamów spersonalizowany plan podróży, w którym zadbamy o każdy, nawet najmniejszy szczegół.
+                </p>
+                <div class="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
+                    <a href="#tanie-loty" class="bg-brand-500 hover:bg-brand-600 text-white px-8 py-4 rounded-full font-bold text-lg transition-all shadow-[0_0_20px_rgba(14,165,233,0.4)] hover:shadow-[0_0_30px_rgba(14,165,233,0.6)] transform hover:-translate-y-1 text-center">Odkryj Tanie Loty</a>
+                    <a href="#plany-podrozy" class="bg-white/10 hover:bg-white/20 backdrop-blur-md text-white border border-white/30 px-8 py-4 rounded-full font-bold text-lg transition-all transform hover:-translate-y-1 text-center">Zamów Plan Podróży</a>
+                </div>
             </div>
         </div>
     </header>
 
-    <!-- TANIE LOTY -->
+    <!-- SEKCJA 1: TANIE LOTY -->
     <section id="tanie-loty" class="py-20 bg-gray-50">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center max-w-3xl mx-auto mb-16">
-                <h2 class="text-brand-500 font-semibold uppercase text-sm mb-2">Budujemy społeczność</h2>
-                <h3 class="text-3xl font-bold text-gray-900 mb-4">Najnowsze Okazje Lotnicze</h3>
-                <p class="text-gray-600 text-lg">Wszystkie zebrane tu oferty znikają automatycznie po 3 dniach, abyś miał pewność, że ceny są świeże!</p>
+                <h2 class="text-brand-500 font-semibold tracking-wide uppercase text-sm mb-2">Budujemy społeczność</h2>
+                <h3 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">Najnowsze Okazje Lotnicze</h3>
+                <p class="text-gray-600 text-lg">Codziennie przeszukujemy tysiące połączeń, aby znaleźć dla Ciebie te najtańsze. Korzystaj z naszych znalezisk zupełnie za darmo!</p>
             </div>
 
-            <!-- GRID (Generowany z JS) -->
+            <!-- ADNOTACJA FOMO -->
+            <div class="mb-12 bg-amber-50 border border-amber-200 rounded-2xl p-6 text-center max-w-4xl mx-auto shadow-sm">
+                <div class="flex items-center justify-center gap-2 text-amber-800 font-bold text-lg mb-2">
+                    <i class="fa-solid fa-bolt text-amber-500 text-xl"></i> Pamiętaj: Ceny zmieniają się dynamicznie!
+                </div>
+                <p class="text-amber-900/80 text-sm sm:text-base leading-relaxed">
+                    Najlepsze okazje biletowe w liniach lotniczych znikają średnio w <strong>2-3 godziny</strong> od publikacji (zależą od liczby wolnych miejsc). Chcesz zdążyć kupić bilet zanim inni go wykupią? 
+                    Obserwuj nasze sociale na bieżąco!
+                </p>
+            </div>
+
+            <!-- DYNAMICZNA SIATKA OFERT -->
             <div id="offers-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                 <div class="col-span-full text-center py-10 text-gray-500">
                     <i class="fa-solid fa-circle-notch fa-spin text-2xl mb-3"></i><br>Szukam najnowszych ofert...
                 </div>
             </div>
+            
+            <div class="mt-12 text-center">
+                <p class="text-gray-500 text-sm">Chcesz więcej takich ofert na bieżąco? Obserwuj nasz profil na <a href="https://www.instagram.com/wayfly__/" target="_blank" rel="noopener noreferrer" class="font-semibold text-brand-500 hover:underline">Instagramie</a> oraz <a href="https://www.tiktok.com/@wayfly_" target="_blank" rel="noopener noreferrer" class="font-semibold text-brand-500 hover:underline">TikTok-u</a>!</p>
+            </div>
         </div>
     </section>
 
-    <!-- SEKCJA 2: PLANY -->
+    <!-- SEKCJA 2: SPERSONALIZOWANE PLANY PODRÓŻY -->
     <section id="plany-podrozy" class="py-24 bg-white relative">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex flex-col lg:flex-row items-center gap-16">
+                
                 <div class="lg:w-1/2">
-                    <h2 class="text-brand-500 font-semibold uppercase text-sm mb-2">Usługa Premium</h2>
+                    <h2 class="text-brand-500 font-semibold tracking-wide uppercase text-sm mb-2">Usługa Premium</h2>
                     <h3 class="text-3xl md:text-4xl font-bold text-gray-900 mb-6">Twój osobisty plan podróży, szyty na miarę.</h3>
-                    <p class="text-gray-600 text-lg mb-8">Nie masz czasu na planowanie? Powiedz nam czego oczekujesz, a my stworzymy kompleksowy plan Twoich wymarzonych wakacji.</p>
+                    <p class="text-gray-600 text-lg mb-8">
+                        Nie masz czasu lub ochoty na ślęczenie przed komputerem i planowanie każdego dnia wyjazdu? Powiedz nam czego oczekujesz, a my stworzymy kompleksowy, spersonalizowany plan Twoich wymarzonych wakacji.
+                    </p>
+                    
                     <ul class="space-y-6 mb-10">
                         <li class="flex items-start">
-                            <div class="flex-shrink-0 flex items-center justify-center w-12 h-12 rounded-full bg-brand-50 text-brand-500"><i class="fa-solid fa-map-location-dot"></i></div>
-                            <div class="ml-4 text-left"><h4 class="text-lg font-bold">Szczegółowy harmonogram</h4><p class="text-gray-600 text-sm">Zoptymalizowany pod kątem logistyki i Twojego tempa.</p></div>
+                            <div class="flex-shrink-0 flex items-center justify-center w-12 h-12 rounded-full bg-brand-50 text-brand-500">
+                                <i class="fa-solid fa-map-location-dot text-xl"></i>
+                            </div>
+                            <div class="ml-4 text-left">
+                                <h4 class="text-lg font-bold text-gray-900">Szczegółowy harmonogram</h4>
+                                <p class="text-gray-600 mt-1">Dzień po dniu. Zoptymalizowany pod kątem logistyki i Twojego tempa. Konkretne adresy, godziny i wskazówki.</p>
+                            </div>
                         </li>
                         <li class="flex items-start">
-                            <div class="flex-shrink-0 flex items-center justify-center w-12 h-12 rounded-full bg-brand-50 text-brand-500"><i class="fa-solid fa-bed"></i></div>
-                            <div class="ml-4 text-left"><h4 class="text-lg font-bold">Baza noclegowa i loty</h4><p class="text-gray-600 text-sm">Dobieramy hotele w Twoim budżecie z linkami do rezerwacji.</p></div>
+                            <div class="flex-shrink-0 flex items-center justify-center w-12 h-12 rounded-full bg-brand-50 text-brand-500">
+                                <i class="fa-solid fa-bed text-xl"></i>
+                            </div>
+                            <div class="ml-4 text-left">
+                                <h4 class="text-lg font-bold text-gray-900">Baza noclegowa i loty</h4>
+                                <p class="text-gray-600 mt-1">Dobieramy najlepsze hotele, apartamenty i loty w Twoim budżecie. Dostajesz gotowe linki do rezerwacji.</p>
+                            </div>
+                        </li>
+                        <li class="flex items-start">
+                            <div class="flex-shrink-0 flex items-center justify-center w-12 h-12 rounded-full bg-brand-50 text-brand-500">
+                                <i class="fa-solid fa-utensils text-xl"></i>
+                            </div>
+                            <div class="ml-4 text-left">
+                                <h4 class="text-lg font-bold text-gray-900">Gastronomia i atrakcje</h4>
+                                <p class="text-gray-600 mt-1">Ukryte perełki kulinarnych, miejsca bez tłumów turystów, polecane lokalne atrakcje, o których nie piszą w przewodnikach.</p>
+                            </div>
                         </li>
                     </ul>
-                    <a href="#kontakt" class="inline-flex items-center bg-gray-900 text-white px-8 py-4 rounded-xl font-bold text-lg hover:-translate-y-1 transition-all">Zamów darmową wycenę <i class="fa-solid fa-arrow-right ml-2"></i></a>
+
+                    <a href="#kontakt" class="inline-flex items-center justify-center bg-gray-900 hover:bg-gray-800 text-white px-8 py-4 rounded-xl font-bold text-lg transition-all shadow-lg transform hover:-translate-y-1">
+                        Zamów darmową wycenę <i class="fa-solid fa-arrow-right ml-2"></i>
+                    </a>
                 </div>
+
                 <div class="lg:w-1/2 relative">
                     <div class="absolute -inset-4 bg-gradient-to-r from-brand-100 to-blue-50 rounded-3xl transform rotate-3 z-0"></div>
+                    
                     <div class="relative z-10 bg-white rounded-2xl shadow-2xl p-8 border border-gray-100">
                         <div class="flex justify-between items-center border-b border-gray-100 pb-4 mb-6">
-                            <div><p class="text-xs text-brand-500 font-bold uppercase mb-1">Przykładowy E-book</p><h4 class="text-2xl font-bold">Włoskie Wakacje</h4></div>
+                            <div>
+                                <p class="text-xs text-brand-500 font-bold uppercase tracking-wider mb-1">Przykładowy E-book</p>
+                                <h4 class="text-2xl font-bold text-gray-900">Włoskie Wakacje (7 dni)</h4>
+                            </div>
                             <i class="fa-solid fa-file-pdf text-red-500 text-3xl"></i>
                         </div>
+                        
                         <div class="space-y-4">
-                            <div class="flex items-center p-3 bg-gray-50 rounded-lg"><i class="fa-solid fa-check text-green-500 mr-3"></i><span class="text-sm">Link do kupna biletów lotniczych</span></div>
-                            <div class="flex items-center p-3 bg-gray-50 rounded-lg"><i class="fa-solid fa-check text-green-500 mr-3"></i><span class="text-sm">Noclegi dopasowane do wymagań</span></div>
-                            <div class="flex items-center p-3 bg-gray-50 rounded-lg"><i class="fa-solid fa-check text-green-500 mr-3"></i><span class="text-sm">Mapa z ukrytymi perełkami (restauracje, widoki)</span></div>
+                            <div class="flex items-center p-3 bg-gray-50 rounded-lg">
+                                <i class="fa-solid fa-check text-green-500 mr-3"></i>
+                                <span class="text-gray-700 text-sm font-medium">Link do kupna biletów lotniczych (najlepsza trasa)</span>
+                            </div>
+                            <div class="flex items-center p-3 bg-gray-50 rounded-lg">
+                                <i class="fa-solid fa-check text-green-500 mr-3"></i>
+                                <span class="text-gray-700 text-sm font-medium">Noclegi (zazwyczaj kilka opcji w budżecie odpowiednim do twoich wymagań!)</span>
+                            </div>
+                            <div class="flex items-center p-3 bg-gray-50 rounded-lg">
+                                <i class="fa-solid fa-check text-green-500 mr-3"></i>
+                                <span class="text-gray-700 text-sm font-medium">Mapa z punktami (restauracje, kawiarnie, widoki czy atrakcje turystyczne)</span>
+                            </div>
+                            <div class="flex items-center p-3 bg-gray-50 rounded-lg">
+                                <i class="fa-solid fa-check text-green-500 mr-3"></i>
+                                <span class="text-gray-700 text-sm font-medium">Wskazówki dotyczące lokalnego transportu</span>
+                            </div>
+                            <div class="flex items-center p-3 bg-gray-50 rounded-lg">
+                                <i class="fa-solid fa-check text-green-500 mr-3"></i>
+                                <span class="text-gray-700 text-sm font-medium">Kosztorys całego wyjazdu</span>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -123,46 +203,182 @@
         </div>
     </section>
 
-    <!-- MODAL OFERTY -->
-    <div id="offer-modal" class="fixed inset-0 z-50 hidden flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm transition-opacity">
-        <div class="bg-white rounded-2xl max-w-2xl w-full max-h-[90vh] overflow-y-auto shadow-2xl relative">
-            <button onclick="closeOfferModal()" class="absolute top-4 right-4 bg-gray-100 text-gray-700 w-10 h-10 rounded-full flex items-center justify-center z-20 hover:bg-gray-200 transition-colors">
+    <!-- SEKCJA 3: O NAS -->
+    <section id="o-nas" class="py-24 bg-brand-900 text-white relative overflow-hidden">
+        <div class="absolute top-0 right-0 -mr-20 -mt-20 w-96 h-96 rounded-full bg-brand-800 opacity-50 blur-3xl"></div>
+        <div class="absolute bottom-0 left-0 -ml-20 -mb-20 w-72 h-72 rounded-full bg-brand-600 opacity-30 blur-3xl"></div>
+        
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
+            <h2 class="text-brand-300 font-semibold tracking-wide uppercase text-sm mb-2">Poznajmy się</h2>
+            <h3 class="text-3xl md:text-5xl font-bold mb-10">Kim jesteśmy i dlaczego WayFly?</h3>
+            
+            <div class="bg-white/10 backdrop-blur-md rounded-3xl p-8 md:p-12 border border-white/20 text-left">
+                <div class="prose prose-lg prose-invert mx-auto">
+                    <p class="text-xl text-brand-100 font-medium mb-6 leading-relaxed">
+                        Cześć! Cieszymy się, że tu jesteś. Ta strona powstała z ogromnej pasji do podróżowania i odkrywania świata bez przepłacania.
+                    </p>
+                    
+                    <p class="text-gray-300 mb-4 leading-relaxed">
+                        Od lat wyszukujemy najciekawsze i najtańsze połączenia lotnicze. Zauważylimy, że wiele osób przepłaca za wakacje, kupując gotowe wycieczki z biur podróży, lub po prostu boi się organizować wyjazdy na własną rękę. Postanowilimy to zmienić. WayFly to projekt, który ma zmienić podróże.
+                    </p>
+                    
+                    <p class="text-gray-300 mb-4 leading-relaxed">
+                        Darmowe oferty, które tu wrzucamy, to dowód na to, że świat stoi otworem dla każdego portfela. Z kolei plany szyte na miarę to nasza odpowiedź na brak czasu i stres, który często towarzyszy samodzielnemu planowaniu logistyki wyjazdu. Oddajemy w Twoje ręce setki godzin naszego doświadczenia.
+                    </p>
+                    
+                    <div class="mt-8 flex items-center gap-4">
+                        <div class="w-16 h-16 rounded-full bg-brand-500 overflow-hidden border-2 border-white/30 flex-shrink-0 flex items-center justify-center">
+                             <i class="fa-solid fa-user text-2xl"></i>
+                        </div>
+                        <div>
+                            <p class="font-bold text-white text-lg">Zespół WayFly</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SEKCJA 4: KONTAKT -->
+    <section id="kontakt" class="py-24 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="max-w-3xl mx-auto text-center mb-16">
+                <h2 class="text-brand-500 font-semibold tracking-wide uppercase text-sm mb-2">Zacznijmy działać</h2>
+                <h3 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">Skontaktuj się ze mną</h3>
+                <p class="text-gray-600 text-lg">Chcesz zamówić plan podróży, masz pytanie dotyczące tanich lotów, a może chcesz podjąć współpracę? Śmiało, pisz!</p>
+            </div>
+
+            <div class="max-w-2xl mx-auto bg-white rounded-2xl shadow-xl p-8 border border-gray-100">
+                <form onsubmit="handleFormSubmit(event)" class="space-y-6">
+                    <input type="hidden" name="_captcha" value="false">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div>
+                            <label for="name" class="block text-sm font-medium text-gray-700 mb-2">Imię i nazwisko</label>
+                            <input type="text" name="Imię i nazwisko" id="name" required class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-brand-500 focus:border-brand-500 outline-none transition-colors" placeholder="Jan Kowalski">
+                        </div>
+                        <div>
+                            <label for="email" class="block text-sm font-medium text-gray-700 mb-2">Adres E-mail</label>
+                            <input type="email" name="Adres e-mail" id="email" required class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-brand-500 focus:border-brand-500 outline-none transition-colors" placeholder="jan@example.com">
+                        </div>
+                    </div>
+                    <div>
+                        <label for="subject" class="block text-sm font-medium text-gray-700 mb-2">Temat</label>
+                        <select name="Temat" id="subject" class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-brand-500 focus:border-brand-500 outline-none transition-colors bg-white">
+                            <option>Wycena Spersonalizowanego Planu Podróży</option>
+                            <option>Pytanie o ofertę darmową</option>
+                            <option>Współpraca</option>
+                            <option>Inne</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label for="message" class="block text-sm font-medium text-gray-700 mb-2">Wiadomość (Podaj tu kierunek, termin i budżet jeśli pytasz o plan)</label>
+                        <textarea name="Wiadomość" id="message" rows="5" required class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-brand-500 focus:border-brand-500 outline-none transition-colors resize-y" placeholder="Opisz swoje wymarzone wakacje..."></textarea>
+                    </div>
+                    <button type="submit" class="w-full bg-brand-500 hover:bg-brand-600 text-white font-bold py-4 rounded-xl transition-colors shadow-md text-lg">
+                        Wyślij wiadomość
+                    </button>
+                    <!-- Komunikat po pomyślnym wysłaniu -->
+                    <div id="form-success-msg" class="hidden text-center text-green-700 font-medium p-4 bg-green-50 rounded-xl border border-green-200 mt-4 leading-relaxed">
+                        <!-- Treść generowana dynamicznie w JS -->
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="bg-gray-900 text-gray-400 py-12 border-t border-gray-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 items-center text-center md:text-left">
+                <div>
+                    <span class="font-bold text-2xl tracking-tight text-white mb-4 block">Way<span class="text-brand-500">Fly</span></span>
+                    <p class="text-sm leading-relaxed">
+                        Twoje centrum tanich lotów i profesjonalnych planów podróży. Przestań przepłacać, zacznij zwiedzać.
+                    </p>
+                </div>
+                <div class="flex justify-center md:justify-start space-x-6">
+                    <a href="https://www.instagram.com/wayfly__/" target="_blank" rel="noopener noreferrer" class="text-gray-400 hover:text-white transition-colors text-2xl" title="Instagram">
+                        <i class="fa-brands fa-instagram"></i>
+                    </a>
+                    <a href="https://www.tiktok.com/@wayfly_" target="_blank" rel="noopener noreferrer" class="text-gray-400 hover:text-white transition-colors text-2xl" title="TikTok">
+                        <i class="fa-brands fa-tiktok"></i>
+                    </a>
+                </div>
+                <div class="md:text-right text-sm">
+                    <p>&copy; 2026 WayFly. Wszelkie prawa zastrzeżone.</p>
+                    <p class="mt-1">Strona stworzona z <i class="fa-solid fa-heart text-brand-500 text-xs"></i> dla podróżników.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- OKNO MODALNE ZE SZCZEGÓŁAMI OFERTY -->
+    <div id="offer-modal" class="fixed inset-0 z-50 hidden flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm transition-opacity duration-300">
+        <div class="bg-white rounded-2xl max-w-2xl w-full max-h-[90vh] overflow-y-auto shadow-2xl relative animate-fade-in">
+            <button onclick="closeOfferModal()" class="absolute top-4 right-4 bg-gray-100 hover:bg-gray-200 text-gray-700 w-10 h-10 rounded-full flex items-center justify-center z-10 transition-colors">
                 <i class="fa-solid fa-xmark text-xl"></i>
             </button>
             <div id="modal-content"></div>
         </div>
     </div>
 
+    <!-- SKRYPTY JAVASCRIPT (CAŁKOWICIE NOWA LOGIKA Z ZACHOWANYM DESIGNEM) -->
     <script>
+        // SŁOWNIK BOGATYCH DANYCH DLA KIERUNKÓW (Uzupełnia surowe dane z bota)
         const cityData = {
-            "LON": { img: "https://images.unsplash.com/photo-1513635269975-59663e0ac1ad?ixlib=rb-4.0.3&w=800&q=80", desc: "Znakomita okazja na city break w Londynie. Odwiedź darmowe muzea i zobacz Big Bena!", airline: "Tanie Linie" },
-            "BCN": { img: "https://images.unsplash.com/photo-1539037116277-4db20202d699?ixlib=rb-4.0.3&w=800&q=80", desc: "Ucieknij do słonecznej Hiszpanii. Rewelacyjna cena lotów jak na ten kierunek o tej porze roku.", airline: "Tanie Linie" },
-            "ROM": { img: "https://images.unsplash.com/photo-1504198453319-5ce911bafcde?ixlib=rb-4.0.3&w=800&q=80", desc: "Poczuj magię Rzymu bez ogromnych tłumów turystów. Zjedz pizzę z widokiem na Koloseum.", airline: "Tanie Linie" },
-            "DEFAULT": { img: "https://images.unsplash.com/photo-1436491865332-7a61a109cc05?ixlib=rb-4.0.3&w=800&q=80", desc: "Okazja lotnicza wyłapana przez nasz radar! Zarezerwuj bilet, zanim inni Cię wyprzedzą.", airline: "Tanie Linie" }
+            "LON": { 
+                img: "https://images.unsplash.com/photo-1513635269975-59663e0ac1ad?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80", 
+                desc: "Świetna okazja na city break w stolicy Wielkiej Brytanii. Zobacz Big Bena, London Eye oraz darmowe muzea światowej klasy!",
+                airline: "Ryanair / WizzAir",
+                details: ["W cenie zawarty jest mały bagaż podręczny", "Lot bezpośredni bez przesiadek", "Polecany kierunek na szybki, weekendowy wypad"]
+            },
+            "ROM": { 
+                img: "https://images.unsplash.com/photo-1504198453319-5ce911bafcde?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80", 
+                desc: "Poczuj magię Rzymu. Włochy bez ogromnych tłumów turystów i z doskonałą pogodą na zwiedzanie.",
+                airline: "WizzAir / Ryanair",
+                details: ["W cenie zawarty jest mały bagaż podręczny", "Lot bezpośredni bez przesiadek", "Wypij pyszne espresso z widokiem na Koloseum"]
+            },
+            "BCN": { 
+                img: "https://images.unsplash.com/photo-1539037116277-4db20202d699?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80", 
+                desc: "Ucieknij do słonecznej Hiszpanii. Rewelacyjna cena lotów jak na ten kierunek o tej porze roku.",
+                airline: "Tanie Linie",
+                details: ["W cenie zawarty jest mały bagaż podręczny", "Lot bezpośredni", "Spaceruj po plaży Barceloneta w łagodnym klimacie"]
+            },
+            "DEFAULT": { 
+                img: "https://images.unsplash.com/photo-1436491865332-7a61a109cc05?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80", 
+                desc: "Znakomita okazja lotnicza wyłapana przez nasz radar! Zarezerwuj bilet, zanim inni Cię wyprzedzą.",
+                airline: "Tanie Linie",
+                details: ["Cena bazowa - sprawdź limity bagażowe przewoźnika", "Sprawdź dokładnie godziny wylotu po kliknięciu w link"]
+            }
         };
 
+        // Zmienne do logiki grupowania
         let groupedOffers = {};
         let activeDestination = null;
         let activeOrigin = null;
         let activeDateOffer = null;
 
+        // Pobieranie ofert z JSON'a
         async function loadDeals() {
             try {
                 const response = await fetch('deals.json?nocache=' + new Date().getTime());
                 const data = await response.json();
                 processOffers(data.oferty || []);
             } catch (error) {
-                document.getElementById('offers-grid').innerHTML = '<div class="col-span-full text-center py-10 text-red-500">Brak aktualnych ofert. Radar skanuje rynek.</div>';
+                document.getElementById('offers-grid').innerHTML = '<div class="col-span-full text-center py-10 text-red-500">Brak aktualnych ofert w bazie. Radar cały czas skanuje rynek.</div>';
             }
         }
 
+        // Grupowanie danych (Rozdziela po Miejscu Przylotu, a w nim Lotniska i Daty)
         function processOffers(offers) {
             groupedOffers = {};
-            // Grupowanie ofert po Miejscu Przylotu (Destination)
+            
             offers.forEach(o => {
                 const dest = o.destination;
-                const destName = o.trasa.split(' → ')[1] || dest;
-                const originName = o.trasa.split(' → ')[0] || o.origin;
+                // Wyodrębnienie miast z pełnej nazwy trasy (np. "Warszawa → Londyn")
+                const trasaParts = o.trasa.split(' → ');
+                const originName = trasaParts[0] || o.origin;
+                const destName = trasaParts[1] || dest;
 
                 if (!groupedOffers[dest]) {
                     groupedOffers[dest] = {
@@ -170,11 +386,18 @@
                         destName: destName,
                         minOneWay: Infinity,
                         minReturn: Infinity,
-                        airports: {} // Lotniska wylotu z Polski
+                        latestUpdate: o.aktualizacja,
+                        airports: {} // Polskie lotniska
                     };
                 }
 
                 const group = groupedOffers[dest];
+                
+                // Szukanie najnowszej daty aktualizacji do wyświetlenia "Dodano:"
+                if(new Date(o.aktualizacja) > new Date(group.latestUpdate)) {
+                    group.latestUpdate = o.aktualizacja;
+                }
+
                 if (o.typ === 'jednokierunkowy') group.minOneWay = Math.min(group.minOneWay, o.cena);
                 if (o.typ === 'w_obie_strony') group.minReturn = Math.min(group.minReturn, o.cena);
 
@@ -187,43 +410,81 @@
             renderGroupedGrid();
         }
 
+        // Formatowanie czasu wzglednego
+        function formatRelativeDate(isoString) {
+            const date = new Date(isoString);
+            const today = new Date();
+            const yesterday = new Date(today);
+            yesterday.setDate(yesterday.getDate() - 1);
+
+            const isToday = date.toDateString() === today.toDateString();
+            const isYesterday = date.toDateString() === yesterday.toDateString();
+            const timeStr = date.toLocaleTimeString('pl-PL', { hour: '2-digit', minute: '2-digit' });
+
+            if (isToday) return `Dzisiaj, ${timeStr}`;
+            if (isYesterday) return `Wczoraj, ${timeStr}`;
+            return `${date.toLocaleDateString('pl-PL', { day: 'numeric', month: 'short' })}, ${timeStr}`;
+        }
+
+        // Renderowanie GŁÓWNEJ SIATKI KAFELKÓW (Pogrupowane Kierunki ze Starym Designem)
         function renderGroupedGrid() {
             const grid = document.getElementById('offers-grid');
             const destKeys = Object.keys(groupedOffers);
-            
+
             if (destKeys.length === 0) {
-                grid.innerHTML = '<div class="col-span-full text-center py-10 text-gray-500">Brak ofert z ostatnich 3 dni. Wróć tu później!</div>';
+                grid.innerHTML = '<div class="col-span-full text-center py-10 text-gray-500">Na ten moment radar nie wykrył żadnych zjawiskowych promocji cenowych. Wrócimy wkrótce!</div>';
                 return;
             }
+
+            // Sortowanie destynacji po najnowszej aktualizacji
+            destKeys.sort((a, b) => new Date(groupedOffers[b].latestUpdate) - new Date(groupedOffers[a].latestUpdate));
 
             grid.innerHTML = destKeys.map(destKey => {
                 const group = groupedOffers[destKey];
                 const meta = cityData[destKey] || cityData["DEFAULT"];
+                const timeStr = formatRelativeDate(group.latestUpdate);
+                const absoluteMinPrice = Math.min(group.minOneWay, group.minReturn);
+                const airportsCount = Object.keys(group.airports).length;
                 
-                let priceTags = '';
-                if (group.minOneWay !== Infinity) priceTags += `<span class="bg-gray-100 text-gray-700 text-xs px-2 py-1 rounded font-medium">W jedną stronę od ${group.minOneWay} zł</span> `;
-                if (group.minReturn !== Infinity) priceTags += `<span class="bg-brand-50 text-brand-700 text-xs px-2 py-1 rounded font-medium border border-brand-200">W obie strony od ${group.minReturn} zł</span>`;
-
                 return `
-                <div class="bg-white rounded-2xl shadow-sm hover:shadow-xl transition-shadow overflow-hidden border border-gray-100 flex flex-col cursor-pointer" onclick="openDestinationModal('${destKey}')">
-                    <div class="relative h-48 overflow-hidden">
-                        <img src="${meta.img}" class="w-full h-full object-cover transition-transform duration-500 hover:scale-105">
-                        <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-4">
-                            <h4 class="text-2xl font-bold text-white">${group.destName}</h4>
+                <div class="bg-white rounded-2xl shadow-sm hover:shadow-xl transition-shadow duration-300 overflow-hidden group border border-gray-100 flex flex-col">
+                    <div class="relative h-56 overflow-hidden">
+                        <img src="${meta.img}" alt="${group.destName}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                        <div class="absolute top-4 right-4 bg-white/90 backdrop-blur-sm px-3 py-1 rounded-full text-sm font-bold text-gray-900 shadow-sm">
+                            <i class="fa-solid fa-fire text-orange-500 mr-1"></i> Okazja
                         </div>
                     </div>
-                    <div class="p-5 flex-grow flex flex-col">
-                        <div class="mb-4 space-y-2">${priceTags}</div>
-                        <button class="w-full bg-brand-500 hover:bg-brand-600 text-white font-semibold py-3 rounded-xl transition-colors mt-auto">
-                            Sprawdź wyloty i daty
-                        </button>
+                    <div class="p-6 flex-grow flex flex-col">
+                        <div class="flex justify-between items-start mb-2">
+                            <div>
+                                <h4 class="text-xl font-bold text-gray-900 mb-1">${group.destName}</h4>
+                                <p class="text-sm text-gray-500"><i class="fa-solid fa-plane-departure mr-2 text-brand-500"></i>${airportsCount} ${airportsCount === 1 ? 'lotnisko wylotu' : 'lotniska wylotu'}</p>
+                            </div>
+                            <div class="text-right">
+                                <span class="block text-2xl font-extrabold text-brand-600">od ${absoluteMinPrice} zł</span>
+                                <span class="text-xs text-gray-400 uppercase">najlepsza cena</span>
+                            </div>
+                        </div>
+                        
+                        <div class="mb-4 flex flex-wrap gap-2">
+                            ${group.minOneWay !== Infinity ? `<span class="inline-flex items-center text-xs font-medium bg-gray-100 text-gray-600 px-2.5 py-1 rounded-md">1-stronnie od ${group.minOneWay} zł</span>` : ''}
+                            ${group.minReturn !== Infinity ? `<span class="inline-flex items-center text-xs font-medium bg-brand-50 text-brand-700 px-2.5 py-1 rounded-md border border-brand-100">2-stronnie od ${group.minReturn} zł</span>` : ''}
+                        </div>
+
+                        <p class="text-gray-600 text-sm mb-6 flex-grow">${meta.desc}</p>
+                        
+                        <div class="space-y-2">
+                            <button onclick="openDestinationModal('${destKey}')" class="w-full block text-center bg-gray-50 hover:bg-brand-50 text-gray-700 hover:text-brand-600 font-semibold py-3 rounded-xl border border-gray-200 hover:border-brand-200 transition-colors">
+                                Wybierz wylot i datę
+                            </button>
+                        </div>
                     </div>
                 </div>`;
             }).join('');
         }
 
+        // Generator dynamicznego URL do SkyScanner'a (YYMMDD)
         function getSkyscannerUrl(offer) {
-            // Format Skyscanner: YYMMDD
             const fmtDate = (iso) => {
                 if(!iso) return '';
                 const parts = iso.split('-');
@@ -239,11 +500,10 @@
             return `https://www.skyscanner.pl/transport/loty/${ori}/${dst}/${dW}/?currency=PLN`;
         }
 
+        // Otwieranie Modala dla Wybranej Destynacji
         function openDestinationModal(destKey) {
             activeDestination = groupedOffers[destKey];
-            // Ustawiamy domyślnie pierwsze lotnisko wylotu
             activeOrigin = Object.keys(activeDestination.airports)[0]; 
-            // I pierwszą datę z tego lotniska
             activeDateOffer = activeDestination.airports[activeOrigin].dates[0];
 
             renderModalContent();
@@ -251,94 +511,233 @@
             document.body.style.overflow = 'hidden';
         }
 
-        function setModalOrigin(originKey) {
+        // Zmiana polskiego lotniska w Modalu
+        window.setModalOrigin = function(originKey) {
             activeOrigin = originKey;
             activeDateOffer = activeDestination.airports[activeOrigin].dates[0];
             renderModalContent();
         }
 
-        function setModalDate(offerIndex) {
+        // Zmiana daty (kafelka) w Modalu
+        window.setModalDate = function(offerIndex) {
             activeDateOffer = activeDestination.airports[activeOrigin].dates[offerIndex];
             renderModalContent();
         }
 
+        // Renderowanie zawartości Modala ze Startym Designem
         function renderModalContent() {
             const dest = activeDestination;
             const meta = cityData[dest.destCode] || cityData["DEFAULT"];
             const currentAirports = dest.airports;
             const availableDates = currentAirports[activeOrigin].dates;
+            
+            const dataFormat = activeDateOffer.data_wylotu + (activeDateOffer.data_powrotu ? ` - ${activeDateOffer.data_powrotu}` : '');
+            const typStr = activeDateOffer.typ === 'w_obie_strony' ? 'w obie strony' : 'w jedną stronę';
+            const timeStr = formatRelativeDate(activeDateOffer.aktualizacja);
 
             const modalHtml = `
-                <div class="relative h-48 sm:h-56">
-                    <img src="${meta.img}" class="w-full h-full object-cover">
-                    <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent flex items-end p-6">
-                        <h3 class="text-3xl font-bold text-white">Kierunek: ${dest.destName}</h3>
+                <div class="relative h-64 sm:h-72">
+                    <img src="${meta.img}" alt="Kierunek ${dest.destName}" class="w-full h-full object-cover">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent flex items-end p-6">
+                        <div>
+                            <span class="bg-brand-500 text-white text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider mb-2 inline-block">${meta.airline}</span>
+                            <h3 class="text-2xl sm:text-3xl font-bold text-white">Kierunek: ${dest.destName}</h3>
+                        </div>
                     </div>
                 </div>
-
-                <div class="p-6">
-                    <!-- Wybór lotniska wylotu -->
-                    <div class="mb-6">
-                        <p class="text-sm font-bold text-gray-700 uppercase tracking-wide mb-3">1. Wybierz lotnisko wylotu (Polska)</p>
+                
+                <div class="p-6 sm:p-8 space-y-6">
+                    
+                    <!-- KROK 1: Wybór Lotniska Wylotu -->
+                    <div class="bg-white">
+                        <h4 class="text-sm font-bold text-gray-700 uppercase tracking-wide mb-3">1. Wybierz lotnisko wylotu</h4>
                         <div class="flex flex-wrap gap-2">
                             ${Object.values(currentAirports).map(air => `
                                 <button onclick="setModalOrigin('${air.originCode}')" 
-                                    class="px-4 py-2 rounded-lg font-medium text-sm border transition-colors ${air.originCode === activeOrigin ? 'bg-brand-500 text-white border-brand-500' : 'bg-white text-gray-600 border-gray-300 hover:bg-gray-50'}">
+                                    class="px-4 py-2 rounded-xl font-semibold text-sm border transition-all ${air.originCode === activeOrigin ? 'bg-brand-500 text-white border-brand-500 shadow-md' : 'bg-gray-50 text-gray-600 border-gray-200 hover:bg-gray-100 hover:border-gray-300'}">
                                     ${air.originName}
                                 </button>
                             `).join('')}
                         </div>
                     </div>
 
-                    <!-- Wybór daty -->
-                    <div class="mb-8">
-                        <p class="text-sm font-bold text-gray-700 uppercase tracking-wide mb-3">2. Wybierz dogodny termin</p>
+                    <!-- KROK 2: Wybór Daty -->
+                    <div class="bg-white">
+                        <h4 class="text-sm font-bold text-gray-700 uppercase tracking-wide mb-3">2. Wybierz dogodny termin</h4>
                         <div class="grid grid-cols-2 sm:grid-cols-3 gap-3">
                             ${availableDates.map((off, idx) => {
                                 const isSelected = (off === activeDateOffer);
-                                const typStr = off.typ === 'w_obie_strony' ? 'W obie strony' : 'W jedną stronę';
-                                const dStr = off.data_powrotu ? `${off.data_wylotu} / ${off.data_powrotu}` : off.data_wylotu;
+                                const typBtnStr = off.typ === 'w_obie_strony' ? 'W obie strony' : 'W 1 stronę';
+                                const dStr = off.data_powrotu ? `${off.data_wylotu}<br><span class="text-[10px] text-gray-400 font-normal">powrót: ${off.data_powrotu}</span>` : off.data_wylotu;
                                 return `
-                                <div onclick="setModalDate(${idx})" class="cursor-pointer border rounded-xl p-3 text-center transition-all ${isSelected ? 'border-brand-500 bg-brand-50 ring-1 ring-brand-500' : 'border-gray-200 hover:border-brand-300 bg-white'}">
-                                    <span class="block text-xs text-gray-500 mb-1">${typStr}</span>
-                                    <span class="block font-bold text-gray-900 text-sm mb-1">${dStr}</span>
-                                    <span class="block font-extrabold text-brand-600">${off.cena} zł</span>
+                                <div onclick="setModalDate(${idx})" class="cursor-pointer border rounded-xl p-3 text-center transition-all ${isSelected ? 'border-brand-500 bg-brand-50 shadow-sm ring-1 ring-brand-500' : 'border-gray-200 hover:border-brand-300 bg-white'}">
+                                    <span class="block text-[11px] font-bold uppercase mb-1 ${isSelected ? 'text-brand-600' : 'text-gray-500'}">${typBtnStr}</span>
+                                    <span class="block font-bold text-gray-900 text-sm mb-1 leading-tight">${dStr}</span>
+                                    <span class="block font-extrabold text-brand-600 text-lg mt-1">${off.cena} zł</span>
                                 </div>`;
                             }).join('')}
                         </div>
                     </div>
 
-                    <!-- Przycisk kupna (Skyscanner) -->
-                    <div class="pt-5 border-t border-gray-100">
-                        <a href="${getSkyscannerUrl(activeDateOffer)}" target="_blank" rel="noopener noreferrer" 
-                           class="w-full flex items-center justify-center bg-[#0770e3] hover:bg-[#065bba] text-white font-bold py-4 rounded-xl transition-colors shadow-lg text-lg">
-                            Kup na Skyscanner za ${activeDateOffer.cena} zł <i class="fa-solid fa-plane-departure ml-3"></i>
-                        </a>
-                        <p class="text-xs text-gray-400 text-center mt-3">Skyscanner zaciągnie automatycznie wybraną trasę i daty.</p>
+                    <!-- STARY INFO-BOX Z PODSUMOWANIEM -->
+                    <div class="flex justify-between items-center bg-gray-50 p-4 rounded-xl border border-gray-100 mt-6">
+                        <div>
+                            <p class="text-xs text-gray-500 uppercase font-semibold">Podsumowanie</p>
+                            <p class="text-gray-900 font-medium mb-1 mt-1 text-sm"><i class="fa-solid fa-plane-departure mr-2 text-brand-500"></i>${activeDestination.airports[activeOrigin].originName}</p>
+                            <p class="text-gray-900 font-medium mb-1 text-sm"><i class="fa-regular fa-calendar mr-2 text-brand-500"></i>${dataFormat}</p>
+                        </div>
+                        <div class="text-right">
+                            <p class="text-xs text-gray-500 uppercase font-semibold">Cena ${typStr}</p>
+                            <p class="text-3xl font-extrabold text-brand-600">${activeDateOffer.cena} zł</p>
+                        </div>
                     </div>
+
+                    <div>
+                        <h4 class="font-bold text-gray-900 text-lg mb-2">Opis wyjazdu</h4>
+                        <p class="text-gray-600 leading-relaxed">${meta.desc}</p>
+                    </div>
+
+                    <div>
+                        <h4 class="font-bold text-gray-900 text-lg mb-3">Szczegóły logistyczne</h4>
+                        <ul class="space-y-2">
+                            ${meta.details.map(item => `
+                                <li class="flex items-center text-gray-700 text-sm">
+                                    <i class="fa-solid fa-check text-green-500 mr-3"></i>${item}
+                                </li>
+                            `).join('')}
+                        </ul>
+                    </div>
+
+                    <!-- STARE PRZYCISKI Z PODMIENIONYM LINKIEM DO SKYSCANNERA -->
+                    <div class="pt-4 border-t border-gray-100 flex flex-col sm:flex-row gap-4">
+                        <a href="${getSkyscannerUrl(activeDateOffer)}" target="_blank" rel="noopener noreferrer" class="flex-1 text-center bg-brand-500 hover:bg-brand-600 text-white font-bold py-3.5 rounded-xl transition-colors shadow-md flex items-center justify-center">
+                            Szukaj biletów na Skyscanner <i class="fa-solid fa-arrow-up-right-from-square ml-2 text-xs"></i>
+                        </a>
+                        <button onclick="reportPriceChange('${activeDateOffer.trasa} (${activeDateOffer.cena} zł)')" class="px-5 py-3.5 bg-red-50 hover:bg-red-100 text-red-600 font-semibold rounded-xl border border-red-200 transition-colors text-sm flex items-center justify-center gap-2">
+                            <i class="fa-solid fa-triangle-exclamation"></i> Zgłoś zmianę ceny
+                        </button>
+                    </div>
+                    
+                    <p class="text-xs text-gray-400 italic text-center pt-2">
+                        ℹ️ Podana cena była aktualna w momencie publikacji przez bota (${timeStr}). Ceny w tanich liniach zmieniają się dynamicznie. Zależnie od wybranej daty w kalendarzu na stronie SkyScanner, ceny mogą nieznacznie różnić się od zrzuconej bazy.
+                    </p>
                 </div>
             `;
             document.getElementById('modal-content').innerHTML = modalHtml;
         }
 
+        // Zamykanie Modala
         function closeOfferModal() {
             document.getElementById('offer-modal').classList.add('hidden');
             document.body.style.overflow = 'auto';
         }
 
-        // Obsługa menu mobilnego...
-        document.getElementById('mobile-menu-btn').addEventListener('click', function() {
-            const menu = document.getElementById('mobile-menu');
+        // Zgłaszanie zmiany ceny do Ciebie
+        async function reportPriceChange(offerTitle) {
+            if (!confirm(`Czy chcesz zgłosić zmianę / nieaktualność ceny dla oferty: "${offerTitle}"?`)) return;
+
+            try {
+                const formData = new FormData();
+                formData.append("Zgłoszenie", "Nieaktualna cena oferty!");
+                formData.append("Oferta", offerTitle);
+                formData.append("Data zgłoszenia", new Date().toLocaleString("pl-PL"));
+
+                const response = await fetch("https://formsubmit.co/ajax/wayfly2025@gmail.com", {
+                    method: "POST",
+                    body: formData,
+                    headers: { 'Accept': 'application/json' }
+                });
+
+                if (response.ok) {
+                    alert("Dziękujemy! Zgłoszenie zostało wysłane. Weryfikujemy cenę tej oferty.");
+                } else {
+                    alert("Wystąpił błąd podczas wysyłania zgłoszenia. Spróbuj ponownie.");
+                }
+            } catch (err) {
+                alert("Wystąpił błąd połączenia z siecią.");
+            }
+        }
+
+        // Interfejs (Menu mobilne i shadow nav)
+        const btn = document.getElementById('mobile-menu-btn');
+        const menu = document.getElementById('mobile-menu');
+        const icon = btn.querySelector('i');
+
+        btn.addEventListener('click', () => {
             menu.classList.toggle('hidden');
-        });
-        document.querySelectorAll('#mobile-menu a').forEach(link => {
-            link.addEventListener('click', () => document.getElementById('mobile-menu').classList.add('hidden'));
-        });
-        window.addEventListener('scroll', () => {
-            const nav = document.getElementById('navbar');
-            nav.classList.toggle('shadow-sm', window.scrollY > 20);
+            if(menu.classList.contains('hidden')){
+                icon.classList.remove('fa-xmark');
+                icon.classList.add('fa-bars');
+            } else {
+                icon.classList.remove('fa-bars');
+                icon.classList.add('fa-xmark');
+            }
         });
 
+        document.querySelectorAll('#mobile-menu a').forEach(link => {
+            link.addEventListener('click', () => {
+                menu.classList.add('hidden');
+                icon.classList.remove('fa-xmark');
+                icon.classList.add('fa-bars');
+            });
+        });
+
+        window.addEventListener('scroll', () => {
+            const nav = document.getElementById('navbar');
+            if (window.scrollY > 20) {
+                nav.classList.add('shadow-sm');
+                nav.classList.remove('border-gray-100');
+            } else {
+                nav.classList.remove('shadow-sm');
+                nav.classList.add('border-gray-100');
+            }
+        });
+
+        // Formularz kontaktowy (z Twoim potwierdzeniem e-maila)
+        async function handleFormSubmit(e) {
+            e.preventDefault();
+            const form = e.target;
+            const submitBtn = form.querySelector('button[type="submit"]');
+            const originalText = submitBtn.innerHTML;
+            const userEmail = document.getElementById('email').value;
+
+            submitBtn.innerHTML = '<i class="fa-solid fa-circle-notch fa-spin"></i> Wysyłanie...';
+            submitBtn.classList.add('opacity-80', 'cursor-not-allowed');
+            submitBtn.disabled = true;
+
+            try {
+                const response = await fetch("https://formsubmit.co/ajax/wayfly2025@gmail.com", {
+                    method: "POST",
+                    body: new FormData(form),
+                    headers: { 'Accept': 'application/json' }
+                });
+
+                if (response.ok) {
+                    const msg = document.getElementById('form-success-msg');
+                    msg.innerHTML = `
+                        <p class="text-base font-bold text-green-800 mb-1">
+                            <i class="fa-solid fa-circle-check text-green-500 mr-2"></i>Wiadomość została pomyślnie wysłana!
+                        </p>
+                        <p class="text-sm text-green-700">
+                            Dziękujemy za kontakt. Nasza odpowiedź przesłana zostanie bezpośrednio na Twój adres e-mail: <span class="font-bold underline">${userEmail}</span>.
+                        </p>
+                    `;
+                    msg.classList.remove('hidden');
+                    form.reset();
+                    setTimeout(() => { msg.classList.add('hidden'); }, 10000);
+                } else {
+                    alert("Wystąpił problem. Jeśli wysyłasz wiadomość po raz pierwszy, upewnij się, że kliknąłeś link aktywacyjny wysłany na Twój e-mail.");
+                }
+            } catch (error) {
+                alert("Wystąpił błąd połączenia. Sprawdź swoje połączenie z internetem.");
+            } finally {
+                submitBtn.innerHTML = originalText;
+                submitBtn.classList.remove('opacity-80', 'cursor-not-allowed');
+                submitBtn.disabled = false;
+            }
+        }
+
+        // Start aplikacji przy uruchomieniu strony
         document.addEventListener('DOMContentLoaded', loadDeals);
     </script>
 </body>
