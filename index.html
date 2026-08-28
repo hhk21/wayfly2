@@ -234,11 +234,40 @@
     <!-- SKRYPTY JAVASCRIPT (Kaskadowy wybór kafelków) -->
     <script>
         const cityData = {
-            "LON": { img: "https://images.unsplash.com/photo-1513635269975-59663e0ac1ad?ixlib=rb-4.0.3&w=800&q=80", desc: "Świetna okazja na city break w stolicy Wielkiej Brytanii. Zobacz Big Bena, London Eye oraz darmowe muzea!", airline: "Ryanair / WizzAir", details: ["W cenie mały bagaż podręczny", "Lot bezpośredni", "Polecany na szybki wypad"] },
-            "ROM": { img: "https://images.unsplash.com/photo-1504198453319-5ce911bafcde?ixlib=rb-4.0.3&w=800&q=80", desc: "Poczuj magię Rzymu. Włochy bez ogromnych tłumów turystów i z doskonałą pogodą na zwiedzanie.", airline: "WizzAir / Ryanair", details: ["W cenie mały bagaż podręczny", "Lot bezpośredni", "Wypij espresso z widokiem na Koloseum"] },
-            "BCN": { img: "https://images.unsplash.com/photo-1539037116277-4db20202d699?ixlib=rb-4.0.3&w=800&q=80", desc: "Ucieknij do słonecznej Hiszpanii. Rewelacyjna cena lotów jak na ten kierunek o tej porze roku.", airline: "Tanie Linie", details: ["W cenie mały bagaż podręczny", "Lot bezpośredni", "Spaceruj po plaży Barceloneta w łagodnym klimacie"] },
-            "DEFAULT": { img: "https://images.unsplash.com/photo-1436491865332-7a61a109cc05?ixlib=rb-4.0.3&w=800&q=80", desc: "Znakomita okazja lotnicza wyłapana przez nasz radar! Zarezerwuj bilet, zanim inni Cię wyprzedzą.", airline: "Tanie Linie", details: ["Cena bazowa - sprawdź limity bagażowe", "Sprawdź godziny wylotu u przewoźnika"] }
-        };
+    // UK & Irlandia
+    "LON": { img: "https://images.unsplash.com/photo-1513635269975-59663e0ac1ad?ixlib=rb-4.0.3&w=800&q=80", desc: "Znakomity city-break w Londynie. Odwiedź darmowe muzea, zobacz Big Bena i poczuj brytyjski klimat.", airline: "Ryanair / WizzAir", details: ["W cenie mały bagaż podręczny", "Lot bezpośredni", "Świetna komunikacja metrem"] },
+    "LTN": { img: "https://images.unsplash.com/photo-1513635269975-59663e0ac1ad?ixlib=rb-4.0.3&w=800&q=80", desc: "Wygodny wylot do Londynu-Luton. Idealna baza wypadowa do zwiedzania stolicy UK.", airline: "WizzAir", details: ["Lot bezpośredni", "Pociąg Thameslink do centrum"] },
+    "STN": { img: "https://images.unsplash.com/photo-1513635269975-59663e0ac1ad?ixlib=rb-4.0.3&w=800&q=80", desc: "Szybkie połączenie na Londyn Stansted w rewelacyjnej cenie.", airline: "Ryanair", details: ["Główny hub Ryanair", "Bezpośredni autobus Stansted Express"] },
+    "DUB": { img: "https://images.unsplash.com/photo-1549918864-48ac978761a4?ixlib=rb-4.0.3&w=800&q=80", desc: "Odkryj klimat irlandzkich pubów w Temple Bar oraz spektakularne klify Moheru.", airline: "Ryanair", details: ["W cenie bagaż podręczny", "Świetny punkt przesiadkowy do USA"] },
+
+    // Hiszpania & Kanary
+    "BCN": { img: "https://images.unsplash.com/photo-1539037116277-4db20202d699?ixlib=rb-4.0.3&w=800&q=80", desc: "Spaceruj po La Rambla, podziwiaj dzieła Gaudiego i wypoczywaj na miejskiej plaży Barceloneta.", airline: "WizzAir / Ryanair", details: ["Słoneczna pogoda", "Kuchnia tapas i paella"] },
+    "MAD": { img: "https://images.unsplash.com/photo-1539037116277-4db20202d699?ixlib=rb-4.0.3&w=800&q=80", desc: "Stolica Hiszpanii pełna sztuki, parku Retiro i niesamowitego życia nocnego.", airline: "Ryanair", details: ["Muzeum Prado", "Architektura Gran Via"] },
+    "AGP": { img: "https://images.unsplash.com/photo-1561632669-6e0e93226a27?ixlib=rb-4.0.3&w=800&q=80", desc: "Słoneczne Costa del Sol. Wyśmienita baza do zwiedzania Rondy, Caminito del Rey i krainy flamenco.", airline: "Ryanair / WizzAir", details: ["Ciepłe morze", "Kraina Picassa"] },
+    "ALC": { img: "https://images.unsplash.com/photo-1563805042-7684c019e1cb?ixlib=rb-4.0.3&w=800&q=80", desc: "Wybrzeże Costa Blanca. Gwarancja słońca, zamku Santa Barbara i pięknych, piaszczystych plaż.", airline: "Ryanair / WizzAir", details: ["Odwiedź wyspę Tabarca", "Tanie restauracje na wybrzeżu"] },
+    "TFS": { img: "https://images.unsplash.com/photo-1589553460732-58ef7a11d952?ixlib=rb-4.0.3&w=800&q=80", desc: "Wyspa wiecznej wiosny. Wulkan Teide, czarne plaże i niesamowity oceaniczny klimat.", airline: "Ryanair / WizzAir", details: ["Całoroczne słońce", "Widok na wulkan"] },
+
+    // Włochy
+    "ROM": { img: "https://images.unsplash.com/photo-1504198453319-5ce911bafcde?ixlib=rb-4.0.3&w=800&q=80", desc: "Poczuj magię Wiecznego Miasta. Zjedz prawdziwą pizzę i rzuć monetę do Fontanny di Trevi.", airline: "WizzAir / Ryanair", details: ["Koloseum i Watykan", "Idealna pogoda jesienią/wiosną"] },
+    "MIL": { img: "https://images.unsplash.com/photo-1513581166391-887a96ddeafd?ixlib=rb-4.0.3&w=800&q=80", desc: "Stolica mody i katedra Duomo di Milano. Znakomity punkt wypadowy nad malownicze jezioro Como.", airline: "WizzAir / Ryanair", details: ["Blisko nad jezioro Como", "Mekka mody i designu"] },
+    "NAP": { img: "https://images.unsplash.com/photo-1534447677768-be436bb09401?ixlib=rb-4.0.3&w=800&q=80", desc: "Kolebka tradycyjnej pizzy neapolitańskiej, wycieczki na Wezuwiusz oraz ruiny Pompei.", airline: "Ryanair / WizzAir", details: ["Najlepsza pizza na świecie", "Widok na wulkan"] },
+    "CTA": { img: "https://images.unsplash.com/photo-1528642474498-1af0c17fd8c3?ixlib=rb-4.0.3&w=800&q=80", desc: "Sycylijska perła u stóp Etny. Ciepłe morze, niesamowity klimat oraz słynne cannoli.", airline: "WizzAir / Ryanair", details: ["Wycieczki na Etnę", "Kuchnia sycylijska"] },
+
+    // Kaukaz & Bliski Wschód
+    "AMM": { img: "https://images.unsplash.com/photo-1579606030852-826959f34076?ixlib=rb-4.0.3&w=800&q=80", desc: "Zobaczenie cud świata – Petry, kąpiel w Morzu Martwym oraz nocleg na pustyni Wadi Rum.", airline: "Ryanair / WizzAir", details: ["Pustynia Wadi Rum", "Wizowa łatwość (Jordan Pass)"] },
+    "KUT": { img: "https://images.unsplash.com/photo-1565008576549-57569a49371d?ixlib=rb-4.0.3&w=800&q=80", desc: "Odkryj gościnność Gruzji. Wyśmienite chaczapuri, chinkali i widowiskowe góry Kaukazu.", airline: "WizzAir", details: ["Niskie ceny na miejscu", "Niesamowita kuchnia i wino"] },
+    "GYD": { img: "https://images.unsplash.com/photo-1527838832700-54595d9776d9?ixlib=rb-4.0.3&w=800&q=80", desc: "Nowoczesne Baku z Płomiennymi Wieżami zderzone z historycznym Starym Miastem nad Morzem Kaspijskim.", airline: "WizzAir", details: ["Egzotyczny kierunek z Budapesztu", "Wspaniała architektura"] },
+    "EVN": { img: "https://images.unsplash.com/photo-1580587771525-78b9dba3b914?ixlib=rb-4.0.3&w=800&q=80", desc: "Erywań u stóp wulkanu Ararat. Najstarsze klasztory świata i unikalna kultura Armenii.", airline: "WizzAir", details: ["Widok na Ararat", "Historyczne zabytki"] },
+    "AUH": { img: "https://images.unsplash.com/photo-1512453979798-5ea266f8880c?ixlib=rb-4.0.3&w=800&q=80", desc: "Wielki Meczet Szejka Zajeda i luksusowe Zjednoczone Emiraty Arabskie w rewelacyjnej cenie.", airline: "WizzAir", details: ["Luksus i gwarancja upału", "Łatwy dojazd do Dubaju"] },
+
+    // USA z Dublina
+    "NYC": { img: "https://images.unsplash.com/photo-1496442226666-8d4d0e62e6e9?ixlib=rb-4.0.3&w=800&q=80", desc: "Lot do Nowego Jorku z Dublinem. Przejdź odprawę celną USA w Dublinie i ląduj jako pasażer krajowy!", airline: "Aer Lingus / Delta", details: ["Brak kolejek celnych w USA (US Preclearance)", "Times Square i Central Park"] },
+    "BOS": { img: "https://images.unsplash.com/photo-1501979376754-2ff867a4f659?ixlib=rb-4.0.3&w=800&q=80", desc: "Historyczny Boston z rewelacyjną ceną przelotu transatlantyckiego z wylotem z Dublina.", airline: "Aer Lingus", details: ["Kolebka historii USA", "Uniwersytet Harvard"] },
+    "MIA": { img: "https://images.unsplash.com/photo-1506929562872-bb421503ef21?ixlib=rb-4.0.3&w=800&q=80", desc: "Słoneczna Floryda, plaże South Beach i tętniące życiem uliczki Miami w promocyjnej stawce.", airline: "Aer Lingus / American", details: ["Całoroczny upał", "Klimat Art Deco"] },
+
+    // Domyślny wygląd dla pozostałych miast
+    "DEFAULT": { img: "https://images.unsplash.com/photo-1436491865332-7a61a109cc05?ixlib=rb-4.0.3&w=800&q=80", desc: "Znakomita okazja lotnicza wyłapana przez nasz radar! Zarezerwuj bilet, zanim inni Cię wyprzedzą.", airline: "Tanie Linie", details: ["Sprawdź limity bagażowe przewoźnika", "Oferta ograniczona czasowo"] }
+};
 
         let groupedOffers = {};
         
