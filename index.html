@@ -79,9 +79,9 @@
     <section id="tanie-loty" class="py-20 bg-gray-50">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center max-w-3xl mx-auto mb-16">
-                <h2 class="text-brand-500 font-semibold tracking-wide uppercase text-sm mb-2">Budujemy społeczność</h2>
+                <h2 class="text-brand-500 font-semibold tracking-wide uppercase text-sm mb-2">Wybierz Kraj Docelowy</h2>
                 <h3 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">Najnowsze Okazje Lotnicze</h3>
-                <p class="text-gray-600 text-lg">Codziennie przeszukujemy tysiące połączeń, aby znaleźć dla Ciebie te najtańsze. Sortowane po Państwach. Korzystaj z naszych znalezisk zupełnie za darmo!</p>
+                <p class="text-gray-600 text-lg">Wybierz państwo, do którego chcesz lecieć i sprawdź najtańsze propozycje miast z naszej bazy. Aktualizowane codziennie!</p>
             </div>
 
             <!-- ADNOTACJA FOMO -->
@@ -94,8 +94,8 @@
                 </p>
             </div>
 
-            <!-- DYNAMICZNA SIATKA OFERT -->
-            <div id="offers-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <!-- DYNAMICZNA SIATKA OFERT KRAJÓW -->
+            <div id="offers-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
                 <div class="col-span-full text-center py-10 text-gray-500">
                     <i class="fa-solid fa-circle-notch fa-spin text-2xl mb-3"></i><br>Szukam najnowszych ofert...
                 </div>
@@ -223,10 +223,10 @@
         </div>
     </footer>
 
-    <!-- OKNO MODALNE ZE SZCZEGÓŁAMI OFERTY -->
+    <!-- OKNO MODALNE -->
     <div id="offer-modal" class="fixed inset-0 z-50 hidden flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm transition-opacity duration-300">
-        <div class="bg-white rounded-2xl max-w-2xl w-full max-h-[90vh] overflow-y-auto shadow-2xl relative animate-fade-in">
-            <button onclick="closeOfferModal()" class="absolute top-4 right-4 bg-gray-100 hover:bg-gray-200 text-gray-700 w-10 h-10 rounded-full flex items-center justify-center z-10 transition-colors"><i class="fa-solid fa-xmark text-xl"></i></button>
+        <div class="bg-white rounded-2xl max-w-2xl w-full max-h-[90vh] overflow-y-auto shadow-2xl relative animate-fade-in" id="modal-container">
+            <button onclick="closeOfferModal()" class="absolute top-4 right-4 bg-white hover:bg-gray-100 shadow-md text-gray-700 w-10 h-10 rounded-full flex items-center justify-center z-30 transition-colors border border-gray-100"><i class="fa-solid fa-xmark text-xl"></i></button>
             <div id="modal-content"></div>
         </div>
     </div>
@@ -369,9 +369,52 @@
         "BKK": "Tajlandia", "TYO": "Japonia", "SEL": "Korea Południowa", "BJS": "Chiny", "CUN": "Meksyk"
     };
 
+    // ZDJĘCIA KRAJÓW (BEZ PRAW AUTORSKICH Z UNSPLASH)
+    const countryImages = {
+        "Wielka Brytania": "https://images.unsplash.com/photo-1513635269975-59663e0ac1ad?w=800&q=80",
+        "Irlandia": "https://images.unsplash.com/photo-1590008433465-9615a6b7d12f?w=800&q=80",
+        "Norwegia": "https://images.unsplash.com/photo-1513622470522-26c311c1d9f8?w=800&q=80",
+        "Szwecja": "https://images.unsplash.com/photo-1509356843151-383703105f29?w=800&q=80",
+        "Dania": "https://images.unsplash.com/photo-1513622470522-26c311c1d9f8?w=800&q=80",
+        "Łotwa": "https://images.unsplash.com/photo-1626014495572-881552a229c9?w=800&q=80",
+        "Litwa": "https://images.unsplash.com/photo-1610339908351-412e8b6dcbbd?w=800&q=80",
+        "Francja": "https://images.unsplash.com/photo-1502602868884-25c7e0964648?w=800&q=80",
+        "Belgia": "https://images.unsplash.com/photo-1503613612260-3132e49c9524?w=800&q=80",
+        "Holandia": "https://images.unsplash.com/photo-1512470876302-972faa2aa9a4?w=800&q=80",
+        "Niemcy": "https://images.unsplash.com/photo-1555627258-297eb06fb769?w=800&q=80",
+        "Hiszpania": "https://images.unsplash.com/photo-1539037116277-4db20202d699?w=800&q=80",
+        "Portugalia": "https://images.unsplash.com/photo-1549429532-60315ce9254d?w=800&q=80",
+        "Włochy": "https://images.unsplash.com/photo-1504198453319-5ce911bafcde?w=800&q=80",
+        "Grecja": "https://images.unsplash.com/photo-1521105452296-88001e309cc1?w=800&q=80",
+        "Cypr": "https://images.unsplash.com/photo-1594951468695-88a29b28a8d0?w=800&q=80",
+        "Chorwacja": "https://images.unsplash.com/photo-1543362143-6d0e80ed63a6?w=800&q=80",
+        "Czarnogóra": "https://images.unsplash.com/photo-1579549339247-49520eec9562?w=800&q=80",
+        "Albania": "https://images.unsplash.com/photo-1579549339247-49520eec9562?w=800&q=80",
+        "Macedonia Północna": "https://images.unsplash.com/photo-1608753232679-b1480f2d4e8c?w=800&q=80",
+        "Bułgaria": "https://images.unsplash.com/photo-1610482087556-9d32d366a7b7?w=800&q=80",
+        "Jordania": "https://images.unsplash.com/photo-1579606030852-826959f34076?w=800&q=80",
+        "Gruzja": "https://images.unsplash.com/photo-1565008576549-57569a49371d?w=800&q=80",
+        "Armenia": "https://images.unsplash.com/photo-1580587771525-78b9dba3b914?w=800&q=80",
+        "Azerbejdżan": "https://images.unsplash.com/photo-1527838832700-54595d9776d9?w=800&q=80",
+        "Turcja": "https://images.unsplash.com/photo-1522083115900-2f6d0f9d9843?w=800&q=80",
+        "Izrael": "https://images.unsplash.com/photo-1569427329587-9bb32d96c9c8?w=800&q=80",
+        "Zjednoczone Emiraty Arabskie": "https://images.unsplash.com/photo-1512453979798-5ea266f8880c?w=800&q=80",
+        "Arabia Saudyjska": "https://images.unsplash.com/photo-1588725514660-f6d3f272c72b?w=800&q=80",
+        "Egipt": "https://images.unsplash.com/photo-1539650116574-8efeb43e2b50?w=800&q=80",
+        "Maroko": "https://images.unsplash.com/photo-1539020140153-e479b8c22e70?w=800&q=80",
+        "Stany Zjednoczone": "https://images.unsplash.com/photo-1496442226666-8d4d0e62e6e9?w=800&q=80",
+        "Tajlandia": "https://images.unsplash.com/photo-1508009603885-50cf7cbf79be?w=800&q=80",
+        "Japonia": "https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?w=800&q=80",
+        "Korea Południowa": "https://images.unsplash.com/photo-1538485399081-7191377e8241?w=800&q=80",
+        "Chiny": "https://images.unsplash.com/photo-1547981609-4b6bfe67ca0b?w=800&q=80",
+        "Meksyk": "https://images.unsplash.com/photo-1518638150340-f706b867a58c?w=800&q=80"
+    };
+
         let groupedOffers = {};
+        let globalOffersByCountry = {};
         
         // Stany modala
+        let activeCountry = null;
         let activeDestination = null;
         let activeOrigin = null;
         let activeType = null;
@@ -391,6 +434,8 @@
 
         function processOffers(offers) {
             groupedOffers = {};
+            globalOffersByCountry = {};
+            
             offers.forEach(o => {
                 const dest = o.destination;
                 const trasaParts = o.trasa.split(' → ');
@@ -435,90 +480,101 @@
                 return;
             }
 
-            // Grupowanie w kraje
-            const offersByCountry = {};
             destKeys.forEach(destKey => {
                 const country = countryMap[destKey] || "Inne";
-                if (!offersByCountry[country]) offersByCountry[country] = [];
-                offersByCountry[country].push(destKey);
+                if (!globalOffersByCountry[country]) globalOffersByCountry[country] = [];
+                globalOffersByCountry[country].push(destKey);
             });
 
-            // Sortowanie państw alfabetycznie
-            const sortedCountries = Object.keys(offersByCountry).sort();
-
+            const sortedCountries = Object.keys(globalOffersByCountry).sort();
             let finalHtml = '';
 
             sortedCountries.forEach(country => {
-                // Nagłówek dla państwa, col-span-full pozwala mu zająć całą szerokość siatki
-                finalHtml += `
-                <div class="col-span-full mt-10 mb-2 border-b-2 border-gray-100 pb-3 flex items-center">
-                    <i class="fa-solid fa-map-location-dot text-brand-500 text-2xl mr-3"></i>
-                    <h3 class="text-3xl font-extrabold text-gray-900">${country}</h3>
-                </div>
-                `;
-
-                // Kierunki w danym państwie sortujemy po najnowszej dacie oferty
-                const countryDestKeys = offersByCountry[country].sort((a, b) => new Date(groupedOffers[b].latestUpdate) - new Date(groupedOffers[a].latestUpdate));
-
-                countryDestKeys.forEach(destKey => {
-                    const group = groupedOffers[destKey];
-                    const meta = cityData[destKey] || cityData["DEFAULT"];
-                    const absoluteMinPrice = Math.min(group.minOneWay, group.minReturn);
-                    const airportsCount = Object.keys(group.airports).length;
-                    
-                    finalHtml += `
-                    <div class="bg-white rounded-2xl shadow-sm hover:shadow-xl transition-shadow duration-300 overflow-hidden group border border-gray-100 flex flex-col">
-                        <div class="relative h-56 overflow-hidden">
-                            <img src="${meta.img}" alt="${group.destName}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
-                            <div class="absolute top-4 right-4 bg-white/90 backdrop-blur-sm px-3 py-1 rounded-full text-sm font-bold text-gray-900 shadow-sm"><i class="fa-solid fa-fire text-orange-500 mr-1"></i> Okazja</div>
-                        </div>
-                        <div class="p-6 flex-grow flex flex-col">
-                            <div class="flex justify-between items-start mb-2">
-                                <div>
-                                    <h4 class="text-xl font-bold text-gray-900 mb-1">${group.destName}</h4>
-                                    <p class="text-sm text-gray-500"><i class="fa-solid fa-plane-departure mr-2 text-brand-500"></i>${airportsCount} ${airportsCount === 1 ? 'lotnisko wylotu' : 'lotniska wylotu'}</p>
-                                </div>
-                                <div class="text-right">
-                                    <span class="block text-2xl font-extrabold text-brand-600">od ${absoluteMinPrice} zł</span>
-                                    <span class="text-xs text-gray-400 uppercase">najlepsza cena</span>
-                                </div>
-                            </div>
-                            <div class="mb-4 flex flex-wrap gap-2">
-                                ${group.minOneWay !== Infinity ? `<span class="inline-flex items-center text-xs font-medium bg-gray-100 text-gray-600 px-2.5 py-1 rounded-md">1-stronnie od ${group.minOneWay} zł</span>` : ''}
-                                ${group.minReturn !== Infinity ? `<span class="inline-flex items-center text-xs font-medium bg-brand-50 text-brand-700 px-2.5 py-1 rounded-md border border-brand-100">2-stronnie od ${group.minReturn} zł</span>` : ''}
-                            </div>
-                            <p class="text-gray-600 text-sm mb-6 flex-grow">${meta.desc}</p>
-                            <div class="space-y-2">
-                                <button onclick="openDestinationModal('${destKey}')" class="w-full block text-center bg-gray-50 hover:bg-brand-50 text-gray-700 hover:text-brand-600 font-semibold py-3 rounded-xl border border-gray-200 hover:border-brand-200 transition-colors">Wybierz wylot i datę</button>
-                            </div>
-                        </div>
-                    </div>`;
+                const countryDestKeys = globalOffersByCountry[country];
+                let countryMinPrice = Infinity;
+                let cityCount = countryDestKeys.length;
+                
+                countryDestKeys.forEach(dk => {
+                    const group = groupedOffers[dk];
+                    countryMinPrice = Math.min(countryMinPrice, group.minOneWay, group.minReturn);
                 });
+                
+                const imgSrc = countryImages[country] || "https://images.unsplash.com/photo-1436491865332-7a61a109cc05?w=800&q=80";
+
+                finalHtml += `
+                <div class="bg-white rounded-2xl shadow-sm hover:shadow-xl transition-shadow duration-300 overflow-hidden group border border-gray-100 flex flex-col cursor-pointer" onclick="openCountryModal('${country}')">
+                    <div class="relative h-56 overflow-hidden">
+                        <img src="${imgSrc}" alt="${country}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                        <div class="absolute top-4 right-4 bg-white/90 backdrop-blur-sm px-3 py-1 rounded-full text-sm font-bold text-gray-900 shadow-sm"><i class="fa-solid fa-fire text-orange-500 mr-1"></i> ${cityCount} ${cityCount === 1 ? 'miasto' : (cityCount > 1 && cityCount < 5 ? 'miasta' : 'miast')}</div>
+                    </div>
+                    <div class="p-6 flex-grow flex flex-col justify-center text-center">
+                        <h4 class="text-2xl font-bold text-gray-900 mb-2">${country}</h4>
+                        <p class="text-brand-600 font-extrabold text-lg">Loty od ${countryMinPrice} zł</p>
+                        <button class="mt-4 w-full block text-center bg-brand-50 hover:bg-brand-500 text-brand-700 hover:text-white font-semibold py-3 rounded-xl transition-colors">Wybierz miasto</button>
+                    </div>
+                </div>`;
             });
 
             grid.innerHTML = finalHtml;
         }
 
         // ================= KASKADOWY LOGIKA MODALA =================
-
-        function openDestinationModal(destKey) {
-            activeDestination = groupedOffers[destKey];
-            const firstOrigin = Object.keys(activeDestination.airports)[0];
-            setModalOrigin(firstOrigin); // Automatycznie wybiera pierwsze lotnisko i renderuje
+        
+        window.openCountryModal = function(country) {
+            activeCountry = country;
+            renderCountryModalContent();
             document.getElementById('offer-modal').classList.remove('hidden');
             document.body.style.overflow = 'hidden';
+        }
+
+        window.renderCountryModalContent = function() {
+            const keys = globalOffersByCountry[activeCountry];
+            keys.sort((a, b) => new Date(groupedOffers[b].latestUpdate) - new Date(groupedOffers[a].latestUpdate));
+            
+            let html = `
+                <div class="p-6 border-b border-gray-100 flex flex-col justify-center sticky top-0 bg-white/95 backdrop-blur-md z-20 rounded-t-2xl">
+                    <p class="text-xs text-brand-500 font-bold uppercase tracking-wider mb-1">Kierunek</p>
+                    <h3 class="text-2xl font-bold text-gray-900">${activeCountry}</h3>
+                </div>
+                <div class="p-6 grid grid-cols-1 sm:grid-cols-2 gap-4 bg-gray-50/50">
+            `;
+            
+            keys.forEach(destKey => {
+                const group = groupedOffers[destKey];
+                const meta = cityData[destKey] || cityData["DEFAULT"];
+                const absoluteMinPrice = Math.min(group.minOneWay, group.minReturn);
+                const airportsCount = Object.keys(group.airports).length;
+                html += `
+                    <div class="bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-md border border-gray-200 cursor-pointer transition flex flex-col transform hover:-translate-y-1" onclick="openDestinationModal('${destKey}')">
+                        <img src="${meta.img}" alt="${group.destName}" class="w-full h-32 object-cover">
+                        <div class="p-4">
+                            <h4 class="text-lg font-bold text-gray-900">${group.destName}</h4>
+                            <p class="text-xs text-gray-500 mb-2 mt-1"><i class="fa-solid fa-plane-departure text-brand-500 mr-1"></i> ${airportsCount} lotnisk wylotu</p>
+                            <p class="text-brand-600 font-extrabold text-sm">od ${absoluteMinPrice} zł</p>
+                        </div>
+                    </div>
+                `;
+            });
+            
+            html += `</div>`;
+            const container = document.getElementById('modal-content');
+            container.innerHTML = html;
+            container.parentElement.scrollTop = 0;
+        }
+
+        window.openDestinationModal = function(destKey) {
+            activeDestination = groupedOffers[destKey];
+            const firstOrigin = Object.keys(activeDestination.airports)[0];
+            setModalOrigin(firstOrigin); // Automatycznie wybiera pierwsze lotnisko i renderuje logikę
         }
 
         window.setModalOrigin = function(originKey) {
             activeOrigin = originKey;
             const offers = activeDestination.airports[activeOrigin].offers;
-            // Ustalamy jakie typy biletów są dostępne z tego lotniska
             const hasOneWay = offers.some(o => o.typ === 'jednokierunkowy');
             const hasReturn = offers.some(o => o.typ === 'w_obie_strony');
             
-            // Domyślnie wybierz typ, który jest dostępny
             activeType = hasReturn ? 'w_obie_strony' : 'jednokierunkowy';
-            
             resetDateSelections();
         }
 
@@ -532,11 +588,17 @@
             activeRetDate = null;
             finalOffer = null;
             
-            // Domyślnie zaznaczamy pierwszą datę wylotu z góry
             const availableOffers = activeDestination.airports[activeOrigin].offers.filter(o => o.typ === activeType);
             
-            // Grupujemy unikalne daty wylotu
-            const uniqueDepDates = [...new Set(availableOffers.map(o => o.data_wylotu))].sort();
+            // Obliczamy ceny i sortujemy, by znalezc najtańszą
+            const datePrices = {};
+            availableOffers.forEach(o => {
+                if(!datePrices[o.data_wylotu] || o.cena < datePrices[o.data_wylotu]) {
+                    datePrices[o.data_wylotu] = o.cena;
+                }
+            });
+            const uniqueDepDates = [...new Set(availableOffers.map(o => o.data_wylotu))].sort((a, b) => datePrices[a] - datePrices[b]);
+            
             if(uniqueDepDates.length > 0) {
                 setModalDepDate(uniqueDepDates[0], availableOffers);
             } else {
@@ -552,13 +614,18 @@
             const availableOffers = preFilteredOffers || activeDestination.airports[activeOrigin].offers.filter(o => o.typ === activeType);
             
             if (activeType === 'jednokierunkowy') {
-                finalOffer = availableOffers.find(o => o.data_wylotu === activeDepDate);
+                // Dla jednokierunkowych szukamy najtanszej oferty dla daty
+                const options = availableOffers.filter(o => o.data_wylotu === activeDepDate);
+                options.sort((a, b) => a.cena - b.cena);
+                finalOffer = options[0];
             } else {
-                // Dla 2-stronnych automatycznie zaznaczamy pierwszy dostępny powrót dla tego wylotu
-                const relatedReturns = availableOffers.filter(o => o.data_wylotu === activeDepDate).map(o => o.data_powrotu).sort();
-                if(relatedReturns.length > 0) {
-                    setModalRetDate(relatedReturns[0], availableOffers);
-                    return; // render zostanie wywołany tam
+                // Dla 2-stronnych automatycznie zaznaczamy pierwszy dostępny (najtańszy) powrót dla tego wylotu
+                const possibleReturns = availableOffers.filter(o => o.data_wylotu === activeDepDate);
+                possibleReturns.sort((a, b) => a.cena - b.cena);
+                
+                if(possibleReturns.length > 0) {
+                    setModalRetDate(possibleReturns[0].data_powrotu, availableOffers);
+                    return; 
                 }
             }
             renderModalContent();
@@ -567,7 +634,11 @@
         window.setModalRetDate = function(retDate, preFilteredOffers = null) {
             activeRetDate = retDate;
             const availableOffers = preFilteredOffers || activeDestination.airports[activeOrigin].offers.filter(o => o.typ === activeType);
-            finalOffer = availableOffers.find(o => o.data_wylotu === activeDepDate && o.data_powrotu === activeRetDate);
+            
+            const options = availableOffers.filter(o => o.data_wylotu === activeDepDate && o.data_powrotu === activeRetDate);
+            options.sort((a, b) => a.cena - b.cena);
+            finalOffer = options[0];
+            
             renderModalContent();
         }
 
@@ -590,23 +661,36 @@
             const hasReturn = allOffers.some(o => o.typ === 'w_obie_strony');
             
             const filteredOffers = allOffers.filter(o => o.typ === activeType);
-            const depDates = [...new Set(filteredOffers.map(o => o.data_wylotu))].sort();
+            
+            // Szukamy najtanszych dat wylotu by posortowac
+            const datePrices = {};
+            filteredOffers.forEach(o => {
+                if(!datePrices[o.data_wylotu] || o.cena < datePrices[o.data_wylotu]) {
+                    datePrices[o.data_wylotu] = o.cena;
+                }
+            });
+            const depDates = [...new Set(filteredOffers.map(o => o.data_wylotu))].sort((a, b) => datePrices[a] - datePrices[b]);
+            const minDepPrice = Math.min(...Object.values(datePrices));
             
             let retDatesHtml = '';
             if (activeType === 'w_obie_strony' && activeDepDate) {
-                const possibleReturns = filteredOffers.filter(o => o.data_wylotu === activeDepDate).map(o => o.data_powrotu).sort();
+                const possibleReturnsData = filteredOffers.filter(o => o.data_wylotu === activeDepDate);
+                possibleReturnsData.sort((a, b) => a.cena - b.cena);
+                const minRetPriceVal = possibleReturnsData.length > 0 ? possibleReturnsData[0].cena : 0;
+                
                 retDatesHtml = `
                     <div class="mt-6 bg-white">
                         <h4 class="text-sm font-bold text-gray-700 uppercase tracking-wide mb-3">4. Wybierz datę powrotu</h4>
                         <div class="grid grid-cols-3 gap-3">
-                            ${possibleReturns.map((rDate) => {
+                            ${possibleReturnsData.map((combo, idx) => {
+                                const rDate = combo.data_powrotu;
                                 const isSelected = (rDate === activeRetDate);
-                                // Znajdz cene dla tego konkretnego comba
-                                const combo = filteredOffers.find(o => o.data_wylotu === activeDepDate && o.data_powrotu === rDate);
+                                const isCheapest = (combo.cena === minRetPriceVal) && (idx === 0);
                                 return `
-                                <div onclick="setModalRetDate('${rDate}')" class="cursor-pointer border rounded-xl p-3 text-center transition-all ${isSelected ? 'border-brand-500 bg-brand-50 shadow-sm ring-1 ring-brand-500' : 'border-gray-200 hover:border-brand-300 bg-white'}">
-                                    <span class="block font-bold text-gray-900 text-sm">${rDate}</span>
-                                    <span class="block font-extrabold text-brand-600 text-sm mt-1">${combo.cena} zł (Cena za 2 strony)</span>
+                                <div onclick="setModalRetDate('${rDate}')" class="cursor-pointer border rounded-xl p-3 text-center transition-all relative ${isSelected ? 'border-brand-500 bg-brand-50 shadow-sm ring-1 ring-brand-500' : 'border-gray-200 hover:border-brand-300 bg-white'}">
+                                    ${isCheapest ? '<span class="absolute -top-2.5 left-1/2 transform -translate-x-1/2 bg-red-500 text-white text-[10px] font-bold px-2 py-0.5 rounded-full whitespace-nowrap shadow-sm">Najtańsza</span>' : ''}
+                                    <span class="block font-bold text-gray-900 text-sm ${isCheapest ? 'mt-1' : ''}">${rDate}</span>
+                                    <span class="block font-extrabold text-brand-600 text-sm mt-1">${combo.cena} zł</span>
                                 </div>`;
                             }).join('')}
                         </div>
@@ -627,15 +711,21 @@
                     <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent flex items-end p-6">
                         <div>
                             <span class="bg-brand-500 text-white text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider mb-2 inline-block">${meta.airline}</span>
-                            <h3 class="text-2xl sm:text-3xl font-bold text-white">Kierunek: ${dest.destName}</h3>
+                            <h3 class="text-2xl sm:text-3xl font-bold text-white">Miasto: ${dest.destName}</h3>
                         </div>
+                    </div>
+                    <!-- Przycisk powrotu do państw -->
+                    <div class="absolute top-4 left-4 z-10">
+                        <button onclick="renderCountryModalContent()" class="bg-white/90 hover:bg-white text-gray-900 px-4 py-2 rounded-full font-bold shadow-md backdrop-blur-md text-sm transition flex items-center gap-2">
+                            <i class="fa-solid fa-arrow-left"></i> Wróć do miast
+                        </button>
                     </div>
                 </div>
                 
                 <div class="p-6 sm:p-8 space-y-6">
                     <!-- KROK 1: Wybór Lotniska Wylotu -->
                     <div class="bg-white">
-                        <h4 class="text-sm font-bold text-gray-700 uppercase tracking-wide mb-3">1. Wybierz lotnisko wylotu z Polski</h4>
+                        <h4 class="text-sm font-bold text-gray-700 uppercase tracking-wide mb-3">1. Wybierz lotnisko wylotu</h4>
                         <div class="flex flex-wrap gap-2">
                             ${Object.values(currentAirports).map(air => `
                                 <button onclick="setModalOrigin('${air.originCode}')" 
@@ -659,11 +749,15 @@
                     <div class="bg-white">
                         <h4 class="text-sm font-bold text-gray-700 uppercase tracking-wide mb-3">3. Wybierz datę wylotu z: ${currentAirports[activeOrigin].originName}</h4>
                         <div class="grid grid-cols-3 sm:grid-cols-4 gap-3">
-                            ${depDates.map(dDate => `
-                                <div onclick="setModalDepDate('${dDate}')" class="cursor-pointer border rounded-xl p-3 text-center transition-all ${dDate === activeDepDate ? 'border-brand-500 bg-brand-50 shadow-sm ring-1 ring-brand-500' : 'border-gray-200 hover:border-brand-300 bg-white'}">
-                                    <span class="block font-bold text-gray-900 text-sm leading-tight">${dDate}</span>
-                                </div>
-                            `).join('')}
+                            ${depDates.map((dDate, idx) => {
+                                const isCheapest = (datePrices[dDate] === minDepPrice) && (idx === 0);
+                                return `
+                                <div onclick="setModalDepDate('${dDate}')" class="cursor-pointer border rounded-xl p-3 text-center transition-all relative ${dDate === activeDepDate ? 'border-brand-500 bg-brand-50 shadow-sm ring-1 ring-brand-500' : 'border-gray-200 hover:border-brand-300 bg-white'}">
+                                    ${isCheapest ? '<span class="absolute -top-2.5 left-1/2 transform -translate-x-1/2 bg-red-500 text-white text-[10px] font-bold px-2 py-0.5 rounded-full whitespace-nowrap shadow-sm">Najtańsza</span>' : ''}
+                                    <span class="block font-bold text-gray-900 text-sm leading-tight ${isCheapest ? 'mt-1' : ''}">${dDate}</span>
+                                    <span class="block text-xs font-semibold text-brand-600 mt-1">od ${datePrices[dDate]} zł</span>
+                                </div>`;
+                            }).join('')}
                         </div>
                     </div>
 
@@ -703,13 +797,22 @@
                     ${finalOffer ? `<p class="text-xs text-gray-400 italic text-center pt-2">ℹ️ Oferta znaleziona: ${formatRelativeDate(finalOffer.aktualizacja)}. Wybierz te same daty w kalendarzu SkyScanner.</p>` : ''}
                 </div>
             `;
-            document.getElementById('modal-content').innerHTML = modalHtml;
+            const container = document.getElementById('modal-content');
+            container.innerHTML = modalHtml;
+            container.parentElement.scrollTop = 0;
         }
 
         function closeOfferModal() {
             document.getElementById('offer-modal').classList.add('hidden');
             document.body.style.overflow = 'auto';
         }
+        
+        // Zamykanie modala po kliknięciu w szare tło (poza białym kontenerem)
+        document.getElementById('offer-modal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeOfferModal();
+            }
+        });
 
         async function reportPriceChange(offerTitle) {
             if (!confirm(`Czy chcesz zgłosić zmianę / nieaktualność ceny dla oferty: "${offerTitle}"?`)) return;
@@ -735,7 +838,7 @@
         // ================= BLOKOWANIE HASHTAGÓW W URL (#) =================
         document.querySelectorAll('.scroll-link').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
-                e.preventDefault(); // Blokuje domyślne przeskoczenie (i dopisanie do URL)
+                e.preventDefault(); 
                 const targetId = this.getAttribute('href').substring(1);
                 const targetElement = document.getElementById(targetId);
                 
@@ -743,7 +846,6 @@
                     targetElement.scrollIntoView({ behavior: 'smooth' });
                 }
 
-                // Zamknięcie menu na urządzeniach mobilnych
                 if(!menu.classList.contains('hidden')){
                     menu.classList.add('hidden'); 
                     icon.classList.remove('fa-xmark'); 
