@@ -347,6 +347,25 @@
         "DEFAULT": { img: "https://images.unsplash.com/photo-1436491865332-7a61a109cc05?w=800&q=80", desc: "Znakomita okazja lotnicza wyłapana przez nasz radar! Zarezerwuj bilet, zanim inni Cię wyprzedzą.", airline: "Tanie Linie", details: ["Sprawdź dokładnie limity bagażowe przewoźnika", "Oferta ograniczona czasowo"] }
     };
 
+    // MAPOWANIE GŁÓWNYCH MIAST (łączenie lotnisk)
+    const masterCityMap = {
+        "BGY": "MIL", "MXP": "MIL", "LIN": "MIL", // Mediolan
+        "CIA": "ROM", "FCO": "ROM",               // Rzym
+        "STN": "LON", "LTN": "LON", "LHR": "LON", // Londyn
+        "BVA": "PAR", "CDG": "PAR", "ORY": "PAR", // Paryż
+        "CRL": "BRU", "BRU": "BRU",               // Bruksela
+        "TRF": "OSL", "OSL": "OSL",               // Oslo
+        "NYO": "STO", "ARN": "STO",               // Sztokholm
+        "TSF": "VCE", "VCE": "VCE"                // Wenecja
+    };
+
+    const masterCityNames = {
+        "MIL": "Mediolan", "ROM": "Rzym", "LON": "Londyn", "PAR": "Paryż", 
+        "STO": "Sztokholm", "OSL": "Oslo", "BRU": "Bruksela", "VCE": "Wenecja"
+    };
+
+    const polishAirports = ["WAW", "WMI", "KRK", "GDN", "KTW", "WRO", "POZ", "RZE", "LCJ", "SZZ", "BZG", "IEG", "SZY"];
+
     // MAPOWANIE PAŃSTW
     const countryMap = {
         "LON": "Wielka Brytania", "LTN": "Wielka Brytania", "STN": "Wielka Brytania", "MAN": "Wielka Brytania", "LPL": "Wielka Brytania", "BHX": "Wielka Brytania", "BRS": "Wielka Brytania", "EDI": "Wielka Brytania", "GLA": "Wielka Brytania",
@@ -439,10 +458,11 @@
             globalOffersByCountry = {};
             
             offers.forEach(o => {
-                const dest = o.destination;
+                const dest = masterCityMap[o.destination] || o.destination;
                 const trasaParts = o.trasa.split(' → ');
                 const originName = trasaParts[0] || o.origin;
-                const destName = trasaParts[1] || dest;
+                
+                const destName = masterCityNames[dest] || trasaParts[1] || dest;
 
                 if (!groupedOffers[dest]) {
                     groupedOffers[dest] = {
@@ -674,6 +694,36 @@
             const depDates = [...new Set(filteredOffers.map(o => o.data_wylotu))].sort((a, b) => datePrices[a] - datePrices[b]);
             const minDepPrice = Math.min(...Object.values(datePrices));
             
+            // PODZIAŁ LOTNISK NA POLSKĘ I ZAGRANICĘ
+            const plOrigins = [];
+            const foreignOrigins = [];
+            Object.values(currentAirports).forEach(air => {
+                if(polishAirports.includes(air.originCode)) plOrigins.push(air);
+                else foreignOrigins.push(air);
+            });
+
+            let originsHtml = '';
+            if (plOrigins.length > 0) {
+                originsHtml += `<p class="text-xs font-bold text-gray-500 mb-2 mt-1">Wylot z Polski</p><div class="flex flex-wrap gap-2 mb-4">`;
+                originsHtml += plOrigins.map(air => `
+                    <button onclick="setModalOrigin('${air.originCode}')" 
+                        class="px-4 py-2 rounded-xl font-semibold text-sm border transition-all ${air.originCode === activeOrigin ? 'bg-brand-500 text-white border-brand-500 shadow-md' : 'bg-gray-50 text-gray-600 border-gray-200 hover:bg-gray-100 hover:border-gray-300'}">
+                        ${air.originName}
+                    </button>
+                `).join('');
+                originsHtml += `</div>`;
+            }
+            if (foreignOrigins.length > 0) {
+                originsHtml += `<p class="text-xs font-bold text-gray-500 mb-2 mt-1">Wylot z zagranicy</p><div class="flex flex-wrap gap-2">`;
+                originsHtml += foreignOrigins.map(air => `
+                    <button onclick="setModalOrigin('${air.originCode}')" 
+                        class="px-4 py-2 rounded-xl font-semibold text-sm border transition-all ${air.originCode === activeOrigin ? 'bg-brand-500 text-white border-brand-500 shadow-md' : 'bg-gray-50 text-gray-600 border-gray-200 hover:bg-gray-100 hover:border-gray-300'}">
+                        ${air.originName}
+                    </button>
+                `).join('');
+                originsHtml += `</div>`;
+            }
+
             let retDatesHtml = '';
             if (activeType === 'w_obie_strony' && activeDepDate) {
                 const possibleReturnsData = filteredOffers.filter(o => o.data_wylotu === activeDepDate);
@@ -728,14 +778,7 @@
                     <!-- KROK 1: Wybór Lotniska Wylotu -->
                     <div class="bg-white">
                         <h4 class="text-sm font-bold text-gray-700 uppercase tracking-wide mb-3">1. Wybierz lotnisko wylotu</h4>
-                        <div class="flex flex-wrap gap-2">
-                            ${Object.values(currentAirports).map(air => `
-                                <button onclick="setModalOrigin('${air.originCode}')" 
-                                    class="px-4 py-2 rounded-xl font-semibold text-sm border transition-all ${air.originCode === activeOrigin ? 'bg-brand-500 text-white border-brand-500 shadow-md' : 'bg-gray-50 text-gray-600 border-gray-200 hover:bg-gray-100 hover:border-gray-300'}">
-                                    ${air.originName}
-                                </button>
-                            `).join('')}
-                        </div>
+                        ${originsHtml}
                     </div>
 
                     <!-- KROK 2: Rodzaj Lotu -->
@@ -766,11 +809,12 @@
                     <!-- KROK 4: Powroty (Tylko dla typu w_obie_strony) -->
                     ${retDatesHtml}
 
-                    <!-- STARY INFO-BOX Z PODSUMOWANIEM -->
+                    <!-- INFO-BOX Z PODSUMOWANIEM -->
                     <div class="flex justify-between items-center bg-gray-50 p-4 rounded-xl border border-gray-100 mt-6">
                         <div>
                             <p class="text-xs text-gray-500 uppercase font-semibold">Podsumowanie wyboru</p>
                             <p class="text-gray-900 font-medium mb-1 mt-1 text-sm"><i class="fa-solid fa-plane-departure mr-2 text-brand-500"></i>${currentAirports[activeOrigin].originName}</p>
+                            ${finalOffer ? `<p class="text-gray-900 font-medium mb-1 text-sm"><i class="fa-solid fa-plane-arrival mr-2 text-brand-500"></i>Przylot na lotnisko: <span class="font-bold">${finalOffer.destination}</span></p>` : ''}
                             ${finalOffer ? `<p class="text-gray-900 font-medium mb-1 text-sm"><i class="fa-regular fa-calendar mr-2 text-brand-500"></i>${finalOffer.data_wylotu}${finalOffer.data_powrotu ? ` - ${finalOffer.data_powrotu}` : ''}</p>` : ''}
                         </div>
                         <div class="text-right">
