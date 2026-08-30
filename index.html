@@ -91,10 +91,10 @@
         </div>
     </header>
 
-    <!-- KONTENER GŁÓWNY NA ZGRUPOWANE OFERTY (Problem 2 & 3) -->
+    <!-- KONTENER GŁÓWNY NA ZGRUPOWANE OFERTY -->
     <div id="tanie-loty" class="bg-gray-50 py-16 scroll-mt-20">
         
-        <!-- ADNOTACJA FOMO (Została jedna na górze) -->
+        <!-- ADNOTACJA FOMO -->
         <div class="max-w-4xl mx-auto px-4 mb-12">
             <div class="bg-amber-50 border border-amber-200 rounded-2xl p-6 text-center shadow-sm">
                 <div class="flex items-center justify-center gap-2 text-amber-800 font-bold text-lg mb-2">
@@ -112,7 +112,7 @@
                 <div class="bg-red-100 p-3 rounded-full"><i class="fa-solid fa-fire-flame-curved text-red-600 text-2xl animate-pulse"></i></div>
                 <div>
                     <h2 class="text-red-600 font-bold tracking-wide uppercase text-sm">Absolutny Hit</h2>
-                    <h3 class="text-3xl font-bold text-gray-900">Ultra Okazje (-55% i taniej!)</h3>
+                    <h3 class="text-3xl font-bold text-gray-900">Ultra Okazje</h3>
                 </div>
             </div>
             <div id="ultra-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
@@ -273,7 +273,6 @@
 
     <!-- SKRYPTY JAVASCRIPT -->
     <script>
-    // PRZENIESIONE Z BOTA ŚREDNIE CENY (aby frontend mógł odrzucać fałszywe okazje)
     const standardPrices = {
         "OSL": 110, "TRF": 100, "BGO": 160, "SVG": 160, "TOS": 320,
         "STO": 120, "NYO": 100, "GOT": 130, "MMX": 110, "CPH": 160, "BLL": 140, "RIX": 150, "VNO": 140,
@@ -343,7 +342,6 @@
         return `<span class="inline-flex items-center bg-amber-50 text-amber-700 text-[11px] font-bold px-2 py-1 rounded-md mt-1 border border-amber-200 shadow-sm"><i class="fa-solid fa-bus mr-1 text-amber-500"></i>${info.text}</span>`;
     }
 
-    // ROZSZERZONE MAPOWANIE GŁÓWNYCH MIAST I WYSP (Problem 1)
     const masterCityMap = {
         "BGY": "MIL", "MXP": "MIL", "LIN": "MIL",
         "CIA": "ROM", "FCO": "ROM",
@@ -353,11 +351,11 @@
         "TRF": "OSL", "OSL": "OSL",
         "NYO": "STO", "ARN": "STO",
         "TSF": "VCE", "VCE": "VCE",
-        "GRO": "BCN_ALL", "REU": "BCN_ALL", "BCN": "BCN_ALL", // Barcelona i okolice
-        "HER": "KRETA", "CHQ": "KRETA", // Kreta
-        "LCA": "CYPR", "PFO": "CYPR", // Cypr
-        "SPX": "EGIPT", "CAI": "EGIPT", // Egipt (Kair/Giza)
-        "TFS": "TENERYFA", "TFN": "TENERYFA" // Teneryfa
+        "GRO": "BCN_ALL", "REU": "BCN_ALL", "BCN": "BCN_ALL",
+        "HER": "KRETA", "CHQ": "KRETA",
+        "LCA": "CYPR", "PFO": "CYPR",
+        "SPX": "EGIPT", "CAI": "EGIPT",
+        "TFS": "TENERYFA", "TFN": "TENERYFA"
     };
 
     const masterCityNames = {
@@ -388,7 +386,6 @@
         "SPX": "Egipt", "RAK": "Maroko",
         "NYC": "Stany Zjednoczone", "BOS": "Stany Zjednoczone", "WAS": "Stany Zjednoczone", "CHI": "Stany Zjednoczone", "MIA": "Stany Zjednoczone", "LAX": "Stany Zjednoczone", "SFO": "Stany Zjednoczone", "MCO": "Stany Zjednoczone",
         "BKK": "Tajlandia", "TYO": "Japonia", "SEL": "Korea Południowa", "BJS": "Chiny", "CUN": "Meksyk",
-        // Dodatkowe mapowania dla grup
         "BCN_ALL": "Hiszpania", "KRETA": "Grecja", "CYPR": "Cypr", "EGIPT": "Egipt", "TENERYFA": "Hiszpania"
     };
 
@@ -402,13 +399,11 @@
         "Jordania": "https://i.imgur.com/c443FFQ.jpeg", "Gruzja": "https://i.imgur.com/YSCaS7q.jpeg", "Egipt": "https://i.imgur.com/E8Ho79I.jpeg"
     };
 
-    // Stany struktury ofert (rozdzielone na kategorie)
     let groupedPL = {}; let globalCountriesPL = {};
     let groupedForeign = {}; let globalCountriesForeign = {};
-    let ultraOkazje = []; // Najlepsze hity
+    let ultraOkazje = []; 
 
-    // Stany modala
-    let activeOriginType = 'PL'; // 'PL' lub 'FOREIGN'
+    let activeOriginType = 'PL'; 
     let activeCountry = null;
     let activeDestination = null;
     let activeOrigin = null;
@@ -433,24 +428,36 @@
         groupedPL = {}; globalCountriesPL = {};
         groupedForeign = {}; globalCountriesForeign = {};
         ultraOkazje = [];
-        let bestUltra = {};
+        let bestUltra = {}; // kluczem będzie teraz tylko cel podróży!
         
         offers.forEach(o => {
-            const stdPrice = standardPrices[o.destination] || 350;
+            const baseStdPrice = standardPrices[o.destination] || 350;
             
-            // 1. TWARDY FILTR: Odrzucanie drożyzny (Problem 3)
-            // Margines 10% ponad standard rynkowy. Jeśli jest drożej - pomijamy!
+            // Poprawka 1: Jeśli lot jest w jedną stronę, próg standardowej ceny jest niższy (np. 55% z ceny return)
+            const isOneWay = (o.typ === 'jednokierunkowy');
+            const stdPrice = isOneWay ? Math.round(baseStdPrice * 0.55) : baseStdPrice;
+            
+            // TWARDY FILTR: Odrzucanie drożyzny
             if (o.cena > (stdPrice * 1.1)) return;
 
-            // 2. ULTRA OKAZJA: Jeśli cena to 45% standardowej lub mniej (czyli -55%+)
+            // Poprawka 3: ULTRA OKAZJA - grupowanie wielu miast wylotu dla jednego celu
             if (o.cena <= (stdPrice * 0.45)) {
-                const key = `${o.origin}-${o.destination}`;
-                if (!bestUltra[key] || o.cena < bestUltra[key].cena) {
-                    bestUltra[key] = { ...o, stdPrice };
+                const dest = masterCityMap[o.destination] || o.destination;
+                
+                if (!bestUltra[dest]) {
+                    bestUltra[dest] = { ...o, stdPrice, minCena: o.cena, origins: [o.origin] };
+                } else {
+                    if (!bestUltra[dest].origins.includes(o.origin)) {
+                        bestUltra[dest].origins.push(o.origin); // dodajemy miasto wylotu do listy
+                    }
+                    if (o.cena < bestUltra[dest].minCena) { // jeśli to nowe miasto jest jeszcze tańsze, aktualizujemy główną ofertę kafelka
+                        const existingOrigins = bestUltra[dest].origins;
+                        bestUltra[dest] = { ...o, stdPrice, minCena: o.cena, origins: existingOrigins };
+                    }
                 }
             }
 
-            // 3. Rozdzielenie na PL i ZAGRANICĘ (Problem 2)
+            // Rozdzielenie na PL i ZAGRANICĘ
             const isPL = polishAirports.includes(o.origin);
             const targetGroup = isPL ? groupedPL : groupedForeign;
             
@@ -465,6 +472,8 @@
 
             const group = targetGroup[dest];
             if(new Date(o.aktualizacja) > new Date(group.latestUpdate)) group.latestUpdate = o.aktualizacja;
+            
+            // Rejestracja najniższych cen DLA DANEGO KIERUNKU
             if (o.typ === 'jednokierunkowy') group.minOneWay = Math.min(group.minOneWay, o.cena);
             if (o.typ === 'w_obie_strony') group.minReturn = Math.min(group.minReturn, o.cena);
 
@@ -474,7 +483,6 @@
             group.airports[o.origin].offers.push(o);
         });
 
-        // Konwersja i sortowanie ultra okazji
         ultraOkazje = Object.values(bestUltra).sort((a, b) => a.cena - b.cena);
 
         renderCountryGrid(groupedPL, globalCountriesPL, 'grid-pl', 'PL');
@@ -494,7 +502,6 @@
         section.classList.remove('hidden');
         let html = '';
         
-        // Pokaż max 8 najlepszych okazji
         ultraOkazje.slice(0, 8).forEach(o => {
             const discount = Math.round(((o.stdPrice - o.cena) / o.stdPrice) * 100);
             const destCode = masterCityMap[o.destination] || o.destination;
@@ -503,14 +510,17 @@
             const typeLabel = polishAirports.includes(o.origin) ? 'PL' : 'FOREIGN';
             const country = countryMap[destCode] || "Inne";
             
+            // Poprawka 3 (UI): Sklejanie miast wylotu
+            const originsText = o.origins.join(', '); 
+            
             html += `
             <div class="bg-white rounded-2xl shadow-sm hover:shadow-2xl transition-shadow duration-300 overflow-hidden group border border-red-200 flex flex-col cursor-pointer relative" onclick="openUltraDeal('${country}', '${destCode}', '${typeLabel}', '${o.origin}')">
                 <div class="absolute top-0 left-0 bg-red-600 text-white font-black px-3 py-1.5 text-sm rounded-br-2xl z-10 shadow-lg shadow-red-500/30">-${discount}%</div>
                 <div class="relative h-44 overflow-hidden">
                     <img src="${meta.img}" alt="${destName}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
                     <div class="absolute inset-0 bg-gradient-to-t from-gray-900/60 to-transparent"></div>
-                    <div class="absolute bottom-3 left-4 text-white">
-                        <p class="text-xs font-bold uppercase tracking-wider mb-0.5"><i class="fa-solid fa-plane-departure mr-1 text-red-400"></i> ${o.origin}</p>
+                    <div class="absolute bottom-3 left-4 text-white w-full pr-4">
+                        <p class="text-xs font-bold uppercase tracking-wider mb-0.5 truncate"><i class="fa-solid fa-plane-departure mr-1 text-red-400"></i> ${originsText}</p>
                         <h4 class="text-2xl font-black">${destName}</h4>
                     </div>
                 </div>
@@ -519,7 +529,8 @@
                         <p class="text-gray-400 text-sm font-medium line-through">Zazwyczaj: ${o.stdPrice} zł</p>
                         <p class="text-red-600 font-extrabold text-3xl">${o.cena} zł</p>
                     </div>
-                    <button class="mt-4 w-full block text-center bg-red-500 hover:bg-red-600 text-white font-bold py-3 rounded-xl transition-colors shadow-md">Sprawdź daty</button>
+                    <p class="text-xs text-red-500 font-semibold mt-1 uppercase tracking-widest">${o.typ === 'w_obie_strony' ? 'W obie strony' : 'W jedną stronę'}</p>
+                    <button class="mt-3 w-full block text-center bg-red-500 hover:bg-red-600 text-white font-bold py-3 rounded-xl transition-colors shadow-md">Sprawdź daty</button>
                 </div>
             </div>`;
         });
@@ -547,15 +558,32 @@
 
         sortedCountries.forEach(country => {
             const countryDestKeys = globalCountriesData[country];
-            let countryMinPrice = Infinity;
+            let countryMinReturn = Infinity;
+            let countryMinOneWay = Infinity;
             let cityCount = countryDestKeys.length;
             
             countryDestKeys.forEach(dk => {
                 const group = groupData[dk];
-                countryMinPrice = Math.min(countryMinPrice, group.minOneWay, group.minReturn);
+                countryMinReturn = Math.min(countryMinReturn, group.minReturn);
+                countryMinOneWay = Math.min(countryMinOneWay, group.minOneWay);
             });
             
             const imgSrc = countryImages[country] || "https://images.unsplash.com/photo-1436491865332-7a61a109cc05?w=800&q=80";
+
+            // Poprawka 2: Formatowanie 2 cen na kaflach
+            let priceHtml = '';
+            if (countryMinReturn !== Infinity) {
+                priceHtml += `<p class="text-brand-600 font-extrabold text-lg">W obie strony od ${countryMinReturn} zł</p>`;
+            } else if(countryMinOneWay !== Infinity) {
+                // Jeśli nie ma lotów w obie strony, pokaż na głównym planie w jedną
+                priceHtml += `<p class="text-brand-600 font-extrabold text-lg">W jedną stronę od ${countryMinOneWay} zł</p>`;
+            }
+
+            if (countryMinOneWay !== Infinity && countryMinReturn !== Infinity) {
+                priceHtml += `<p class="text-gray-500 font-medium text-sm mt-0.5">w jedną stronę już od ${countryMinOneWay} zł</p>`;
+            } else if (countryMinReturn === Infinity && countryMinOneWay === Infinity) {
+                priceHtml = `<p class="text-gray-500 text-sm">Brak ofert</p>`;
+            }
 
             finalHtml += `
             <div class="bg-white rounded-2xl shadow-sm hover:shadow-xl transition-shadow duration-300 overflow-hidden group border border-gray-100 flex flex-col cursor-pointer" onclick="openCountryModal('${country}', '${typeLabel}')">
@@ -565,7 +593,7 @@
                 </div>
                 <div class="p-6 flex-grow flex flex-col justify-center text-center">
                     <h4 class="text-2xl font-bold text-gray-900 mb-2">${country}</h4>
-                    <p class="text-brand-600 font-extrabold text-lg">Loty od ${countryMinPrice} zł</p>
+                    ${priceHtml}
                     <button class="mt-4 w-full block text-center bg-brand-50 hover:bg-brand-500 text-brand-700 hover:text-white font-semibold py-3 rounded-xl transition-colors">Wybierz miasto</button>
                 </div>
             </div>`;
@@ -574,8 +602,6 @@
         grid.innerHTML = finalHtml;
     }
 
-    // ================= FUNKCJE MODALA =================
-    
     function getActiveGroupData() {
         return activeOriginType === 'PL' ? groupedPL : groupedForeign;
     }
@@ -587,7 +613,18 @@
     window.openUltraDeal = function(country, destCode, typeLabel, originCode) {
         openCountryModal(country, typeLabel);
         openDestinationModal(destCode);
-        setModalOrigin(originCode);
+        
+        // Zabezpieczenie: wybieramy pierwsze miasto z listy w Ultra Okazji
+        // (jeśli przekazano grupę origins jako string, wyciągamy pierwsze)
+        let primaryOrigin = originCode;
+        if(originCode.includes(',')) {
+            primaryOrigin = originCode.split(',')[0].trim();
+        }
+        
+        // Sprawdzamy czy to miasto w ogóle jest dostępne w słowniku (czasami przy filtrach może go nie być)
+        if(activeDestination && activeDestination.airports[primaryOrigin]) {
+            setModalOrigin(primaryOrigin);
+        }
     }
 
     window.openCountryModal = function(country, originType) {
@@ -615,8 +652,19 @@
         countryData.forEach(destKey => {
             const group = groupData[destKey];
             const meta = cityData[destKey] || cityData["DEFAULT"];
-            const absoluteMinPrice = Math.min(group.minOneWay, group.minReturn);
             const airportsCount = Object.keys(group.airports).length;
+
+            // Poprawka 2: ceny na kaflach miast w modalu
+            let priceHtml = '';
+            if (group.minReturn !== Infinity) {
+                priceHtml += `<p class="text-brand-600 font-extrabold text-sm mt-3">W obie strony od ${group.minReturn} zł</p>`;
+            } else if(group.minOneWay !== Infinity) {
+                priceHtml += `<p class="text-brand-600 font-extrabold text-sm mt-3">W jedną stronę od ${group.minOneWay} zł</p>`;
+            }
+
+            if (group.minOneWay !== Infinity && group.minReturn !== Infinity) {
+                priceHtml += `<p class="text-gray-500 font-medium text-[11px] mt-0.5">w jedną stronę od ${group.minOneWay} zł</p>`;
+            }
 
             html += `
                 <div class="bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-md border border-gray-200 cursor-pointer transition flex flex-col transform hover:-translate-y-1" onclick="openDestinationModal('${destKey}')">
@@ -626,7 +674,9 @@
                             <h4 class="text-lg font-bold text-gray-900">${group.destName}</h4>
                             <p class="text-xs text-gray-500 mb-2 mt-1"><i class="fa-solid fa-plane-departure text-brand-500 mr-1"></i> ${airportsCount} lotnisk wylotu</p>
                         </div>
-                        <p class="text-brand-600 font-extrabold text-sm mt-3">od ${absoluteMinPrice} zł</p>
+                        <div>
+                            ${priceHtml}
+                        </div>
                     </div>
                 </div>
             `;
@@ -752,7 +802,6 @@
         const depDates = [...new Set(filteredOffers.map(o => o.data_wylotu))].sort((a, b) => datePrices[a] - datePrices[b]);
         const minDepPrice = Math.min(...Object.values(datePrices));
         
-        // Pętla lotnisk (będą tylko tego samego typu co activeOriginType)
         let originsHtml = '<div class="flex flex-wrap gap-2 mb-4">';
         Object.values(currentAirports).forEach(air => {
             originsHtml += `
@@ -950,7 +999,6 @@
         } catch (err) { alert("Wystąpił błąd sieci."); }
     }
 
-    // Scroll i obsługa mobilnego menu
     const btn = document.getElementById('mobile-menu-btn');
     const menu = document.getElementById('mobile-menu');
     const icon = btn.querySelector('i');
