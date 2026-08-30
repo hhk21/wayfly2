@@ -353,7 +353,6 @@
         "TSF": "VCE", "VCE": "VCE",
         "GRO": "BCN_ALL", "REU": "BCN_ALL", "BCN": "BCN_ALL",
         "HER": "KRETA", "CHQ": "KRETA",
-        "LCA": "CYPR", "PFO": "CYPR",
         "SPX": "EGIPT", "CAI": "EGIPT",
         "TFS": "TENERYFA", "TFN": "TENERYFA"
     };
@@ -361,7 +360,7 @@
     const masterCityNames = {
         "MIL": "Mediolan", "ROM": "Rzym", "LON": "Londyn", "PAR": "Paryż", 
         "STO": "Sztokholm", "OSL": "Oslo", "BRU": "Bruksela", "VCE": "Wenecja",
-        "BCN_ALL": "Barcelona", "KRETA": "Kreta", "CYPR": "Cypr", "EGIPT": "Kair / Giza", "TENERYFA": "Teneryfa"
+        "BCN_ALL": "Barcelona", "KRETA": "Kreta", "CYPR": "Larnaka / Pafos", "EGIPT": "Kair / Giza", "TENERYFA": "Teneryfa"
     };
 
     const polishAirports = ["WAW", "WMI", "KRK", "GDN", "KTW", "WRO", "POZ", "RZE", "LCJ", "SZZ", "BZG", "IEG", "SZY", "LUZ"];
@@ -428,40 +427,36 @@
         groupedPL = {}; globalCountriesPL = {};
         groupedForeign = {}; globalCountriesForeign = {};
         ultraOkazje = [];
-        let bestUltra = {}; // kluczem będzie teraz tylko cel podróży!
+        let bestUltra = {}; 
         
         offers.forEach(o => {
             const baseStdPrice = standardPrices[o.destination] || 350;
             
-            // Poprawka 1: Jeśli lot jest w jedną stronę, próg standardowej ceny jest niższy (np. 55% z ceny return)
             const isOneWay = (o.typ === 'jednokierunkowy');
             const stdPrice = isOneWay ? Math.round(baseStdPrice * 0.55) : baseStdPrice;
             
-            // TWARDY FILTR: Odrzucanie drożyzny
             if (o.cena > (stdPrice * 1.1)) return;
 
-            // Poprawka 3: ULTRA OKAZJA - grupowanie wielu miast wylotu dla jednego celu
             if (o.cena <= (stdPrice * 0.45)) {
-                const dest = masterCityMap[o.destination] || o.destination;
+                const dest = masterCityMap[o.destination] || (o.destination === 'LCA' || o.destination === 'PFO' ? 'CYPR' : o.destination);
                 
                 if (!bestUltra[dest]) {
                     bestUltra[dest] = { ...o, stdPrice, minCena: o.cena, origins: [o.origin] };
                 } else {
                     if (!bestUltra[dest].origins.includes(o.origin)) {
-                        bestUltra[dest].origins.push(o.origin); // dodajemy miasto wylotu do listy
+                        bestUltra[dest].origins.push(o.origin); 
                     }
-                    if (o.cena < bestUltra[dest].minCena) { // jeśli to nowe miasto jest jeszcze tańsze, aktualizujemy główną ofertę kafelka
+                    if (o.cena < bestUltra[dest].minCena) { 
                         const existingOrigins = bestUltra[dest].origins;
                         bestUltra[dest] = { ...o, stdPrice, minCena: o.cena, origins: existingOrigins };
                     }
                 }
             }
 
-            // Rozdzielenie na PL i ZAGRANICĘ
             const isPL = polishAirports.includes(o.origin);
             const targetGroup = isPL ? groupedPL : groupedForeign;
             
-            const dest = masterCityMap[o.destination] || o.destination;
+            const dest = masterCityMap[o.destination] || (o.destination === 'LCA' || o.destination === 'PFO' ? 'CYPR' : o.destination);
             const trasaParts = o.trasa.split(' → ');
             const originName = trasaParts[0] || o.origin;
             const destName = masterCityNames[dest] || trasaParts[1] || dest;
@@ -473,7 +468,6 @@
             const group = targetGroup[dest];
             if(new Date(o.aktualizacja) > new Date(group.latestUpdate)) group.latestUpdate = o.aktualizacja;
             
-            // Rejestracja najniższych cen DLA DANEGO KIERUNKU
             if (o.typ === 'jednokierunkowy') group.minOneWay = Math.min(group.minOneWay, o.cena);
             if (o.typ === 'w_obie_strony') group.minReturn = Math.min(group.minReturn, o.cena);
 
@@ -504,17 +498,16 @@
         
         ultraOkazje.slice(0, 8).forEach(o => {
             const discount = Math.round(((o.stdPrice - o.cena) / o.stdPrice) * 100);
-            const destCode = masterCityMap[o.destination] || o.destination;
+            const destCode = masterCityMap[o.destination] || (o.destination === 'LCA' || o.destination === 'PFO' ? 'CYPR' : o.destination);
             const destName = masterCityNames[destCode] || o.destination;
             const meta = cityData[destCode] || cityData["DEFAULT"];
             const typeLabel = polishAirports.includes(o.origin) ? 'PL' : 'FOREIGN';
-            const country = countryMap[destCode] || "Inne";
+            const country = countryMap[o.destination] || "Inne";
             
-            // Poprawka 3 (UI): Sklejanie miast wylotu
             const originsText = o.origins.join(', '); 
             
             html += `
-            <div class="bg-white rounded-2xl shadow-sm hover:shadow-2xl transition-shadow duration-300 overflow-hidden group border border-red-200 flex flex-col cursor-pointer relative" onclick="openUltraDeal('${country}', '${destCode}', '${typeLabel}', '${o.origin}')">
+            <div class="bg-white rounded-2xl shadow-sm hover:shadow-2xl transition-shadow duration-300 overflow-hidden group border border-red-200 flex flex-col cursor-pointer relative" onclick="openUltraDeal('${country}', '${destCode}', '${typeLabel}', '${o.origin}', '${o.typ}', '${o.data_wylotu}', '${o.data_powrotu || ''}')">
                 <div class="absolute top-0 left-0 bg-red-600 text-white font-black px-3 py-1.5 text-sm rounded-br-2xl z-10 shadow-lg shadow-red-500/30">-${discount}%</div>
                 <div class="relative h-44 overflow-hidden">
                     <img src="${meta.img}" alt="${destName}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
@@ -548,9 +541,13 @@
         }
 
         destKeys.forEach(destKey => {
-            const country = countryMap[destKey] || "Inne";
+            // Bezpiecznik dla mapowania kraju
+            const firstOfferAirport = Object.keys(groupData[destKey].airports)[0];
+            const sampleDest = groupData[destKey].airports[firstOfferAirport].offers[0].destination;
+            const country = countryMap[sampleDest] || countryMap[destKey] || "Inne";
+            
             if (!globalCountriesData[country]) globalCountriesData[country] = [];
-            globalCountriesData[country].push(destKey);
+            if (!globalCountriesData[country].includes(destKey)) globalCountriesData[country].push(destKey);
         });
 
         const sortedCountries = Object.keys(globalCountriesData).sort();
@@ -570,17 +567,15 @@
             
             const imgSrc = countryImages[country] || "https://images.unsplash.com/photo-1436491865332-7a61a109cc05?w=800&q=80";
 
-            // Poprawka 2: Formatowanie 2 cen na kaflach
             let priceHtml = '';
             if (countryMinReturn !== Infinity) {
                 priceHtml += `<p class="text-brand-600 font-extrabold text-lg">W obie strony od ${countryMinReturn} zł</p>`;
             } else if(countryMinOneWay !== Infinity) {
-                // Jeśli nie ma lotów w obie strony, pokaż na głównym planie w jedną
-                priceHtml += `<p class="text-brand-600 font-extrabold text-lg">W jedną stronę od ${countryMinOneWay} zł</p>`;
+                priceHtml += `<p class="text-emerald-600 font-extrabold text-lg">W jedną stronę od ${countryMinOneWay} zł</p>`;
             }
 
             if (countryMinOneWay !== Infinity && countryMinReturn !== Infinity) {
-                priceHtml += `<p class="text-gray-500 font-medium text-sm mt-0.5">w jedną stronę już od ${countryMinOneWay} zł</p>`;
+                priceHtml += `<p class="text-emerald-600 font-medium text-sm mt-0.5">w jedną stronę już od ${countryMinOneWay} zł</p>`;
             } else if (countryMinReturn === Infinity && countryMinOneWay === Infinity) {
                 priceHtml = `<p class="text-gray-500 text-sm">Brak ofert</p>`;
             }
@@ -610,20 +605,23 @@
         return activeOriginType === 'PL' ? globalCountriesPL : globalCountriesForeign;
     }
 
-    window.openUltraDeal = function(country, destCode, typeLabel, originCode) {
+    // Nowa wersja openUltraDeal - przechodząca bezpośrednio do konkretnej daty
+    window.openUltraDeal = function(country, destCode, typeLabel, originCode, typ, depDate, retDate) {
         openCountryModal(country, typeLabel);
-        openDestinationModal(destCode);
         
-        // Zabezpieczenie: wybieramy pierwsze miasto z listy w Ultra Okazji
-        // (jeśli przekazano grupę origins jako string, wyciągamy pierwsze)
+        activeDestination = getActiveGroupData()[destCode];
+        if(!activeDestination) return;
+        
         let primaryOrigin = originCode;
-        if(originCode.includes(',')) {
-            primaryOrigin = originCode.split(',')[0].trim();
-        }
+        if(originCode.includes(',')) primaryOrigin = originCode.split(',')[0].trim();
         
-        // Sprawdzamy czy to miasto w ogóle jest dostępne w słowniku (czasami przy filtrach może go nie być)
-        if(activeDestination && activeDestination.airports[primaryOrigin]) {
-            setModalOrigin(primaryOrigin);
+        if(activeDestination.airports[primaryOrigin]) {
+            activeOrigin = primaryOrigin;
+            activeType = typ;
+            activeDepDate = depDate;
+            activeRetDate = typ === 'w_obie_strony' ? retDate : null;
+            activeDestAirport = null;
+            renderFinalModalContent();
         }
     }
 
@@ -654,16 +652,15 @@
             const meta = cityData[destKey] || cityData["DEFAULT"];
             const airportsCount = Object.keys(group.airports).length;
 
-            // Poprawka 2: ceny na kaflach miast w modalu
             let priceHtml = '';
             if (group.minReturn !== Infinity) {
                 priceHtml += `<p class="text-brand-600 font-extrabold text-sm mt-3">W obie strony od ${group.minReturn} zł</p>`;
             } else if(group.minOneWay !== Infinity) {
-                priceHtml += `<p class="text-brand-600 font-extrabold text-sm mt-3">W jedną stronę od ${group.minOneWay} zł</p>`;
+                priceHtml += `<p class="text-emerald-600 font-extrabold text-sm mt-3">W jedną stronę od ${group.minOneWay} zł</p>`;
             }
 
             if (group.minOneWay !== Infinity && group.minReturn !== Infinity) {
-                priceHtml += `<p class="text-gray-500 font-medium text-[11px] mt-0.5">w jedną stronę od ${group.minOneWay} zł</p>`;
+                priceHtml += `<p class="text-emerald-600 font-medium text-[11px] mt-0.5">w jedną stronę od ${group.minOneWay} zł</p>`;
             }
 
             html += `
@@ -690,8 +687,43 @@
 
     window.openDestinationModal = function(destKey) {
         activeDestination = getActiveGroupData()[destKey];
-        const firstOrigin = Object.keys(activeDestination.airports)[0];
-        setModalOrigin(firstOrigin); 
+        
+        let bestOffer = null;
+        let minPrice = Infinity;
+        
+        // Szukaj najpierw najtańszego lotu w OBIE strony
+        Object.values(activeDestination.airports).forEach(air => {
+            air.offers.forEach(o => {
+                if (o.typ === 'w_obie_strony' && o.cena < minPrice) {
+                    minPrice = o.cena;
+                    bestOffer = o;
+                }
+            });
+        });
+        
+        // Jeśli nie ma w obie, weź najtańszy w JEDNĄ
+        if (!bestOffer) {
+            Object.values(activeDestination.airports).forEach(air => {
+                air.offers.forEach(o => {
+                    if (o.cena < minPrice) {
+                        minPrice = o.cena;
+                        bestOffer = o;
+                    }
+                });
+            });
+        }
+        
+        if (bestOffer) {
+            activeOrigin = bestOffer.origin;
+            activeType = bestOffer.typ;
+            activeDepDate = bestOffer.data_wylotu;
+            activeRetDate = bestOffer.typ === 'w_obie_strony' ? bestOffer.data_powrotu : null;
+            activeDestAirport = bestOffer.destination;
+            renderFinalModalContent();
+        } else {
+            const firstOrigin = Object.keys(activeDestination.airports)[0];
+            setModalOrigin(firstOrigin); 
+        }
     }
 
     window.setModalOrigin = function(originKey) {
@@ -964,6 +996,16 @@
                 <div>
                     <h4 class="font-bold text-gray-900 text-lg mb-2">Opis wyjazdu</h4>
                     <p class="text-gray-600 leading-relaxed text-sm">${meta.desc}</p>
+                </div>
+                
+                <!-- BANER UPSELL (Subtelna sprzedaż planu) -->
+                <div class="bg-brand-50 rounded-xl p-4 border border-brand-100 flex items-start gap-3 mt-4">
+                    <i class="fa-solid fa-map-location-dot text-brand-500 mt-1 text-lg"></i>
+                    <div>
+                        <h5 class="text-sm font-bold text-gray-900 mb-0.5">Brak czasu na organizację wyjazdu?</h5>
+                        <p class="text-xs text-gray-600 mb-2 leading-relaxed">Znajdziemy najlepsze noclegi, dobierzemy atrakcje i stworzymy harmonogram dzień po dniu. Kup lot, a resztę zostaw nam.</p>
+                        <a href="#plany-podrozy" onclick="closeOfferModal()" class="text-xs font-bold text-brand-600 hover:text-brand-700 flex items-center gap-1 transition-colors">Zobacz ofertę Premium <i class="fa-solid fa-arrow-right"></i></a>
+                    </div>
                 </div>
 
                 <div class="pt-4 border-t border-gray-100 flex flex-col sm:flex-row gap-4">
