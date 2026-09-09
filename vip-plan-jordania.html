@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+html_content = """<!DOCTYPE html>
 <html lang="pl" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
@@ -18,8 +18,10 @@
         }
     </script>
     <style>
-        .timeline-line { position: absolute; left: 2rem; top: 4rem; bottom: 0; width: 2px; background-color: #e5e7eb; z-index: 0; }
+        .timeline-line { position: absolute; left: 2.5rem; top: 4rem; bottom: 0; width: 2px; background-color: #e5e7eb; z-index: 0; }
         @media (max-width: 640px) { .timeline-line { display: none; } }
+        .hide-scrollbar::-webkit-scrollbar { display: none; }
+        .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
     </style>
 </head>
 <body class="font-sans bg-gray-50 text-gray-800 antialiased">
@@ -34,7 +36,7 @@
             <a href="#dzien-4" class="text-gray-600 hover:text-brand-500 transition-colors">Dzień 4</a>
             <a href="#dzien-5" class="text-gray-600 hover:text-brand-500 transition-colors">Dzień 5</a>
             <a href="#dzien-6" class="text-gray-600 hover:text-brand-500 transition-colors">Dzień 6</a>
-            <a href="#dzien-7" class="text-brand-600 font-bold hover:text-brand-700 transition-colors">Dzień 7 (Petra)</a>
+            <a href="#dzien-7" class="text-brand-600 font-bold hover:text-brand-700 transition-colors">Dzień 7</a>
         </div>
     </nav>
 
@@ -42,12 +44,12 @@
     <header class="relative pt-24 pb-16 lg:pt-32 lg:pb-24 overflow-hidden bg-gray-900">
         <div class="absolute inset-0 z-0 opacity-50">
             <img src="https://images.unsplash.com/photo-1548679848-185f67b55f11?w=1600&q=80" alt="Petra" class="w-full h-full object-cover" />
-            <div class="absolute inset-0 bg-gradient-to-t from-gray-900 via-gray-900/60 to-transparent"></div>
+            <div class="absolute inset-0 bg-gradient-to-t from-gray-900 via-gray-900/70 to-transparent"></div>
         </div>
         <div class="relative z-10 max-w-4xl mx-auto px-4 text-center">
             <span class="inline-block py-1 px-3 rounded-full bg-brand-500 text-white text-xs font-bold tracking-wider mb-4 uppercase shadow-lg">Zero stresu. Kompletna logistyka.</span>
             <h1 class="text-4xl sm:text-5xl font-black text-white leading-tight mb-4 tracking-tight">Jordania: Gotowy Plan (7 Dni)</h1>
-            <p class="text-lg text-gray-300 max-w-2xl mx-auto font-light">Wyjazd na własną rękę, ale z wiedzą przewodnika. Prowadzimy Cię od lotniska przez Petrę aż do bezpiecznego powrotu.</p>
+            <p class="text-lg text-gray-300 max-w-2xl mx-auto font-light">Od lądowania w Ammanie do powrotu. Krok po kroku, bez miejsca na błędy.</p>
         </div>
     </header>
 
@@ -55,39 +57,36 @@
     <main class="max-w-4xl mx-auto px-4 sm:px-6 py-12 space-y-12 relative">
         <div class="timeline-line"></div>
 
-        <!-- PIGUŁKA PRZETRWANIA (Zwiększająca poczucie bezpieczeństwa) -->
+        <!-- BEZWZGLĘDNY WYMÓG: AUTO -->
+        <section class="bg-red-50 rounded-2xl shadow-sm border border-red-200 p-6 sm:p-8 relative z-10 ml-0 sm:ml-12 flex flex-col sm:flex-row gap-6 items-center sm:items-start">
+            <div class="flex-shrink-0 bg-red-100 p-4 rounded-full">
+                <i class="fa-solid fa-car-burst text-4xl text-red-600"></i>
+            </div>
+            <div>
+                <h2 class="text-2xl font-black text-red-800 mb-2 uppercase tracking-wide">Bezwzględny wymóg: Wynajem Auta</h2>
+                <p class="text-sm text-red-900/80 leading-relaxed font-medium">Ten plan opiera się na pełnej niezależności. Aby zrealizować trasę bez stresu i przepłacania za zorganizowane wycieczki, <strong>musisz wynająć samochód na lotnisku w Ammanie</strong>. Transport publiczny w Jordanii poza Ammanem praktycznie nie istnieje dla turystów. Z autem zyskujesz wolność i komfort, a drogi międzymiastowe (jak Desert Highway) są proste i bezpieczne.</p>
+            </div>
+        </section>
+
+        <!-- PIGUŁKA PRZETRWANIA -->
         <section class="bg-white rounded-2xl shadow-sm border border-gray-100 p-6 sm:p-8 relative z-10 ml-0 sm:ml-12">
             <div class="flex items-center gap-3 mb-6 border-b border-gray-100 pb-4">
                 <i class="fa-solid fa-shield-halved text-2xl text-brand-500"></i>
-                <h2 class="text-2xl font-bold text-gray-900">Twój fundament bezpieczeństwa</h2>
+                <h2 class="text-2xl font-bold text-gray-900">Fundament bezpieczeństwa</h2>
             </div>
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                <div class="flex gap-4">
-                    <div class="w-10 h-10 rounded-full bg-blue-50 flex items-center justify-center flex-shrink-0"><i class="fa-solid fa-passport text-blue-500"></i></div>
+                <div class="flex gap-4 items-start">
+                    <div class="w-10 h-10 rounded-xl bg-blue-50 flex items-center justify-center flex-shrink-0"><i class="fa-solid fa-passport text-blue-500"></i></div>
                     <div>
                         <h3 class="font-bold text-gray-900 text-sm">Jordan Pass (Wiza w cenie)</h3>
-                        <p class="text-sm text-gray-600 mt-1">Kup online przed wylotem (wersja Jordan Explorer - 75 JOD). Dokument zwalnia Cię z wyrabiania wizy na lotnisku (oszczędzasz 40 JOD) i jest Twoim darmowym biletem do Petry oraz na Cytadelę.</p>
+                        <p class="text-xs text-gray-600 mt-1 leading-relaxed">Kup online przed wylotem (wersja Jordan Explorer - 75 JOD). Dokument zwalnia z wyrabiania wizy na lotnisku (oszczędzasz 40 JOD) i jest darmowym biletem do Petry oraz wielu innych atrakcji.</p>
                     </div>
                 </div>
-                <div class="flex gap-4">
-                    <div class="w-10 h-10 rounded-full bg-green-50 flex items-center justify-center flex-shrink-0"><i class="fa-solid fa-wifi text-green-500"></i></div>
+                <div class="flex gap-4 items-start">
+                    <div class="w-10 h-10 rounded-xl bg-green-50 flex items-center justify-center flex-shrink-0"><i class="fa-solid fa-wifi text-green-500"></i></div>
                     <div>
-                        <h3 class="font-bold text-gray-900 text-sm">Internet i Mapy</h3>
-                        <p class="text-sm text-gray-600 mt-1">Kup kartę eSIM (np. Airalo) przed wylotem lub fizyczną kartę SIM (Umniah/Zain) na lotnisku za ok. 15 JOD. <strong>Zawsze pobieraj mapy Google offline</strong> – na pustyni zgubisz zasięg.</p>
-                    </div>
-                </div>
-                <div class="flex gap-4">
-                    <div class="w-10 h-10 rounded-full bg-orange-50 flex items-center justify-center flex-shrink-0"><i class="fa-solid fa-car text-orange-500"></i></div>
-                    <div>
-                        <h3 class="font-bold text-gray-900 text-sm">Jazda samochodem</h3>
-                        <p class="text-sm text-gray-600 mt-1">Jordańczycy jeżdżą chaotycznie w Ammanie, ale drogi międzymiastowe (Desert Highway) są szerokie i bezpieczne. <strong>Żelazna zasada:</strong> Nie jeździj po zmroku (brak oświetlenia, bezpańskie psy, wielbłądy).</p>
-                    </div>
-                </div>
-                <div class="flex gap-4">
-                    <div class="w-10 h-10 rounded-full bg-purple-50 flex items-center justify-center flex-shrink-0"><i class="fa-solid fa-bed text-purple-500"></i></div>
-                    <div>
-                        <h3 class="font-bold text-gray-900 text-sm">Rezerwacje i Ceny</h3>
-                        <p class="text-sm text-gray-600 mt-1">Ceny podane w planie to średni koszt za noc <strong>w pokoju 2-osobowym</strong>. Rezerwuj przez Booking.com – jordańskie hotele często wymagają płatności na miejscu (gotówką lub kartą).</p>
+                        <h3 class="font-bold text-gray-900 text-sm">Internet i Mapy Offline</h3>
+                        <p class="text-xs text-gray-600 mt-1 leading-relaxed">Kup kartę eSIM (np. Airalo) lub fizyczną kartę na lotnisku. <strong>Zawsze pobieraj mapy Google offline</strong> – na pustyni Wadi Rum i w kanionach całkowicie zgubisz zasięg.</p>
                     </div>
                 </div>
             </div>
@@ -95,114 +94,179 @@
 
         <!-- DZIEŃ 1 -->
         <section id="dzien-1" class="relative z-10 ml-0 sm:ml-12">
-            <div class="absolute -left-12 top-8 w-4 h-4 rounded-full bg-brand-500 border-4 border-gray-50 shadow-sm hidden sm:block"></div>
+            <div class="absolute -left-12 top-8 w-5 h-5 rounded-full bg-brand-500 border-4 border-gray-50 shadow-sm hidden sm:block"></div>
             <div class="bg-gray-900 text-white rounded-t-2xl p-6 sm:px-8">
-                <span class="text-brand-400 font-bold text-sm tracking-wider uppercase mb-1 block">Dzień 1</span>
-                <h2 class="text-2xl font-bold">Amman: Starożytność w centrum miasta</h2>
+                <span class="text-brand-400 font-bold text-xs tracking-wider uppercase mb-1 block">Dzień 1</span>
+                <h2 class="text-2xl font-bold">Amman: Serce Bliskiego Wschodu</h2>
             </div>
             <div class="bg-white rounded-b-2xl shadow-sm border border-gray-100 p-6 sm:p-8">
                 
                 <div class="bg-blue-50 text-blue-800 text-sm p-4 rounded-xl mb-8 flex items-start gap-3">
-                    <i class="fa-solid fa-car-side mt-1"></i>
-                    <p><strong>Logistyka:</strong> Z lotniska do centrum Ammanu jedzie się ok. 45 minut. Jeśli hotel nie ma parkingu, auto najlepiej zostawić na płatnym, strzeżonym parkingu przy Teatrze Rzymskim (ok. 2 JOD za dzień). Po Ammanie poruszaj się pieszo lub korzystaj z Ubera – jest tani i bezpieczny.</p>
+                    <i class="fa-solid fa-parking mt-1"></i>
+                    <p><strong>Logistyka i Parking:</strong> Z lotniska do centrum Ammanu masz ok. 45 min drogi. Wąskie uliczki w centrum to chaos. <strong>Rekomendacja:</strong> Zostaw auto na płatnym parkingu przy Teatrze Rzymskim (ok. 2 JOD) i eksploruj miasto pieszo lub tanim Uberem.</p>
                 </div>
 
                 <div class="mb-8">
-                    <span class="bg-brand-100 text-brand-700 text-[10px] font-bold px-2 py-0.5 rounded uppercase tracking-wider mb-2 inline-block">Poranna Kotwica (Od 9:00)</span>
+                    <span class="bg-brand-100 text-brand-700 text-[10px] font-bold px-2 py-0.5 rounded uppercase tracking-wider mb-2 inline-block">Od 9:00</span>
                     <h3 class="text-xl font-bold text-gray-900 mb-2">Cytadela i Teatr Rzymski</h3>
-                    <p class="text-gray-600 text-sm leading-relaxed mb-2">Rozpocznij od Cytadeli (Jabal al-Qal’a). To najwyższe wzgórze w mieście. Wejdziesz tam za darmo, okazując Jordan Pass. Znajdziesz tu słynną Świątynię Herkulesa. Następnie zejdź schodami w dół prosto do Teatru Rzymskiego w sercu Al-Balad.</p>
+                    <p class="text-gray-600 text-sm leading-relaxed">Wjedź Uberem na szczyt Cytadeli (Jabal al-Qal’a). Wejście za darmo z Jordan Pass. Najlepsza panorama 360° na miasto. Następnie zejdź schodami w dół prosto na tętniące życiem ulice obok Teatru Rzymskiego.</p>
                 </div>
 
-                <div class="mb-8 border border-gray-100 rounded-xl p-5">
-                    <h4 class="font-bold text-gray-900 text-sm uppercase tracking-wide mb-3"><i class="fa-solid fa-utensils text-brand-500 mr-2"></i>Gdzie zjeść w Ammanie?</h4>
-                    <ul class="space-y-4">
-                        <li>
-                            <p class="font-bold text-gray-900 text-sm">Hashem Restaurant <span class="bg-gray-100 text-gray-600 text-[10px] px-1.5 rounded ml-1 font-normal">Tani Street Food</span></p>
-                            <p class="text-xs text-gray-600">Kultowy falafel i hummus jedzony na plastikowych krzesłach. Jadał tu król. Ok. 4 JOD za 2 osoby.</p>
-                        </li>
-                        <li>
-                            <p class="font-bold text-gray-900 text-sm">Habibah Sweets <span class="bg-gray-100 text-gray-600 text-[10px] px-1.5 rounded ml-1 font-normal">Deser</span></p>
-                            <p class="text-xs text-gray-600">Najlepsza gorąca Kunafa (ser z ciastem i syropem). Kupujesz w okienku, jesz na ulicy.</p>
-                        </li>
-                    </ul>
-                </div>
-
-                <div class="mb-6">
-                    <h4 class="font-bold text-gray-900 text-sm uppercase tracking-wide mb-3"><i class="fa-solid fa-bed text-brand-500 mr-2"></i>Bezpieczna Baza (Amman)</h4>
-                    <div class="border border-gray-100 rounded-xl p-4 flex justify-between items-center hover:bg-gray-50">
-                        <div>
-                            <span class="bg-brand-100 text-brand-800 text-[10px] px-2 py-0.5 rounded font-bold uppercase mb-1 inline-block">Złoty Środek</span>
-                            <p class="font-bold text-gray-900">Nomads Hotel</p>
-                            <p class="text-xs text-gray-500">Blisko Rainbow Street. Nowoczesny i czysty.</p>
+                <!-- POLECANE RESTAURACJE (KAFELKI) -->
+                <div class="mb-10">
+                    <h4 class="font-bold text-gray-900 text-sm uppercase tracking-wide mb-4 border-b border-gray-100 pb-2"><i class="fa-solid fa-utensils text-brand-500 mr-2"></i>Gdzie zjeść w Ammanie?</h4>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div class="border border-gray-200 rounded-xl p-4 hover:border-brand-300 transition-colors">
+                            <span class="bg-green-100 text-green-800 text-[10px] px-2 py-0.5 rounded font-bold uppercase tracking-wider mb-2 inline-block">Street Food (Budżet)</span>
+                            <p class="font-bold text-gray-900 text-base mb-1">Hashem Restaurant</p>
+                            <p class="text-xs text-gray-600 mb-3">Kultowe miejsce. Falafel, hummus i pita na plastikowych stolikach w bocznej uliczce. Autentyczne i super tanie.</p>
+                            <p class="text-xs font-black text-gray-900">Koszt: ok. 2-4 JOD/os</p>
                         </div>
-                        <p class="font-black text-gray-900">~ 200 PLN</p>
+                        <div class="border border-gray-200 rounded-xl p-4 hover:border-brand-300 transition-colors">
+                            <span class="bg-purple-100 text-purple-800 text-[10px] px-2 py-0.5 rounded font-bold uppercase tracking-wider mb-2 inline-block">Komfort (Restauracja)</span>
+                            <p class="font-bold text-gray-900 text-base mb-1">Sufra Restaurant</p>
+                            <p class="text-xs text-gray-600 mb-3">Elegancka kuchnia jordańska na słynnej Rainbow Street. Przepiękny ogród i tradycyjne potrawy (np. Mansaf).</p>
+                            <p class="text-xs font-black text-gray-900">Koszt: ok. 15-20 JOD/os</p>
+                        </div>
+                        <div class="md:col-span-2 border border-gray-200 rounded-xl p-4 bg-amber-50/50">
+                            <span class="bg-amber-100 text-amber-800 text-[10px] px-2 py-0.5 rounded font-bold uppercase tracking-wider mb-2 inline-block">Najlepszy Deser</span>
+                            <p class="font-bold text-gray-900 text-base mb-1">Habibah Sweets</p>
+                            <p class="text-xs text-gray-600">Staniesz tu w kolejce z lokalsami, by kupić gorącą <strong>Kunafę</strong> z serem i pistacjami. Je się ją na stojąco na rogu ulicy.</p>
+                        </div>
                     </div>
+                </div>
+
+                <!-- POLECANE NOCLEGI (KAFELKI) -->
+                <div>
+                    <h4 class="font-bold text-gray-900 text-sm uppercase tracking-wide mb-4 border-b border-gray-100 pb-2"><i class="fa-solid fa-bed text-brand-500 mr-2"></i>Baza Noclegowa: Amman (Dzień 1 i 2)</h4>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                        <!-- Budżet -->
+                        <div class="border border-green-200 bg-green-50/30 rounded-xl p-4 flex flex-col justify-between">
+                            <div>
+                                <span class="bg-green-100 text-green-800 text-[10px] font-bold px-2 py-0.5 rounded uppercase tracking-wider mb-2 inline-block">Budżetowy</span>
+                                <h5 class="font-bold text-gray-900 text-sm mb-1">The Cabin Hostel</h5>
+                                <p class="text-[11px] text-gray-600 leading-relaxed">Czyste, proste pokoje w samym sercu Al-Balad. Idealne do umycia się i snu.</p>
+                            </div>
+                            <div class="mt-4 pt-3 border-t border-green-200 flex justify-between items-center">
+                                <span class="font-black text-gray-900 text-sm">~ 120 PLN</span>
+                                <span class="text-[10px] text-green-700 font-bold">Booking</span>
+                            </div>
+                        </div>
+                        <!-- Standard -->
+                        <div class="border border-blue-200 bg-blue-50/30 rounded-xl p-4 flex flex-col justify-between relative shadow-sm">
+                            <div class="absolute -top-3 left-1/2 transform -translate-x-1/2 bg-blue-500 text-white text-[9px] font-black px-2 py-0.5 rounded-full uppercase tracking-widest shadow-sm">Najlepszy wybór</div>
+                            <div>
+                                <span class="bg-blue-100 text-blue-800 text-[10px] font-bold px-2 py-0.5 rounded uppercase tracking-wider mb-2 inline-block mt-1">Standard</span>
+                                <h5 class="font-bold text-gray-900 text-sm mb-1">Nomads Hotel</h5>
+                                <p class="text-[11px] text-gray-600 leading-relaxed">Krok od Rainbow St. Nowoczesny wystrój, pyszne śniadanie i świetna obsługa.</p>
+                            </div>
+                            <div class="mt-4 pt-3 border-t border-blue-200 flex justify-between items-center">
+                                <span class="font-black text-gray-900 text-sm">~ 220 PLN</span>
+                                <span class="text-[10px] text-blue-700 font-bold">Booking</span>
+                            </div>
+                        </div>
+                        <!-- Komfort -->
+                        <div class="border border-purple-200 bg-purple-50/30 rounded-xl p-4 flex flex-col justify-between">
+                            <div>
+                                <span class="bg-purple-100 text-purple-800 text-[10px] font-bold px-2 py-0.5 rounded uppercase tracking-wider mb-2 inline-block">Komfort / Premium</span>
+                                <h5 class="font-bold text-gray-900 text-sm mb-1">Amman Rotana</h5>
+                                <p class="text-[11px] text-gray-600 leading-relaxed">Luksusowy wieżowiec. Widok na całe miasto, basen, pełen zachodni standard.</p>
+                            </div>
+                            <div class="mt-4 pt-3 border-t border-purple-200 flex justify-between items-center">
+                                <span class="font-black text-gray-900 text-sm">~ 650 PLN</span>
+                                <span class="text-[10px] text-purple-700 font-bold">Booking</span>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="text-[10px] text-gray-400 mt-2 text-right">* Ceny szacunkowe za 1 noc w pokoju 2-os. Zarezerwuj ten sam hotel na 2 pierwsze noce.</p>
                 </div>
             </div>
         </section>
 
         <!-- DZIEŃ 2 -->
         <section id="dzien-2" class="relative z-10 ml-0 sm:ml-12">
-            <div class="absolute -left-12 top-8 w-4 h-4 rounded-full bg-brand-500 border-4 border-gray-50 shadow-sm hidden sm:block"></div>
+            <div class="absolute -left-12 top-8 w-5 h-5 rounded-full bg-brand-500 border-4 border-gray-50 shadow-sm hidden sm:block"></div>
             <div class="bg-gray-900 text-white rounded-t-2xl p-6 sm:px-8">
-                <span class="text-brand-400 font-bold text-sm tracking-wider uppercase mb-1 block">Dzień 2</span>
-                <h2 class="text-2xl font-bold">Wzgórza Golan i Miejsce Chrztu</h2>
+                <span class="text-brand-400 font-bold text-xs tracking-wider uppercase mb-1 block">Dzień 2</span>
+                <h2 class="text-2xl font-bold">Północna Jordania: Z widokiem na Izrael</h2>
             </div>
             <div class="bg-white rounded-b-2xl shadow-sm border border-gray-100 p-6 sm:p-8">
                 
                 <div class="bg-blue-50 text-blue-800 text-sm p-4 rounded-xl mb-8 flex items-start gap-3">
                     <i class="fa-solid fa-route mt-1"></i>
-                    <p><strong>Logistyka:</strong> Dziś zrobisz ok. 250 km. Droga do Umm Qais z Ammanu to 2 godziny na północ. Z Umm Qais do Miejsca Chrztu jedziesz ok. 2.5 godziny Doliną Jordanu (bardzo malownicza, ale uważaj na progi zwalniające!). Powrót do Ammanu na nocleg to 1 godzina.</p>
+                    <p><strong>Logistyka Tras:</strong> Dziś jeździsz. Rano: Amman -> Umm Qais (ok. 2h na północ). Popołudnie: Umm Qais -> Miejsce Chrztu (ok. 2.5h zjazdu Doliną Jordanu). Wieczór: Powrót do Ammanu (1h). Drogi są w porządku, ale uważaj na niewidoczne progi zwalniające (speed bumps) na trasie krajowej!</p>
                 </div>
 
                 <div class="mb-8">
                     <span class="bg-brand-100 text-brand-700 text-[10px] font-bold px-2 py-0.5 rounded uppercase tracking-wider mb-2 inline-block">Rano: 9:00</span>
                     <h3 class="text-xl font-bold text-gray-900 mb-2">Umm Qais (Starożytna Gadara)</h3>
-                    <p class="text-gray-600 text-sm leading-relaxed">Ruiny z niezwykłym widokiem. Przy dobrej widoczności zobaczysz stąd Wzgórza Golan, Jezioro Tyberiadzkie w Izraelu i terytorium Syrii. <strong>Wstęp darmowy z Jordan Pass.</strong></p>
+                    <p class="text-gray-600 text-sm leading-relaxed">Ruiny z czarnego bazaltu i niesamowity widok na 3 państwa naraz: Jordanię, Syrię i Wzgórza Golan (Izrael), a w dole Jezioro Galilejskie. <strong>Darmowe wejście na Jordan Pass.</strong> Auto zostawiasz na sporym, darmowym parkingu przed kompleksem.</p>
                 </div>
 
                 <div class="mb-8">
-                    <span class="bg-brand-100 text-brand-700 text-[10px] font-bold px-2 py-0.5 rounded uppercase tracking-wider mb-2 inline-block">Popołudnie: 14:00</span>
+                    <span class="bg-brand-100 text-brand-700 text-[10px] font-bold px-2 py-0.5 rounded uppercase tracking-wider mb-2 inline-block">Popołudnie: 14:30</span>
                     <h3 class="text-xl font-bold text-gray-900 mb-2">Betania za Jordanem (Miejsce Chrztu)</h3>
-                    <p class="text-gray-600 text-sm leading-relaxed">Zjedź na południe. To tutaj według tradycji Jan Chrzciciel ochrzcił Jezusa. Zostawiasz auto na darmowym parkingu Visitor Center, a dalej wiezie Cię obowiązkowy, bezpłatny busik z przewodnikiem (dojeżdża do samej rzeki Jordan – po drugiej stronie brzegu, kilka metrów dalej, jest już Izrael). <strong>Uwaga: Bilet kosztuje 12 JOD (jeśli zaznaczysz tę opcję kupując Jordan Pass to tylko 8 JOD).</strong></p>
+                    <p class="text-gray-600 text-sm leading-relaxed">Parkujesz przy dużym Visitor Center. Stamtąd zabierze Cię dedykowany mini-bus (nie można wjeżdżać własnym autem do strefy wojskowej przy granicy). Zobaczysz rzekę Jordan i miejsce chrztu Jezusa. Pamiętaj: to osobny bilet (8 JOD, jeśli kupiłeś go razem z Jordan Pass).</p>
                 </div>
 
-                <p class="text-sm font-semibold text-gray-900 mt-6"><i class="fa-solid fa-moon text-brand-500 mr-2"></i>Nocleg: Powrót do tego samego hotelu w Ammanie (brak konieczności pakowania bagaży).</p>
+                <div class="bg-gray-50 border border-gray-200 rounded-xl p-4 flex items-center justify-between">
+                    <div>
+                        <p class="font-bold text-gray-900 text-sm"><i class="fa-solid fa-moon text-brand-500 mr-2"></i>Nocleg: Amman</p>
+                        <p class="text-xs text-gray-600">Wracasz do swojego hotelu z Dnia 1. Bez pakowania bagaży.</p>
+                    </div>
+                </div>
             </div>
         </section>
 
         <!-- DZIEŃ 3 -->
         <section id="dzien-3" class="relative z-10 ml-0 sm:ml-12">
-            <div class="absolute -left-12 top-8 w-4 h-4 rounded-full bg-brand-500 border-4 border-gray-50 shadow-sm hidden sm:block"></div>
+            <div class="absolute -left-12 top-8 w-5 h-5 rounded-full bg-brand-500 border-4 border-gray-50 shadow-sm hidden sm:block"></div>
             <div class="bg-gray-900 text-white rounded-t-2xl p-6 sm:px-8">
-                <span class="text-brand-400 font-bold text-sm tracking-wider uppercase mb-1 block">Dzień 3</span>
-                <h2 class="text-2xl font-bold">Unoszenie na wodzie i Zamek Krzyżowców</h2>
+                <span class="text-brand-400 font-bold text-xs tracking-wider uppercase mb-1 block">Dzień 3</span>
+                <h2 class="text-2xl font-bold">Sól, woda i twierdze krzyżowców</h2>
             </div>
             <div class="bg-white rounded-b-2xl shadow-sm border border-gray-100 p-6 sm:p-8">
                 
-                <div class="bg-blue-50 text-blue-800 text-sm p-4 rounded-xl mb-8 flex items-start gap-3">
-                    <i class="fa-solid fa-route mt-1"></i>
-                    <p><strong>Logistyka:</strong> Amman -> Morze Martwe (1 godzina). Morze Martwe -> Zamek Kerak drogą nr 65, a potem niesamowicie krętą (ale wyasfaltowaną) drogą w góry (ok. 1.5 godziny). Parkowanie przy zamku Kerak bywa ciasne – szukaj miejsc nieco poniżej oficjalnego wejścia.</p>
+                <div class="mb-8">
+                    <span class="bg-brand-100 text-brand-700 text-[10px] font-bold px-2 py-0.5 rounded uppercase tracking-wider mb-2 inline-block">Rano: 10:00</span>
+                    <h3 class="text-xl font-bold text-gray-900 mb-2">Unoszenie się na Morzu Martwym</h3>
+                    <p class="text-gray-600 text-sm leading-relaxed mb-3">Zjazd z Ammanu nad morze trwa ok. godzinę. <strong>Kluczowe:</strong> nie kąp się "na dziko". Gęsta sól podrażni skórę, a na dzikiej plaży nie ma pryszniców. Wykup dostęp "Day Pass" w jednym z hoteli (np. Holiday Inn lub Amman Beach), by w cenie ok. 20-30 JOD mieć baseny, ręcznik i prysznic na plaży.</p>
                 </div>
 
-                <div class="mb-8">
-                    <span class="bg-brand-100 text-brand-700 text-[10px] font-bold px-2 py-0.5 rounded uppercase tracking-wider mb-2 inline-block">Relaks: 10:00 - 13:00</span>
-                    <h3 class="text-xl font-bold text-gray-900 mb-2">Kąpiel w Morzu Martwym</h3>
-                    <p class="text-gray-600 text-sm leading-relaxed mb-3">Nie pływaj "na dziko" – po kąpieli musisz zmyć z siebie gęstą sól, inaczej podrażni skórę. Najlepsza i najbezpieczniejsza opcja: wykup wstęp jednodniowy na tzw. <strong>Amman Beach Tourist Resort</strong> (ok. 20 JOD/os) lub skorzystaj z płatnych plaż przy dużych hotelach (np. Holiday Inn), gdzie w cenie masz ręcznik, baseny słodkowodne i prysznice.</p>
-                </div>
-
-                <div class="mb-8">
+                <div class="mb-10">
                     <span class="bg-brand-100 text-brand-700 text-[10px] font-bold px-2 py-0.5 rounded uppercase tracking-wider mb-2 inline-block">Popołudnie: 15:00</span>
-                    <h3 class="text-xl font-bold text-gray-900 mb-2">Zamek Kerak (Al-Karak)</h3>
-                    <p class="text-gray-600 text-sm leading-relaxed">Jeden z największych zamków krzyżowców na Bliskim Wschodzie. Spacer ciemnymi podziemnymi korytarzami robi potężne wrażenie (weź latarkę w telefonie!). Wstęp: Darmowy z Jordan Pass.</p>
+                    <h3 class="text-xl font-bold text-gray-900 mb-2">Zamek Kerak (Karak)</h3>
+                    <p class="text-gray-600 text-sm leading-relaxed">Jedziesz malowniczą trasą wzdłuż brzegu i ostro wjeżdżasz w góry. Zamek jest potężny, podziemne tunele robią ogromne wrażenie. Wejście darmowe z Jordan Pass. <strong>Parking:</strong> Parkuj wzdłuż drogi wjazdowej przed samym wejściem na dziedziniec.</p>
                 </div>
 
-                <div class="mb-6 border border-gray-100 rounded-xl p-4">
-                    <h4 class="font-bold text-gray-900 text-sm uppercase tracking-wide mb-2"><i class="fa-solid fa-bed text-brand-500 mr-2"></i>Nocleg (Okolice Kerak)</h4>
-                    <p class="text-xs text-gray-600 mb-3">Zamiast jechać po zmroku dalej, prześpij się w okolicy Kerak, by rano na spokojnie ruszyć na południe.</p>
-                    <div class="flex justify-between items-center">
-                        <p class="font-bold text-gray-900 text-sm">Karak Guest House (lub podobne w okolicy)</p>
-                        <p class="font-black text-gray-900 text-sm">~ 180 PLN</p>
+                <!-- POLECANE NOCLEGI (KERAK/OKOLICE) -->
+                <div>
+                    <h4 class="font-bold text-gray-900 text-sm uppercase tracking-wide mb-4 border-b border-gray-100 pb-2"><i class="fa-solid fa-bed text-brand-500 mr-2"></i>Baza Noclegowa: Okolice Kerak</h4>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                        <div class="border border-green-200 bg-green-50/30 rounded-xl p-4 flex flex-col justify-between">
+                            <div>
+                                <span class="bg-green-100 text-green-800 text-[10px] font-bold px-2 py-0.5 rounded uppercase tracking-wider mb-1 inline-block">Budżetowy</span>
+                                <h5 class="font-bold text-gray-900 text-sm mb-1">Karak Guest House</h5>
+                                <p class="text-[11px] text-gray-600">Prosty pensjonat z gościnnym właścicielem. Doskonała baza po zwiedzaniu zamku.</p>
+                            </div>
+                            <div class="mt-4 pt-3 border-t border-green-200 flex justify-between items-center"><span class="font-black text-gray-900 text-sm">~ 150 PLN</span></div>
+                        </div>
+                        <div class="border border-blue-200 bg-blue-50/30 rounded-xl p-4 flex flex-col justify-between">
+                            <div>
+                                <span class="bg-blue-100 text-blue-800 text-[10px] font-bold px-2 py-0.5 rounded uppercase tracking-wider mb-1 inline-block">Standard</span>
+                                <h5 class="font-bold text-gray-900 text-sm mb-1">Mujib Chalets</h5>
+                                <p class="text-[11px] text-gray-600">Leżą niżej, tuż przy brzegu morza. Klimatyczne domki letniskowe z widokiem na wodę.</p>
+                            </div>
+                            <div class="mt-4 pt-3 border-t border-blue-200 flex justify-between items-center"><span class="font-black text-gray-900 text-sm">~ 350 PLN</span></div>
+                        </div>
+                        <div class="border border-purple-200 bg-purple-50/30 rounded-xl p-4 flex flex-col justify-between">
+                            <div>
+                                <span class="bg-purple-100 text-purple-800 text-[10px] font-bold px-2 py-0.5 rounded uppercase tracking-wider mb-1 inline-block">Komfort (Wymaga objazdu)</span>
+                                <h5 class="font-bold text-gray-900 text-sm mb-1">Ma'In Hot Springs</h5>
+                                <p class="text-[11px] text-gray-600">Resort z naturalnymi gorącymi wodospadami. Topowy luksus ukryty w kanionie.</p>
+                            </div>
+                            <div class="mt-4 pt-3 border-t border-purple-200 flex justify-between items-center"><span class="font-black text-gray-900 text-sm">~ 750 PLN</span></div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -210,32 +274,67 @@
 
         <!-- DZIEŃ 4 -->
         <section id="dzien-4" class="relative z-10 ml-0 sm:ml-12">
-            <div class="absolute -left-12 top-8 w-4 h-4 rounded-full bg-brand-500 border-4 border-gray-50 shadow-sm hidden sm:block"></div>
+            <div class="absolute -left-12 top-8 w-5 h-5 rounded-full bg-brand-500 border-4 border-gray-50 shadow-sm hidden sm:block"></div>
             <div class="bg-gray-900 text-white rounded-t-2xl p-6 sm:px-8">
-                <span class="text-brand-400 font-bold text-sm tracking-wider uppercase mb-1 block">Dzień 4</span>
-                <h2 class="text-2xl font-bold">Kierunek Południe: Akaba i Morze Czerwone</h2>
+                <span class="text-brand-400 font-bold text-xs tracking-wider uppercase mb-1 block">Dzień 4</span>
+                <h2 class="text-2xl font-bold">Na południe: Akaba i Morze Czerwone</h2>
             </div>
             <div class="bg-white rounded-b-2xl shadow-sm border border-gray-100 p-6 sm:p-8">
                 
                 <div class="bg-blue-50 text-blue-800 text-sm p-4 rounded-xl mb-8 flex items-start gap-3">
-                    <i class="fa-solid fa-route mt-1"></i>
-                    <p><strong>Logistyka:</strong> Włącz muzykę – czeka Cię najdłuższy, ale najprostszy przejazd. Zjazd z Kerak na główną Desert Highway (nr 15) w kierunku Akaby. Szeroka, prosta droga przez pustynię. Zajmie to ok. 2.5 - 3 godziny. Pamiętaj zatankować, choć stacji przy autostradzie nie brakuje.</p>
+                    <i class="fa-solid fa-gauge-high mt-1"></i>
+                    <p><strong>Logistyka:</strong> Czeka Cię długa, ale bardzo prosta droga przez pustynię. Z Kerak wjeżdżasz na główną Desert Highway (autostrada nr 15) i jedziesz ciągle na południe (ok. 2.5h - 3h). Uważaj na ciężarówki i radar policyjny.</p>
                 </div>
 
-                <div class="mb-8">
-                    <span class="bg-brand-100 text-brand-700 text-[10px] font-bold px-2 py-0.5 rounded uppercase tracking-wider mb-2 inline-block">Relaks: Całe popołudnie</span>
-                    <h3 class="text-xl font-bold text-gray-900 mb-2">Chilling na South Beach</h3>
-                    <p class="text-gray-600 text-sm leading-relaxed">Miejskie plaże w Akabie omiń (są zatłoczone). Jedź 15 minut za miasto w stronę granicy z Arabią Saudyjską na <strong>South Beach</strong>. Wypożycz maskę z rurką (ok. 3 JOD) i wejdź do wody z molo – rafa koralowa, zatopiony czołg i samolot są dostępne tuż przy brzegu dla każdego amatora!</p>
+                <div class="mb-10">
+                    <span class="bg-brand-100 text-brand-700 text-[10px] font-bold px-2 py-0.5 rounded uppercase tracking-wider mb-2 inline-block">Popołudnie relaksu</span>
+                    <h3 class="text-xl font-bold text-gray-900 mb-2">Snorkeling na South Beach</h3>
+                    <p class="text-gray-600 text-sm leading-relaxed">Omiń plaże w centrum Akaby (są zatłoczone). Jedź 15 minut za miasto w stronę Arabii Saudyjskiej na <strong>South Beach</strong>. Wypożycz maskę z rurką na plaży (3 JOD). Od razu przy wejściu do wody znajdziesz rafy koralowe, zatopiony czołg i wrak samolotu.</p>
                 </div>
 
-                <div class="mb-6 border border-gray-100 rounded-xl p-4">
-                    <h4 class="font-bold text-gray-900 text-sm uppercase tracking-wide mb-2"><i class="fa-solid fa-bed text-brand-500 mr-2"></i>Nocleg (Akaba)</h4>
-                    <div class="flex justify-between items-center">
+                <!-- POLECANE RESTAURACJE AKABA -->
+                <div class="mb-10 border border-gray-100 rounded-xl p-5 bg-gray-50">
+                    <h4 class="font-bold text-gray-900 text-sm uppercase tracking-wide mb-3"><i class="fa-solid fa-fish text-brand-500 mr-2"></i>Gdzie zjeść w Akabie?</h4>
+                    <div class="space-y-3">
                         <div>
-                            <p class="font-bold text-gray-900 text-sm">Lacosta Hotel</p>
-                            <p class="text-[10px] text-gray-500">W samym centrum, daje dostęp do prywatnych klubów plażowych.</p>
+                            <p class="font-bold text-gray-900 text-sm">Ali Baba Restaurant <span class="bg-white border border-gray-200 text-gray-600 text-[10px] px-1.5 rounded ml-1 font-normal">Owoce Morza (Standard)</span></p>
+                            <p class="text-xs text-gray-600">Świetne ryby i owoce morza w centrum miasta. Pytaj o danie *Sayadieh*.</p>
                         </div>
-                        <p class="font-black text-gray-900 text-sm">~ 350 PLN</p>
+                        <div class="pt-3 border-t border-gray-200">
+                            <p class="font-bold text-gray-900 text-sm">Khadija <span class="bg-white border border-gray-200 text-gray-600 text-[10px] px-1.5 rounded ml-1 font-normal">Domowa (Budżet)</span></p>
+                            <p class="text-xs text-gray-600">Pyszne, obfite, lokalne posiłki dla mieszkańców. Tania i pyszna opcja.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- POLECANE NOCLEGI (AKABA) -->
+                <div>
+                    <h4 class="font-bold text-gray-900 text-sm uppercase tracking-wide mb-4 border-b border-gray-100 pb-2"><i class="fa-solid fa-bed text-brand-500 mr-2"></i>Baza Noclegowa: Akaba</h4>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                        <div class="border border-green-200 bg-green-50/30 rounded-xl p-4 flex flex-col justify-between">
+                            <div>
+                                <span class="bg-green-100 text-green-800 text-[10px] font-bold px-2 py-0.5 rounded uppercase tracking-wider mb-1 inline-block">Budżetowy</span>
+                                <h5 class="font-bold text-gray-900 text-sm mb-1">Amir Palace Hotel</h5>
+                                <p class="text-[11px] text-gray-600">Świetna lokalizacja w centrum do wyjścia wieczorem, bardzo tanio.</p>
+                            </div>
+                            <div class="mt-4 pt-3 border-t border-green-200 flex justify-between items-center"><span class="font-black text-gray-900 text-sm">~ 140 PLN</span></div>
+                        </div>
+                        <div class="border border-blue-200 bg-blue-50/30 rounded-xl p-4 flex flex-col justify-between">
+                            <div>
+                                <span class="bg-blue-100 text-blue-800 text-[10px] font-bold px-2 py-0.5 rounded uppercase tracking-wider mb-1 inline-block">Standard</span>
+                                <h5 class="font-bold text-gray-900 text-sm mb-1">Lacosta Hotel</h5>
+                                <p class="text-[11px] text-gray-600">Wygodne pokoje z genialnym śniadaniem. Dają darmowe wejściówki na prywatne plaże Berenice.</p>
+                            </div>
+                            <div class="mt-4 pt-3 border-t border-blue-200 flex justify-between items-center"><span class="font-black text-gray-900 text-sm">~ 350 PLN</span></div>
+                        </div>
+                        <div class="border border-purple-200 bg-purple-50/30 rounded-xl p-4 flex flex-col justify-between">
+                            <div>
+                                <span class="bg-purple-100 text-purple-800 text-[10px] font-bold px-2 py-0.5 rounded uppercase tracking-wider mb-1 inline-block">Komfort (Luksus)</span>
+                                <h5 class="font-bold text-gray-900 text-sm mb-1">Kempinski Hotel Aqaba</h5>
+                                <p class="text-[11px] text-gray-600">Prywatna piaszczysta plaża, infinity pool. Odpoczynek totalny.</p>
+                            </div>
+                            <div class="mt-4 pt-3 border-t border-purple-200 flex justify-between items-center"><span class="font-black text-gray-900 text-sm">~ 900 PLN</span></div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -243,30 +342,53 @@
 
         <!-- DZIEŃ 5 -->
         <section id="dzien-5" class="relative z-10 ml-0 sm:ml-12">
-            <div class="absolute -left-12 top-8 w-4 h-4 rounded-full bg-brand-500 border-4 border-gray-50 shadow-sm hidden sm:block"></div>
+            <div class="absolute -left-12 top-8 w-5 h-5 rounded-full bg-brand-500 border-4 border-gray-50 shadow-sm hidden sm:block"></div>
             <div class="bg-gray-900 text-white rounded-t-2xl p-6 sm:px-8">
-                <span class="text-brand-400 font-bold text-sm tracking-wider uppercase mb-1 block">Dzień 5</span>
-                <h2 class="text-2xl font-bold">Pustynia Wadi Rum: Jak na Marsie</h2>
+                <span class="text-brand-400 font-bold text-xs tracking-wider uppercase mb-1 block">Dzień 5</span>
+                <h2 class="text-2xl font-bold">Wadi Rum: Marsjańska Pustynia</h2>
             </div>
             <div class="bg-white rounded-b-2xl shadow-sm border border-gray-100 p-6 sm:p-8">
                 
                 <div class="bg-blue-50 text-blue-800 text-sm p-4 rounded-xl mb-8 flex items-start gap-3">
                     <i class="fa-solid fa-car-side mt-1"></i>
-                    <p><strong>Zasada Złotego Spokoju:</strong> Akaba -> Wadi Rum to zaledwie godzina drogi autem po asfalcie. Twoim celem jest <strong>Wadi Rum Visitor Center</strong>. Zostawiasz tam swoje wynajęte auto na potężnym, darmowym i strzeżonym przez policję parkingu (jest całkowicie bezpieczne). Dalej podbiera Cię Beduin z campu swoim Jeepem z napędem 4x4. Ty nie prowadzisz na piasku!</p>
+                    <p><strong>Jak przetrwać logistykę:</strong> Z Akaby do Wadi Rum jedziesz tylko 1 godzinę. Autem asflatowym dojeżdżasz do <strong>Wadi Rum Visitor Center / Wadi Rum Village</strong>. Zostawiasz auto na 100% darmowym, bezpiecznym parkingu policyjnym. Następnie Beduin odbiera Cię z parkingu swoim Jeepem i wiezie na piasek pustyni. <strong>Nie próbuj wjeżdżać osobówką na piach!</strong></p>
                 </div>
 
-                <div class="mb-8">
+                <div class="mb-10">
                     <span class="bg-brand-100 text-brand-700 text-[10px] font-bold px-2 py-0.5 rounded uppercase tracking-wider mb-2 inline-block">Start: 13:00 - 14:00</span>
-                    <h3 class="text-xl font-bold text-gray-900 mb-2">Jeep Tour (4 lub 6 godzin)</h3>
-                    <p class="text-gray-600 text-sm leading-relaxed">Najlepszy sposób na poznanie pustyni. Przewodnik zabierze Cię na czerwone wydmy, kaniony z petroglifami, łuki skalne (np. Um Frouth Rock Bridge) oraz w miejsca, gdzie kręcono "Marsjanina" i "Diunę".</p>
+                    <h3 class="text-xl font-bold text-gray-900 mb-2">Jeep Tour 4x4 (Ok. 4h)</h3>
+                    <p class="text-gray-600 text-sm leading-relaxed">Twój obóz zorganizuje Ci wycieczkę jeepem. Zobaczysz czerwone wydmy, kaniony i miejsca gdzie kręcono "Marsjanina" i "Diunę". Wieczorem usiądziecie przy ognisku i zjecie <strong>Zarb</strong> (narodową potrawę z mięsa i warzyw pieczonych w ziemi pod gorącym piaskiem).</p>
                 </div>
 
-                <div class="mb-6 border border-gray-100 rounded-xl p-5">
-                    <h4 class="font-bold text-gray-900 text-sm uppercase tracking-wide mb-3"><i class="fa-solid fa-campground text-brand-500 mr-2"></i>Nocleg (Pustynia Wadi Rum)</h4>
-                    <p class="text-xs text-gray-600 mb-3">Wybierz camp z dobrymi ocenami na Booking. Wieczorem gospodarze przygotują narodową potrawę **Zarb** – warzywa i mięso pieczone godzinami pod ziemią na gorącym piasku.</p>
-                    <div class="flex justify-between items-center bg-gray-50 p-3 rounded-lg border border-gray-200">
-                        <p class="font-bold text-gray-900 text-sm">Wadi Rum Bedouin Camp (tradycyjny namiot)</p>
-                        <p class="font-black text-gray-900 text-sm">~ 250 PLN (ze śniadaniem i kolacją)</p>
+                <!-- POLECANE NOCLEGI (WADI RUM) -->
+                <div>
+                    <h4 class="font-bold text-gray-900 text-sm uppercase tracking-wide mb-4 border-b border-gray-100 pb-2"><i class="fa-solid fa-campground text-brand-500 mr-2"></i>Baza Noclegowa: Obozy na Pustyni</h4>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                        <div class="border border-green-200 bg-green-50/30 rounded-xl p-4 flex flex-col justify-between">
+                            <div>
+                                <span class="bg-green-100 text-green-800 text-[10px] font-bold px-2 py-0.5 rounded uppercase tracking-wider mb-1 inline-block">Budżetowy</span>
+                                <h5 class="font-bold text-gray-900 text-sm mb-1">Bedouin Lifestyle Camp</h5>
+                                <p class="text-[11px] text-gray-600">Tradycyjne materiałowe namioty. Świetna atmosfera przy ognisku, bardzo tanio i wesoło.</p>
+                            </div>
+                            <div class="mt-4 pt-3 border-t border-green-200 flex justify-between items-center"><span class="font-black text-gray-900 text-sm">~ 180 PLN</span></div>
+                        </div>
+                        <div class="border border-blue-200 bg-blue-50/30 rounded-xl p-4 flex flex-col justify-between relative">
+                            <div class="absolute -top-3 left-1/2 transform -translate-x-1/2 bg-blue-500 text-white text-[9px] font-black px-2 py-0.5 rounded-full uppercase tracking-widest shadow-sm whitespace-nowrap">Bańka na Marsie</div>
+                            <div>
+                                <span class="bg-blue-100 text-blue-800 text-[10px] font-bold px-2 py-0.5 rounded uppercase tracking-wider mb-1 inline-block mt-2">Standard</span>
+                                <h5 class="font-bold text-gray-900 text-sm mb-1">Wadi Rum Night Luxury</h5>
+                                <p class="text-[11px] text-gray-600">Śpisz w sferycznym "Martian Dome" z przeszklonym dachem, patrząc nocą na gwiazdy z łóżka.</p>
+                            </div>
+                            <div class="mt-4 pt-3 border-t border-blue-200 flex justify-between items-center"><span class="font-black text-gray-900 text-sm">~ 600 PLN</span></div>
+                        </div>
+                        <div class="border border-purple-200 bg-purple-50/30 rounded-xl p-4 flex flex-col justify-between">
+                            <div>
+                                <span class="bg-purple-100 text-purple-800 text-[10px] font-bold px-2 py-0.5 rounded uppercase tracking-wider mb-1 inline-block">Premium</span>
+                                <h5 class="font-bold text-gray-900 text-sm mb-1">Memories Aicha Luxury Camp</h5>
+                                <p class="text-[11px] text-gray-600">Zjawiskowy, luksusowy obóz, często ukazywany na Instagramie jako jeden z najpiękniejszych na świecie.</p>
+                            </div>
+                            <div class="mt-4 pt-3 border-t border-purple-200 flex justify-between items-center"><span class="font-black text-gray-900 text-sm">~ 1200 PLN</span></div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -274,29 +396,53 @@
 
         <!-- DZIEŃ 6 -->
         <section id="dzien-6" class="relative z-10 ml-0 sm:ml-12">
-            <div class="absolute -left-12 top-8 w-4 h-4 rounded-full bg-brand-500 border-4 border-gray-50 shadow-sm hidden sm:block"></div>
+            <div class="absolute -left-12 top-8 w-5 h-5 rounded-full bg-brand-500 border-4 border-gray-50 shadow-sm hidden sm:block"></div>
             <div class="bg-gray-900 text-white rounded-t-2xl p-6 sm:px-8">
-                <span class="text-brand-400 font-bold text-sm tracking-wider uppercase mb-1 block">Dzień 6</span>
-                <h2 class="text-2xl font-bold">Wadi Musa: Przedsmak Petry (Little Petra)</h2>
+                <span class="text-brand-400 font-bold text-xs tracking-wider uppercase mb-1 block">Dzień 6</span>
+                <h2 class="text-2xl font-bold">Wadi Musa i Mała Petra: Dzień Regeneracji</h2>
             </div>
             <div class="bg-white rounded-b-2xl shadow-sm border border-gray-100 p-6 sm:p-8">
                 
-                <div class="bg-blue-50 text-blue-800 text-sm p-4 rounded-xl mb-6 flex items-start gap-3">
-                    <i class="fa-solid fa-battery-full mt-1"></i>
-                    <p><strong>Regeneracja:</strong> Główna Petra to nawet 15-20 km marszu. Ten dzień musi być przeznaczony na odpoczynek. Nie forsuj się.</p>
+                <div class="bg-blue-50 text-blue-800 text-sm p-4 rounded-xl mb-8 flex items-start gap-3">
+                    <i class="fa-solid fa-battery-half mt-1"></i>
+                    <p><strong>Złota zasada:</strong> Petra to 15-20 km ciężkiego marszu. Przed jutrzejszym finałem musisz odpocząć. Po wyjeździe z pustyni Wadi Rum (odbierasz auto z parkingu) rusz w niespieszną trasę Kings Highway do Wadi Musa (ok. 2h).</p>
                 </div>
 
-                <div class="mb-8">
-                    <h3 class="text-xl font-bold text-gray-900 mb-2">Przejazd do Wadi Musa i Mała Petra</h3>
-                    <p class="text-gray-600 text-sm leading-relaxed mb-4">Po beduińskim śniadaniu przewodnik odwozi Cię do auta. Jedziesz przepiękną, widokową drogą Kings Highway do miasteczka Wadi Musa (baza wypadowa do Petry) - ok. 1.5 do 2h spokojnej jazdy. <strong>Co robić po południu?</strong> Zamiast atakować od razu główną Petrę, podjedź 10 minut za miasto do <strong>Małej Petry (Little Petra / Siq al-Barid)</strong>. Wstęp jest całkowicie darmowy (nie zużywa dni z Jordan Pass). To wspaniały, spokojny przedsmak tego, co czeka Cię jutro.</p>
+                <div class="mb-10">
+                    <span class="bg-brand-100 text-brand-700 text-[10px] font-bold px-2 py-0.5 rounded uppercase tracking-wider mb-2 inline-block">Popołudnie</span>
+                    <h3 class="text-xl font-bold text-gray-900 mb-2">Rozgrzewka w Małej Petrze</h3>
+                    <p class="text-gray-600 text-sm leading-relaxed">Nie wchodź dziś do głównej Petry. Podjedź autem na darmowy parking przy <strong>Małej Petrze (Little Petra)</strong> – 10 min drogi za miastem. Wstęp jest bezpłatny i nie zużywa dni z Jordan Pass. Piękne, mniejsze zabytki z ułamkiem tłumu.</p>
                 </div>
 
-                <div class="mb-6 border border-gray-100 rounded-xl p-4">
-                    <h4 class="font-bold text-gray-900 text-sm uppercase tracking-wide mb-2"><i class="fa-solid fa-bed text-brand-500 mr-2"></i>Nocleg (Wadi Musa)</h4>
-                    <p class="text-xs text-gray-600 mb-2">Twoim celem jest hotel jak najbliżej "Petra Visitor Center", żeby rano podejść pod kasy pieszo i uniknąć szukania parkingu.</p>
-                    <div class="flex justify-between items-center">
-                        <p class="font-bold text-gray-900 text-sm">Petra Moon Hotel (ok. 250 m od bramek)</p>
-                        <p class="font-black text-gray-900 text-sm">~ 280 PLN</p>
+                <!-- POLECANE NOCLEGI (WADI MUSA) -->
+                <div>
+                    <h4 class="font-bold text-gray-900 text-sm uppercase tracking-wide mb-4 border-b border-gray-100 pb-2"><i class="fa-solid fa-bed text-brand-500 mr-2"></i>Baza Noclegowa: Wadi Musa (Obok Petry)</h4>
+                    <p class="text-xs text-gray-600 mb-4">W Wadi Musa lokalizacja to wszystko. Szukaj hotelu blisko "Petra Visitor Center", żeby rano podejść pieszo i nie tracić czasu.</p>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                        <div class="border border-green-200 bg-green-50/30 rounded-xl p-4 flex flex-col justify-between">
+                            <div>
+                                <span class="bg-green-100 text-green-800 text-[10px] font-bold px-2 py-0.5 rounded uppercase tracking-wider mb-1 inline-block">Budżetowy</span>
+                                <h5 class="font-bold text-gray-900 text-sm mb-1">Valentine Inn</h5>
+                                <p class="text-[11px] text-gray-600">Daleko od bram (wymagany dojazd busem), ale bardzo tani z genialnym właścicielem i widokiem na zachód.</p>
+                            </div>
+                            <div class="mt-4 pt-3 border-t border-green-200 flex justify-between items-center"><span class="font-black text-gray-900 text-sm">~ 140 PLN</span></div>
+                        </div>
+                        <div class="border border-blue-200 bg-blue-50/30 rounded-xl p-4 flex flex-col justify-between">
+                            <div>
+                                <span class="bg-blue-100 text-blue-800 text-[10px] font-bold px-2 py-0.5 rounded uppercase tracking-wider mb-1 inline-block">Standard</span>
+                                <h5 class="font-bold text-gray-900 text-sm mb-1">Petra Moon Hotel</h5>
+                                <p class="text-[11px] text-gray-600">Zaledwie 200m do bramek Petry (idealnie na 6:00 rano). Basen na dachu na wieczorny relaks.</p>
+                            </div>
+                            <div class="mt-4 pt-3 border-t border-blue-200 flex justify-between items-center"><span class="font-black text-gray-900 text-sm">~ 290 PLN</span></div>
+                        </div>
+                        <div class="border border-purple-200 bg-purple-50/30 rounded-xl p-4 flex flex-col justify-between">
+                            <div>
+                                <span class="bg-purple-100 text-purple-800 text-[10px] font-bold px-2 py-0.5 rounded uppercase tracking-wider mb-1 inline-block">Komfort (Luksus)</span>
+                                <h5 class="font-bold text-gray-900 text-sm mb-1">Mövenpick Resort Petra</h5>
+                                <p class="text-[11px] text-gray-600">Zaledwie 50 metrów od bramek. Topowy 5* resort zbudowany w orientalnym stylu.</p>
+                            </div>
+                            <div class="mt-4 pt-3 border-t border-purple-200 flex justify-between items-center"><span class="font-black text-gray-900 text-sm">~ 850 PLN</span></div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -304,33 +450,46 @@
 
         <!-- DZIEŃ 7 (FINAŁ) -->
         <section id="dzien-7" class="relative z-10 ml-0 sm:ml-12 mb-12">
-            <div class="absolute -left-12 top-8 w-4 h-4 rounded-full bg-amber-500 border-4 border-gray-50 shadow-sm hidden sm:block"></div>
+            <div class="absolute -left-12 top-8 w-6 h-6 rounded-full bg-amber-500 border-4 border-gray-50 shadow-md hidden sm:flex items-center justify-center text-white text-[10px]"><i class="fa-solid fa-star"></i></div>
             <div class="bg-gray-900 text-white rounded-t-2xl p-6 sm:px-8 border-t-4 border-amber-500">
-                <span class="text-amber-500 font-bold text-sm tracking-wider uppercase mb-1 block">Dzień 7 - FINAŁ</span>
-                <h2 class="text-2xl font-bold">Wielka Petra i Powrót</h2>
+                <span class="text-amber-500 font-bold text-xs tracking-wider uppercase mb-1 block">Dzień 7 - Wielki Finał</span>
+                <h2 class="text-2xl font-bold">Petra o wschodzie słońca i Powrót</h2>
             </div>
             <div class="bg-white rounded-b-2xl shadow-sm border border-gray-100 p-6 sm:p-8">
                 
                 <div class="bg-amber-50 text-amber-900 text-sm p-4 rounded-xl mb-8 flex items-start gap-3 border border-amber-200">
                     <i class="fa-solid fa-triangle-exclamation mt-1"></i>
-                    <p><strong>Ważne:</strong> Podejdź z paszportem i kodem Jordan Pass do kasy (Ticket Office) w Visitor Center, aby odebrać fizyczny papierowy bilet. Bez niego bramki Cię nie puszczą!</p>
+                    <p><strong>Procedura biletowa:</strong> Jordan Pass nie zadziała na bramkach. Idź pod okienko "Ticket Office" i przekaż paszport oraz kod QR na telefonie. Wydadzą Ci papierowy bilet. Bez tego nie wejdziesz.</p>
                 </div>
 
                 <div class="mb-8">
                     <span class="bg-amber-100 text-amber-800 text-[10px] font-bold px-2 py-0.5 rounded uppercase tracking-wider mb-2 inline-block">Wielki Wstęp: Punkt 6:00 rano</span>
                     <h3 class="text-xl font-bold text-gray-900 mb-2">Przez Wąwóz Siq do Skarbca</h3>
-                    <p class="text-gray-600 text-sm leading-relaxed mb-4">Wstań wcześnie. Zjawienie się na miejscu o 6:00 gwarantuje spacer w ciszy przez chłodny 1,2-kilometrowy wąwóz. Widok wyłaniającego się Skarbca (Al-Chazna) ze szczeliny to moment, którego nie zapomnisz do końca życia. Będziesz tam przed upałem, naciągaczami i wycieczkami.</p>
+                    <p class="text-gray-600 text-sm leading-relaxed mb-4">Nie zaśpij. Zjawienie się pod bramą o 6:00 rano to Twoje najważniejsze zadanie tego dnia. Przejdziesz 1,2 km przez wąwóz i zobaczysz Skarbiec, gdy nie ma tam ani tłumów, ani naciągaczy z wielbłądami. Cała przestrzeń jest dla Ciebie.</p>
                 </div>
                 
                 <div class="mb-8 border-l-2 border-amber-200 pl-4 ml-2">
-                    <h4 class="font-bold text-gray-900 text-sm mb-2">Rozwidlenie formy (Dwie ścieżki w Petrze):</h4>
-                    <p class="text-sm text-gray-600 mb-2"><strong>Dla wytrwałych: Wspinaczka do Klasztoru (Ad-Dajr)</strong> – Ok. 800-900 starożytnych schodów. Monumentalna fasada, większa od Skarbca. Niesamowita satysfakcja, ale wymaga sprawności.</p>
-                    <p class="text-sm text-gray-600"><strong>Dla relaksu: Grobowce Królewskie</strong> – Znajdują się na dole, po prawej stronie od głównej ścieżki. Łagodne podejście, wspaniałe kolory nabatejskich skał. Usiądź w beduińskiej kawiarence na herbatę z miętą.</p>
+                    <h4 class="font-bold text-gray-900 text-sm mb-3">Opcje zwiedzania (Dla każdego coś innego):</h4>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <div class="bg-gray-50 p-4 rounded-xl border border-gray-100">
+                            <span class="text-brand-600 font-bold text-xs uppercase mb-1 block">Dla ambitnych</span>
+                            <p class="font-bold text-gray-900 text-sm mb-1">Klasztor (Ad-Dajr)</p>
+                            <p class="text-xs text-gray-600">Ok. 800-900 schodów pod górę. Fasada jest większa niż Skarbiec. Niesamowita satysfakcja, zjawiskowe widoki i kawiarnia na szczycie.</p>
+                        </div>
+                        <div class="bg-gray-50 p-4 rounded-xl border border-gray-100">
+                            <span class="text-green-600 font-bold text-xs uppercase mb-1 block">Dla relaksu</span>
+                            <p class="font-bold text-gray-900 text-sm mb-1">Grobowce Królewskie</p>
+                            <p class="text-xs text-gray-600">Ogromne grobowce po prawej stronie od Skarbca. Niewiele wspinaczki, przepiękne kolory piaskowca i genialne miejsca na sesję zdjęciową.</p>
+                        </div>
+                    </div>
                 </div>
 
-                <div class="bg-blue-50 text-blue-800 text-sm p-4 rounded-xl mt-8 flex items-start gap-3">
-                    <i class="fa-solid fa-plane-departure mt-1"></i>
-                    <p><strong>Logistyka Powrotu:</strong> Opuść Petrę najpóźniej około godziny 14:00 - 15:00. Z Wadi Musa do lotniska w Ammanie jedzie się autostradą Desert Highway równe 3 godziny. Pamiętaj, aby założyć rezerwę czasową (ok. 30 min) na oddanie auta w wypożyczalni przed wylotem do domu.</p>
+                <div class="bg-blue-50 text-blue-800 text-sm p-5 rounded-xl mt-8 flex flex-col sm:flex-row items-center sm:items-start gap-4 text-center sm:text-left">
+                    <i class="fa-solid fa-plane-departure text-2xl text-blue-500"></i>
+                    <div>
+                        <h4 class="font-bold text-gray-900 text-sm uppercase tracking-wide mb-1">Droga powrotna</h4>
+                        <p class="text-sm">Opuść Petrę najpóźniej o 14:00 - 15:00. Z Wadi Musa na lotnisko jedzie się prosto autostradą równe 3 godziny. Pamiętaj o doliczeniu 30 minut na zdanie auta. <strong>Zawsze oddawaj auto z pełnym bakiem!</strong></p>
+                    </div>
                 </div>
 
             </div>
@@ -345,5 +504,9 @@
     </footer>
 
 </body>
-</html>
-</html>
+</html>"""
+
+with open('wayfly_jordania_komplet.html', 'w', encoding='utf-8') as f:
+    f.write(html_content)
+
+print("HTML file created successfully.")
