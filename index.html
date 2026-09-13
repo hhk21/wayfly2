@@ -95,7 +95,7 @@
             <div class="bg-amber-50 border border-amber-200 rounded-2xl p-6 text-center shadow-sm">
                 <div class="flex items-center justify-center gap-2 text-amber-800 font-bold text-lg mb-2">
                     <i class="fa-solid fa-bolt text-amber-500 text-xl"></i> Pamiętaj: Ceny zmieniają się dynamicznie!
-                </div>
+                    </div>
                 <p class="text-amber-900/80 text-sm sm:text-base leading-relaxed">
                     Nasz system automatycznie odrzuca drogie loty. Najlepsze okazje poniżej rynkowych standardów potrafią jednak znikać w <strong>2-3 godziny</strong>.
                 </p>
@@ -824,13 +824,19 @@
         return `${date.toLocaleDateString('pl-PL', { day: 'numeric', month: 'short' })}, ${timeStr}`;
     }
 
-    function getSkyscannerUrl(offer) {
+    // --- NOWA FUNKCJA AVIASALES ---
+    function getAviasalesUrl(offer) {
         if(!offer) return "#";
-        const fmtDate = (iso) => { const parts = iso.split('-'); return parts[0].substring(2) + parts[1] + parts[2]; };
-        const dW = fmtDate(offer.data_wylotu); const dP = (offer.typ === 'w_obie_strony' && offer.data_powrotu) ? fmtDate(offer.data_powrotu) : '';
-        const ori = offer.origin.toLowerCase(); const dst = offer.destination.toLowerCase();
-        return dP ? `https://www.skyscanner.pl/transport/loty/${ori}/${dst}/${dW}/${dP}/?currency=PLN` : `https://www.skyscanner.pl/transport/loty/${ori}/${dst}/${dW}/?currency=PLN`;
+        const marker = "768883";
+        const fmtAviaDate = (iso) => { const parts = iso.split('-'); return parts[2] + parts[1]; };
+        const dW = fmtAviaDate(offer.data_wylotu);
+        const dP = (offer.typ === 'w_obie_strony' && offer.data_powrotu) ? fmtAviaDate(offer.data_powrotu) : '';
+        const ori = offer.origin.toUpperCase();
+        const dst = offer.destination.toUpperCase();
+        let route = dP ? `${ori}${dW}${dst}${dP}1` : `${ori}${dW}${dst}1`;
+        return `https://www.aviasales.pl/search/${route}?marker=${marker}`;
     }
+    // ------------------------------
 
     function renderFinalModalContent() {
         const dest = activeDestination;
@@ -978,9 +984,11 @@
 
         const typText = activeType === 'w_obie_strony' ? 'w obie strony' : 'w jedną stronę';
         const priceHtml = finalOffer ? `<p class="text-3xl font-extrabold text-brand-600">${finalOffer.cena} zł</p>` : `<p class="text-sm font-bold text-red-500">Wybierz daty</p>`;
+        
+        // ZAKTUALIZOWANY PRZYCISK:
         const buyButton = finalOffer 
-            ? `<a href="${getSkyscannerUrl(finalOffer)}" target="_blank" rel="noopener noreferrer" class="flex-1 text-center bg-brand-500 hover:bg-brand-600 text-white font-bold py-3.5 rounded-xl transition-colors shadow-md flex items-center justify-center">
-                Sprawdź daty na Skyscanner <i class="fa-solid fa-arrow-up-right-from-square ml-2 text-xs"></i>
+            ? `<a href="${getAviasalesUrl(finalOffer)}" target="_blank" rel="noopener noreferrer" class="flex-1 text-center bg-brand-500 hover:bg-brand-600 text-white font-bold py-3.5 rounded-xl transition-colors shadow-md flex items-center justify-center">
+                Sprawdź loty <i class="fa-solid fa-arrow-up-right-from-square ml-2 text-xs"></i>
                </a>`
             : `<button disabled class="flex-1 text-center bg-gray-300 text-gray-500 font-bold py-3.5 rounded-xl cursor-not-allowed">Wybierz komplet dat</button>`;
 
@@ -1057,7 +1065,8 @@
                     ${finalOffer ? `<button onclick="reportPriceChange('${finalOffer.trasa} (${finalOffer.cena} zł)')" class="px-5 py-3.5 bg-red-50 hover:bg-red-100 text-red-600 font-semibold rounded-xl border border-red-200 transition-colors text-sm flex items-center justify-center gap-2"><i class="fa-solid fa-triangle-exclamation"></i> Zgłoś zmianę</button>` : ''}
                 </div>
                 
-                ${finalOffer ? `<p class="text-xs text-gray-400 italic text-center pt-2">ℹ️ Oferta znaleziona: ${formatRelativeDate(finalOffer.aktualizacja)}. Wybierz te same daty w kalendarzu SkyScanner.</p>` : ''}
+                <!-- ZAKTUALIZOWANY TEKST INFORMACYJNY: -->
+                ${finalOffer ? `<p class="text-xs text-gray-400 italic text-center pt-2">ℹ️ Oferta znaleziona: ${formatRelativeDate(finalOffer.aktualizacja)}. Wybierz te same daty w wyszukiwarce Aviasales.</p>` : ''}
             </div>
         `;
         const container = document.getElementById('modal-content');
